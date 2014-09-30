@@ -1,0 +1,35 @@
+
+/*
+	TABLE OF CONTENTS
+	========================
+	1.	RESTAURANT RESERVATION
+*/
+
+
+/*##############################################
+	1.	RESTAURANT RESERVATION
+##############################################*/
+.olr_restaurant_wrapper .olr_label{
+	min-width: 200px;
+	display: inline-block;
+	font-weight: bold;
+
+}
+
+.olr_date_section,
+.olr_date_section{
+	margin-bottom: 24px;
+	
+}
+.olr_date_wrap,
+.olr_time_wrap{
+	display: inline-block;
+}
+
+
+.olr_restaurant_wrapper .olr_required,
+.olr_restaurant_wrapper .olr_requireds{
+	color: #C00;
+	font-size: 20px;
+}
+
