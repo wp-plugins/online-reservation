@@ -1,5 +1,13 @@
+=== Online Reservation ===
+Contributors: wahsidin tjandra
+Donate link: 
+Tags: comments, spam
+Requires at least: 3.0.1
+Tested up to: 3.4
 Version: 1.0
 Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Online Reservation is a plugin that allow you to manage and receive your business reservation online.
 
@@ -33,8 +41,14 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 
 Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 
+== Screenshots ==
+
 == Changelog ==
 * Version 1.0 still No any changes
+
+== Upgrade Notice ==
+
+
 
 
 == Usage ==
