@@ -16,10 +16,10 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 Online Reservation is a plugin that allow you to manage and receive your business reservation online.
 
 = Features =
-* Easy to confirm ,reject and trash the reservations
+* Easy to confirm, reject and trash the reservations
 * Set your business opening and closing time for week day 
 * Set maximum available table and seats 
-* Assign how early and late , a reservation can be made by your customer 
+* Assign how early and late, a reservation can be made by your customer 
 * Shortcode support  *[online_restaurant_reservation]*
 * Cross Browser compatible
 
