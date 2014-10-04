@@ -11,6 +11,7 @@
 		4.	PREVENT CODE INJECTION 
 		5.	VALIDATION AND SANITAZATION
 		6.	SAVING PROCESS
+		
 	*/
 	
 
@@ -32,7 +33,15 @@
 		$plugin_url = $_POST['plugin_url'];
 		$Options 	= $_POST['options'];
 	
-	
+		
+		echo "<pre>";
+			print_r( $Options );
+		
+		echo "</pre>";
+		
+		
+		die();
+		
 	
 		/*########################################
 			2. 	GENERAL VARIABLE
@@ -108,17 +117,33 @@
 			
 		/*########################################
 			6.	SAVING PROCESS
-				1.	FORM VERIFICATION
-				2.	SAVING DATA TO DATABASE
-				3.	SENDING EMAIL
+				1. 	VARIABLE
+				2.	FORM VERIFICATION
+				3.	SAVING DATA TO DATABASE
+				4.	SEND EMAIL TO OWNER
+				5.	SEND EMAIL TO CUSTOMER
 		########################################*/
 					
-					$saving_database 	= true;
-					$send_email			= false;		
+					/*=====================================
+						1. 	VARIABLE
+					=====================================*/	
+					
+					$saving_database 			= true;
+					$send_email_to_owner		= false;
+					if( $options['email_to_owner'] ){
+						$send_email_to_owner = true;
+					}
+					
+					$send_email_to_customer		= false;
+					if( $options['email_to_customer'] ){
+						$send_email_to_customer	 = true;
+					}
+					
+					
 						// $emailBot = new Email; // HOSTGATOR CAN'T USED THIS CLASS
 					
 					/*=====================================
-						1.	FORM VERIFICATION
+						2.	FORM VERIFICATION
 					=====================================*/
 					if ( empty($_POST) || !wp_verify_nonce($nonce,'restaurant_form_verify') ){
 						print 'Sorry, your form is not valid.';
@@ -127,7 +152,7 @@
 					}else{
 					
 						/*=====================================
-							2.	SAVING DATA TO DATABASE
+							3.	SAVING DATA TO DATABASE
 						=====================================*/
 						if( $saving_database ) {
 							
@@ -166,42 +191,90 @@
 						} // if( $saving_database ) {
 	
 						
+
+						$email_from = strip_tags( $options['email_from'] );
+					
 						/*=====================================
-							 3.	SENDING EMAIL
+							4.	SEND EMAIL TO OWNER
 						=====================================*/
-						if( $send_email	) {
+						if( $send_email_to_owner ) {
 							
-							$recipient = get_theme_mod( 'contact_recepient_email_address');
-							$from = $name .'<'.$email .'>';
-							$subject = $subject;
+							$owner_email 			= strip_tags( $options['owner_email'] );
+							$owner_email_subject 	= strip_tags( $options['owner_email_subject'] );
 							
-							/*$messages .= " From : " . $name .'<br>'; // HOSTGATOR NOT ALLOWED  ( : )
-							$messages = " Email : " . $email .'<br>';
-							$messages .= " IP : " . $Visitor_IpAddress ."<br>";
-							$messages .= " Telephone : " . $telephone ."<br>";
-							$messages .= " Website : " . $website_url ."<br><br>";
-							$messages .= $message;*/
+							if( $owner_email != ''){
 							
-							$messages  = "From ( " . $name ." )\n";
-							$messages .= "Subject ( " . $subject ." )\n";
-							$messages .= "Email ( " . $email ." )\n";
-							$messages .= "ip ( " . $Visitor_IpAddress ." )\n";
-							$messages .= "Telephone ( " . $telephone ." )\n";
-							$messages .= "Website ( " . $website_url ." )\n\n";
-							$messages .= $message;
+								$recipient = $owner_email;
+								$from = $email_from;
+								$subject = $owner_email_subject;
+								
+								$messages  = "From ( " . $from ." )\n";
+								$messages .= "Name( " . $name ." )\n";
+								$messages .= "Subject ( " . $subject ." )\n";
+								$messages .= "Customer Email ( " . $email ." )\n";
+								$messages .= "Telephone ( " . $phone ." )\n";
+								$messages .= "Type of Table ( " . $type_of_table ." )\n";
+								$messages .= "Table ( " . $table ." )\n";
+								$messages .= "Persons ( " . $persons ." )\n";
+								$messages .= "Date ( " . $date ." )\n";
+								$messages .= "Time ( " . $time ." )\n";
+								$messages .= $message;
+								
+								
+								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
+									$result  = mail($recipient, $from, $subject, $messages);
+								}
+								if( $result){
+									echo '<span id="contactSuccessImg"></span>';
+								}else{
+									echo '<span id="contactFailedImg"></span><br>';
+								}
+							
+							} // if( $owner_email != ''){
+								
+						}	// if( $send_email_to_owner ) {		
+								
+								
+		
+								
+						/*=====================================
+							5.	SEND EMAIL TO CUSTOMER
+						=====================================*/
+						if( $send_email_to_owner ) {
 							
 							
-							if( $_SERVER['HTTP_HOST'] != 'localhost' ){
-								//$result  = $emailBot->sendEmail($recipient, "testsub from testmailer", $subject, $messages);
-								$result  = mail($recipient, $from, $subject, $messages);
-							}
-							if( $result){
-								echo '<span id="contactSuccessImg">'.get_theme_mod('contact_sucess_msg').'</span>';
-							}else{
-								echo '<span id="contactFailedImg">'.get_theme_mod('failed_sucess_msg').'</span><br>';
-							}
+							$customer_email 			= $email;
+							$customer_email_subject 	= strip_tags( $options['customer_email_subject'] );
+			
+							if( $owner_email != ''){
 							
-						}	// if( $send_email	) {
+								$recipient = $customer_email;
+								$from = $email_from;
+								$subject = $customer_email_subject;
+								
+								$messages  = "From ( " . $from ." )\n";
+								$messages .= "Subject ( " . $subject ." )\n";
+								$messages .= "Type of Table ( " . $type_of_table ." )\n";
+								$messages .= "Table ( " . $table ." )\n";
+								$messages .= "Persons ( " . $persons ." )\n";
+								$messages .= "Date ( " . $date ." )\n";
+								$messages .= "Time ( " . $time ." )\n";
+								$messages .= $message;
+								
+								
+								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
+									$result  = mail($recipient, $from, $subject, $messages);
+								}
+								if( $result){
+									echo '<span id="contactSuccessImg"></span>';
+								}else{
+									echo '<span id="contactFailedImg"></span><br>';
+								}
+							
+							} // if( $owner_email != ''){	
+							
+							
+						}	// if( $send_email_to_owner ) {
 					
 					} // if ( empty($_POST) || !wp_verify_nonce($nonce,'restaurant_form_verify') ){	
 	

@@ -7,9 +7,6 @@ jQuery(document).ready(function($){
 			1. 	GLOBAL VARIABLES
 			2.	DATE PICKER
 			3.	RESTAURANT BOOKING FORM
-		
-		
-	
 	*/
 
 	var Olr_admin_resto = {
@@ -17,9 +14,7 @@ jQuery(document).ready(function($){
 			
 			$('table.wp-list-table a.row-title').contents().unwrap();
 			$('.view-switch').css('display','none');
-		}
-			
-					
+		}			
 	}
 	
 	//initialize Archieve

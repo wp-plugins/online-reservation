@@ -7,7 +7,6 @@
 	3.	VALIDATION AND SANITIZATION
 */
 
-
 /*##############################################
 	1.	REGISTER SECTION AND FIELD
 		1.	SCHEDULE ( SECTION )

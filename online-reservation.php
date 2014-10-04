@@ -32,7 +32,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 	========================
 	1. 	GLOBAL VARIABLES
 	2.	HELPER FUNCTIONS
-	3.	RESTAURANT RESERVATION
+	3.	ADMIN PAGES
+	4.	RESTAURANT RESERVATION
 
 */
 
@@ -50,7 +51,25 @@ require_once('helper/helper_functions.php');
 
 
 /*############################################
-	3.	RESTAURANT RESERVATION
+	3.	ADMIN PAGES
+		1.	RESTAURANT ADMIN PAGES
+############################################*/
+	/*=================================
+		1.	RESTAURANT ADMIN PAGES
+	=================================*/
+	global $all_bookings_page;
+	global $resto_setting_page;
+	global $resto_general_setting_page;
+	global $resto_schedule_setting_page;
+	global $resto_table_setting_page;
+	global $resto_email_setting_page;
+	global $options_page;
+	
+require_once('check-admin-page.php');
+
+
+/*############################################
+	4.	RESTAURANT RESERVATION
 		1.	ADMIN
 		2.	SHORTCODE
 		3.	WIDGET

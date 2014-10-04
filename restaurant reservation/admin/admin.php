@@ -3,14 +3,25 @@
 /*
 	TABLE OF CONTENTS
 	========================
-	1.	RESTAURANT RESERVATION POST TYPE
-	2.	STYLE AND SCRIPT 
-	3.	SETTING SUB MENU
+	1. 	ADMIN PAGES
+	2.	RESTAURANT RESERVATION POST TYPE
+	3.	STYLE AND SCRIPT 
+	4.	SETTING SUB MENU
 */
+
+/*#########################################################
+	1. 	ADMIN PAGES
+#########################################################*/
+global $all_bookings_page;
+global $resto_setting_page;
+global $resto_general_setting_page;
+global $resto_schedule_setting_page;
+global $resto_table_setting_page;
+global $options_page;
 
 
 /*#########################################################
-	1.	RESTAURANT RESERVATION POST TYPE
+	2.	RESTAURANT RESERVATION POST TYPE
 		1.	REGISTER NEW POST STATUS
 		1.	ADDING VALUE TO CUSTOM COLUMN
 		2.	CUSTOMIZE ALL COLUMNS
@@ -54,33 +65,33 @@
 	/*=========================================
 		1.	REGISTER NEW POST STATUS
 	=========================================*/
-	function olr_new_post_status(){
-
-		register_post_status( 'confirmed', array(
-			//'label'                     => _x( 'Confirmed', 'post' ),
-			'label'                     => 'Confirmed',
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Confirmed <span class="count">(%s)</span>', 'Confirmed <span class="count">(%s)</span>' ),
-		) );
-		
-		register_post_status( 'closed', array(
-			//'label'                     => _x( 'Confirmed', 'post' ),
-			'label'                     => 'Closed',
-			'public'                    => true,
-			'exclude_from_search'       => false,
-			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => true,
-			'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>' ),
-		) );
-		
-		
+	if( $all_bookings_page ){
 	
+		function olr_new_post_status(){
+	
+			register_post_status( 'confirmed', array(
+				//'label'                     => _x( 'Confirmed', 'post' ),
+				'label'                     => 'Confirmed',
+				'public'                    => true,
+				'exclude_from_search'       => false,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Confirmed <span class="count">(%s)</span>', 'Confirmed <span class="count">(%s)</span>' ),
+			) );
+			
+			register_post_status( 'closed', array(
+				//'label'                     => _x( 'Confirmed', 'post' ),
+				'label'                     => 'Closed',
+				'public'                    => true,
+				'exclude_from_search'       => false,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>' ),
+			) );
+			
+		}
+		add_action( 'init', 'olr_new_post_status' );
 	}
-	add_action( 'init', 'olr_new_post_status' );
-	
 	
 
 	/*=========================================
@@ -95,12 +106,10 @@
 			8.	BOOKING TIME
 			9.	STATUS
 	=========================================*/
-		
+	if( $all_bookings_page ){
 		add_action('manage_olr_restaurant_posts_custom_column', 'olr_custom_column_date', 10, 2);
 		function olr_custom_column_date($column_name, $id){
 			$meta_key = 'olr_custom_column';
-			
-			
 			/*echo "<pre>";
 			print_r( get_post_meta($id, 'olr_custom_column', true) );
 			echo "</pre>";*/
@@ -134,16 +143,22 @@
 				echo $column['Booking Time'];
 			}
 			if($column_name == 'status'){
-				echo  get_post_status ( $id );
+				$status = get_post_status ( $id );
+				if( $status == 'draft' ){
+					echo 'Waiting Confirmation';	
+				}else{
+					echo $status;
+				}	
 			}
-
+		}   // function olr_custom_column_date($column_name, $id){
+	
+	} // if( $all_bookings_page ){
 		
-			
-		}   
 
 	/*========================================================
 		2.	CREATE NEW COLUMN AND CUSTOMIZE ALL COLUMNS
 	========================================================*/
+	if( $all_bookings_page ){
 		add_filter( 'manage_edit-olr_restaurant_columns', 'olr_customize_default_columns' ) ;
 		
 		function olr_customize_default_columns( $columns ) {
@@ -166,12 +181,12 @@
 		
 			return $columns;
 		}
-
+	} // if( $all_bookings_page ){
 			
 	/*=========================================
 		3.	SORT COLUMNS
 	=========================================*/
-		
+	if( $all_bookings_page ){	
 		add_filter( 'manage_edit-olr_restaurant_sortable_columns', 'olr_sort_columns' ); 
 		
 		function olr_sort_columns( $columns ) {
@@ -181,7 +196,7 @@
 				'Booking Date' 	=> __( 'Booking Date') // NEW COLUMNS
 		  	);
 		}
-	
+	} // if( $all_bookings_page ){
 	
 	/*=========================================
 		4.	DISABLE ADD NEW 
@@ -209,7 +224,7 @@
 			3.	PROCESS THE BULK ACTION
 			4.	ADMIN NOTIFY THE BULK RESULTS
 	=========================================*/
-		
+	if( $all_bookings_page ){		
 		/*=========================================
 			1.	REMOVE ITEMS
 		=========================================*/
@@ -348,8 +363,14 @@
 		 	}
 		 
 		}
+		
+	} // if( $all_bookings_page ){
 	
-	
+	/*==============================================================
+		6.	REMOVE HYPERLINK TO EDIT POST IN EDIT.PHP
+	==============================================================*/
+	if( $all_bookings_page ){
+		// $('table.wp-list-table a.row-title').contents().unwrap(); , put on , admin-resto-script.js
 		add_filter( 'post_row_actions', 'remove_row_actions', 10, 1 );
 		function remove_row_actions( $actions )
 		{
@@ -360,24 +381,24 @@
 				unset( $actions['inline hide-if-no-js'] );
 			return $actions;
 		}
-	
-	
-	/*==============================================================
-		6.	REMOVE HYPERLINK TO EDIT POST IN EDIT.PHP
-	==============================================================*/
-		// $('table.wp-list-table a.row-title').contents().unwrap(); , put on , admin-resto-script.js
-	
+	} // if( $all_bookings_page ){	
+		
+		
 
 /*##############################################################
-	2.	STYLE AND SCRIPT 
+	3.	STYLE AND SCRIPT 
 		1.	ENQUEQE STYLE
 		2.	ENQUEQE SCRIPT 
 		3.	REMOVE ADD NEW FEATURES ( CUSTOM POST TYPE )
 ##############################################################*/
-if( is_admin() ){
-	
-	if ($_GET['post_type'] == 'olr_restaurant') {		
-			
+echo $all_bookings_page;
+
+
+
+if( 	$all_bookings_page
+	||	$resto_setting_page
+){
+
 			//=	1.	ENQUEQE STYLE
 			wp_enqueue_style(
 				'olr-admin-resto-style',	// $handle (id)	
@@ -401,19 +422,17 @@ if( is_admin() ){
 						.column-editor{width: 150px;}
 						";
 			wp_add_inline_style( 'olr-admin-resto-style', $css_data );
-	
-	
-	} // if ($_GET['post_type'] == 'olr_restaurant') {			
-}
+		
+} // if( $all_bookings_page ){
+
 
 /*##############################################
-	3.	SETTING SUB MENU
+	4.	SETTING SUB MENU
 		1.	MENU LINK 
 		2.	MENU DISPLAY
 		3.	SECTION ( TAB )
 ##############################################*/
-		
-			
+				
 	/*=========================================
 		1.	MENU LINK 
 	=========================================*/
@@ -462,7 +481,9 @@ if( is_admin() ){
               		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_schedule_setting" class="nav-tab <?php echo $active_tab == 'resto_schedule_setting' ? 'nav-tab-active' : ''; ?>">
                             Schedule</a>
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_table_setting' ? 'nav-tab-active' : ''; ?>">
-                            Table</a>         
+                            Table</a> 
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_email_setting' ? 'nav-tab-active' : ''; ?>">
+                            Email</a>                       
           		</h2>
                 
                 
@@ -484,10 +505,15 @@ if( is_admin() ){
 						settings_fields( 'resto_schedule_setting' );
 						do_settings_sections( 'resto_schedule_setting' );
 					
-					} else {
+					} else if ( $active_tab == 'resto_table_setting' )  {
 						
 						settings_fields( 'resto_table_setting' );
 						do_settings_sections( 'resto_table_setting' );
+					
+					} else { 
+					
+						settings_fields( 'resto_email_setting' );
+						do_settings_sections( 'resto_email_setting' );
 					
 					} // end if/else
 					
@@ -505,20 +531,49 @@ if( is_admin() ){
 			1.	GENERAL
 			2. 	SCHEDULE
 			3.	TABLE
+			4.	EMAIL
 	=========================================*/
-
+		
 		/*=========================================
 			1.	 GENERAL
 		=========================================*/
+		if( 	$resto_setting_page
+			||	$options_page
+		){	
 			require_once('general.php');
-			
+		}
+		
+		
 		/*=========================================
 			2. 	SCHEDULE
 		=========================================*/	
+		if( 	$resto_schedule_setting_page
+			||	$options_page
+		){
 			require_once('schedule.php');
+		}	
 		
+
 		/*=========================================
 			3.	TABLE
 		=========================================*/	
+		if( 	$resto_table_setting_page
+		   	||	$options_page
+		){
 			require_once('table.php');
+		}
+		
+		/*=========================================
+			4.	EMAIL
+		=========================================*/	
+		if( 	$resto_setting_page
+		   	||	$options_page
+		 	&&	!$resto_general_setting_page 
+			&&	!$resto_schedule_setting_page
+			&&	!$resto_table_setting_page
+		){
+			require_once('email.php');
+		}
+		
+		
 ?>
