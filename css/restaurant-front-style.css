@@ -9,6 +9,10 @@
 /*##############################################
 	1.	RESTAURANT RESERVATION
 ##############################################*/
+.olr_restaurant_wrapper p{
+	margin: 10px 0;
+}
+
 .olr_restaurant_wrapper .olr_label{
 	min-width: 200px;
 	display: inline-block;
@@ -32,4 +36,12 @@
 	color: #C00;
 	font-size: 20px;
 }
+
+.olr_restaurant_wrapper #olr_restaurant_booking_button{
+	margin-top :20px;
+	padding: 10px;
+}
+
+
+
 
