@@ -33,16 +33,6 @@
 		$plugin_url = $_POST['plugin_url'];
 		$Options 	= $_POST['options'];
 	
-		
-		echo "<pre>";
-			print_r( $Options );
-		
-		echo "</pre>";
-		
-		
-		die();
-		
-	
 		/*########################################
 			2. 	GENERAL VARIABLE
 		########################################*/	
