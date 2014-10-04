@@ -2,7 +2,7 @@
 Contributors: solweder
 Plugin URI: http://solweder.com
 Author: Wahsidin Tjandra
-Author URI: http://solweder.com/about
+Author URI: http://solweder.com/about-me
 Tags: wp, online reservations, online bookings, restaurant reservation, restaurant bookings, reservation, restaurant, bookings   
 Requires at least: 3.6
 Tested up to: 4.0
