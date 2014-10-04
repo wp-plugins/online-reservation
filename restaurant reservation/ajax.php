@@ -33,6 +33,7 @@
 		$plugin_url = $_POST['plugin_url'];
 		$Options 	= $_POST['options'];
 	
+	
 		/*########################################
 			2. 	GENERAL VARIABLE
 		########################################*/	
@@ -230,7 +231,7 @@
 						/*=====================================
 							5.	SEND EMAIL TO CUSTOMER
 						=====================================*/
-						if( $send_email_to_owner ) {
+						if( $send_email_to_customer ) {
 							
 							
 							$customer_email 			= $email;
