@@ -391,10 +391,6 @@ global $options_page;
 		2.	ENQUEQE SCRIPT 
 		3.	REMOVE ADD NEW FEATURES ( CUSTOM POST TYPE )
 ##############################################################*/
-echo $all_bookings_page;
-
-
-
 if( 	$all_bookings_page
 	||	$resto_setting_page
 ){
