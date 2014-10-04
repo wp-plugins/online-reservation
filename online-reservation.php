@@ -3,7 +3,7 @@ Plugin Name: Online Reservation
 Plugin URI: http://solweder.com/
 Description: allow you to manage and receive your business reservation online
 Author: Wahsidin Tjandra
-Author URI: http://solweder.com/about/
+Author URI: http://solweder.com/about-me/
 Version: 1.0
 Donate link: 
 Tags: 
