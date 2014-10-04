@@ -110,7 +110,6 @@
 			6.	SAVING PROCESS
 				1.	FORM VERIFICATION
 				2.	SAVING DATA TO DATABASE
-				3.	SENDING EMAIL
 		########################################*/
 					
 					$saving_database 	= true;
@@ -165,44 +164,6 @@
 							
 						} // if( $saving_database ) {
 	
-						
-						/*=====================================
-							 3.	SENDING EMAIL
-						=====================================*/
-						if( $send_email	) {
-							
-							$recipient = get_theme_mod( 'contact_recepient_email_address');
-							$from = $name .'<'.$email .'>';
-							$subject = $subject;
-							
-							/*$messages .= " From : " . $name .'<br>'; // HOSTGATOR NOT ALLOWED  ( : )
-							$messages = " Email : " . $email .'<br>';
-							$messages .= " IP : " . $Visitor_IpAddress ."<br>";
-							$messages .= " Telephone : " . $telephone ."<br>";
-							$messages .= " Website : " . $website_url ."<br><br>";
-							$messages .= $message;*/
-							
-							$messages  = "From ( " . $name ." )\n";
-							$messages .= "Subject ( " . $subject ." )\n";
-							$messages .= "Email ( " . $email ." )\n";
-							$messages .= "ip ( " . $Visitor_IpAddress ." )\n";
-							$messages .= "Telephone ( " . $telephone ." )\n";
-							$messages .= "Website ( " . $website_url ." )\n\n";
-							$messages .= $message;
-							
-							
-							if( $_SERVER['HTTP_HOST'] != 'localhost' ){
-								//$result  = $emailBot->sendEmail($recipient, "testsub from testmailer", $subject, $messages);
-								$result  = mail($recipient, $from, $subject, $messages);
-							}
-							if( $result){
-								echo '<span id="contactSuccessImg">'.get_theme_mod('contact_sucess_msg').'</span>';
-							}else{
-								echo '<span id="contactFailedImg">'.get_theme_mod('failed_sucess_msg').'</span><br>';
-							}
-							
-						}	// if( $send_email	) {
-					
 					} // if ( empty($_POST) || !wp_verify_nonce($nonce,'restaurant_form_verify') ){	
 	
 
