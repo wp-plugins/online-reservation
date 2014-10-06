@@ -60,14 +60,28 @@
 				);
 				
 				
-				/*=======================================
+				/*=============================================
 					2.	GENERAL FIELD
 						1.	FROM ( YOUR STORE NAME )
-				=======================================*/
+						2.	YOUR HEADER IMAGE ( STORE IMAGE )
+						3.	FACEBOOK 
+						4.	TWITTER
+						5. 	GOOGLE
+						6. 	LINKEDIN
+						7.	PINTEREST
+						8.	YOUTUBE
+				=============================================*/
 				$fields_owner = array(
 									// array ( $id , $title , $args )
-									array('email_from','From ( Your Store Name )', array('email_from') ) // 1.	FROM ( YOUR STORE NAME )
-                         		);
+									array('email_from','From ( Your Store Name )', array('email_from') ), // 1.	FROM ( YOUR STORE NAME )
+									array('email_header_image','Header Image ( Your Store Image )', array('email_header_image') ), // 2.	YOUR HEADER IMAGE ( STORE IMAGE )
+                         			array('email_facebook','Facebook', array('email_facebook') ), // 3.	FACEBOOK 
+									array('email_twitter','Twitter', array('email_twitter') ), // 4.	TWITTER
+									array('email_google','Google', array('email_google') ), // 5. 	GOOGLE
+									array('email_linkedin','LinkeIn', array('email_linkedin') ), // 6. 	LINKEDIN
+									array('email_pinterest','Pinterest', array('email_pinterest') ), // 7.	PINTEREST
+									array('email_youtube','Youtube', array('email_youtube') ) // 8.	YOUTUBE
+								);
 				
 				foreach( $fields_owner as $field ){
 					add_settings_field(	
@@ -193,7 +207,14 @@
 		4.	FIELD
 			1.	GENERAL
 				1.	FROM ( YOUR STORE NAME )
-	
+				2.	YOUR HEADER IMAGE ( STORE IMAGE )
+				3.	FACEBOOK 
+				4.	TWITTER
+				5. 	GOOGLE
+				6. 	LINKEDIN
+				7.	PINTEREST
+				8.	YOUTUBE
+				
 			2.	OWNER
 				1.	SEND EMAIL TO OWNER
 				2.	OWNER EMAIL
@@ -221,6 +242,62 @@
 			echo '<textarea id="'.$args[0].'" name="resto_email_setting['.$args[0].']" rows="5" cols="50">' . 
 				$options[$args[0]] . '</textarea>';
 		}
+		
+		/*=========================================
+			2.	YOUR HEADER IMAGE ( STORE IMAGE )
+		=========================================*/
+		if( $args[0] == 'email_header_image' ){
+			echo '<input class="email-header-image" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		
+		
+		/*=========================================
+			3.	FACEBOOK
+		=========================================*/
+		if( $args[0] == 'email_facebook' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		
+		
+		/*=========================================
+			4.	TWITTER
+		=========================================*/
+		if( $args[0] == 'email_twitter' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		/*=========================================
+			5. 	GOOGLE
+		=========================================*/
+		if( $args[0] == 'email_google' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		
+		/*=========================================
+			6. 	LINKEDIN
+		=========================================*/
+		if( $args[0] == 'email_linkedin' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}	
+		
+		/*=========================================
+			7.	PINTEREST
+		=========================================*/
+		if( $args[0] == 'email_pinterest' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		/*=========================================
+			8.	YOUTUBE
+		=========================================*/
+		if( $args[0] == 'email_youtube' ){
+			echo '<input class="email-social-icons" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 	
 		

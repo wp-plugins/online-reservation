@@ -14,7 +14,7 @@
 		
 	*/
 	
-
+	
 	
 	/*#################################################################
 		1.	RESTO BOOKING AJAX SUBMIT
@@ -56,6 +56,30 @@
 				1.	PERSONAL INFORMATION
 				2.	BOOKING TABLE INFORMATION
 		########################################*/	
+		global	$name;
+		global	$email; 			
+		global	$phone; 			
+		global	$message; 		
+		global	$table;			
+		global	$persons;		
+		global	$lunch; 			
+		global	$date;			
+		global 	$time;		
+		global 	$recipient;
+		global 	$from;
+		global  $subject;
+		global  $messages;
+		global  $email_header_image;
+		global 	$email_icon_exist;
+		global  $email_facebook;
+		global  $email_twitter;
+		global  $email_google;
+		global  $email_linkedin;
+		global  $email_pinterest;
+		global  $email_youtube;
+		global  $email_template;
+		
+	
 		
 			/*========================================
 				 1.	NONCE ( FORM KEY ) , PREVENT XSS
@@ -98,9 +122,7 @@
 		$lunch 			= strip_tags($lunch);
 		$date			= strip_tags($date);
 		$time			= strip_tags($time);
-	
-	
-	
+		
 		/*########################################
 			5.	VALIDATION AND SANITAZATION
 		########################################*/
@@ -181,10 +203,43 @@
 							
 						} // if( $saving_database ) {
 	
+					
 						
 
 						$email_from = strip_tags( $options['email_from'] );
-					
+						$email_icon_exist = false;
+						
+						if( $options['email_header_image'] != '' ){
+							$email_header_image = $options['email_header_image'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_facebook'] != '' ){
+							$email_header_image = $options['email_facebook'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_twitter'] != '' ){
+							$email_header_image = $options['email_twitter'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_google'] != '' ){
+							$email_header_image = $options['email_google'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_linkedin'] != '' ){
+							$email_header_image = $options['email_linkedin'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_pinterest'] != '' ){
+							$email_header_image = $options['email_pinterest'];
+							$email_icon_exist = true;
+						}
+						if( $options['email_youtube'] != '' ){
+							$email_header_image = $options['email_youtube'];
+							$email_icon_exist = true;
+						}
+						
+				
+						
 						/*=====================================
 							4.	SEND EMAIL TO OWNER
 						=====================================*/
@@ -193,24 +248,18 @@
 							$owner_email 			= strip_tags( $options['owner_email'] );
 							$owner_email_subject 	= strip_tags( $options['owner_email_subject'] );
 							
+							
 							if( $owner_email != ''){
 							
 								$recipient = $owner_email;
 								$from = $email_from;
 								$subject = $owner_email_subject;
 								
-								$messages  = "From ( " . $from ." )\n";
-								$messages .= "Name( " . $name ." )\n";
-								$messages .= "Subject ( " . $subject ." )\n";
-								$messages .= "Customer Email ( " . $email ." )\n";
-								$messages .= "Telephone ( " . $phone ." )\n";
-								$messages .= "Type of Table ( " . $type_of_table ." )\n";
-								$messages .= "Table ( " . $table ." )\n";
-								$messages .= "Persons ( " . $persons ." )\n";
-								$messages .= "Date ( " . $date ." )\n";
-								$messages .= "Time ( " . $time ." )\n";
-								$messages .= $message;
+								require_once('email-template.php');
 								
+								$messages = $email_template;
+								
+								echo $messages;
 								
 								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
 									$result  = mail($recipient, $from, $subject, $messages);

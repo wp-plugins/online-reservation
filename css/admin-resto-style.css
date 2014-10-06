@@ -25,9 +25,15 @@
 
 /*= 1.	EMAIL TAB */
 #owner_email{
-	min-width: 300px;
+	min-width: 50%;
 }
 .setting_section_title{
 	color: #00F;
 	font-size: 25px;
+}
+.email-header-image{
+	min-width: 80%;
+}
+.email-social-icons{
+	min-width: 50%;
 }
