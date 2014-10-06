@@ -232,14 +232,14 @@ $email_template ='
 <td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:20px;padding-bottom:20px;padding-left:18px;padding-right:18px;">
 <h1 style="color: #F20000; display: block; font-family: Helvetica, Arial; font-size: 26px; font-style: normal; font-weight: bold; line-height: 110%; letter-spacing: normal; margin: 0; margin-bottom: 9px; text-align: left"><span style="color:#FFFFFF;">'.$subject.'</span></h1>
 
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$name.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$email.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$phone.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$type_of_table.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$persons.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$date.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$time.'</span></p>
-<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">'.$message.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Name 			: </strong>'.$name.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Email			: </strong>'.$email.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Phone			: </strong>'.$phone.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Type of table	: </strong>'.$type_of_table.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Persons			: </strong>'.$persons.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Booking Date		: </strong>'.$date.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Booking Time		: </strong>'.$time.'</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;"><strong>Message			: </strong>'.$message.'</span></p>
 
 </td>
 </tr>
@@ -421,7 +421,4 @@ $email_template .= '
 </body>
 </html>
 ';
-
-echo $email_template;
-
 ?>

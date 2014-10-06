@@ -56,16 +56,16 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 = 1.1 (2014-10-05) =
 * Add Email Features
 
-= 1.2 (2014-10-07) =
-* Add Email Template
-
+= 1.1 (2014-10-07) =
+* Add HTML Email 
 
 == Upgrade Notice ==
 = 1.1 (2014-10-05) =
 This update adds support for Email Features.
 
-= 1.2 (2014-10-07) =
-This update adds support for Email Template.
+= 1.1 (2014-10-07) =
+This update adds support for HTML Email.
+
 
 
 == Usage ==
