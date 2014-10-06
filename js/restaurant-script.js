@@ -280,6 +280,7 @@ jQuery(document).ready(function($){
 					}	
 					
 					$.post(ajaxurl,postData, function(data) {
+						//alert( data );
 						$('#olr_restaurant_response').html(data);
 					});				
 				}

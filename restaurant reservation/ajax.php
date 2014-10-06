@@ -203,9 +203,7 @@
 							
 						} // if( $saving_database ) {
 	
-					
-						
-
+		
 						$email_from = strip_tags( $options['email_from'] );
 						$email_icon_exist = false;
 						
@@ -214,27 +212,27 @@
 							$email_icon_exist = true;
 						}
 						if( $options['email_facebook'] != '' ){
-							$email_header_image = $options['email_facebook'];
+							$email_facebook = $options['email_facebook'];
 							$email_icon_exist = true;
 						}
 						if( $options['email_twitter'] != '' ){
-							$email_header_image = $options['email_twitter'];
+							$email_twitter = $options['email_twitter'];
 							$email_icon_exist = true;
 						}
 						if( $options['email_google'] != '' ){
-							$email_header_image = $options['email_google'];
+							$email_google = $options['email_google'];
 							$email_icon_exist = true;
 						}
 						if( $options['email_linkedin'] != '' ){
-							$email_header_image = $options['email_linkedin'];
+							$email_linkedin = $options['email_linkedin'];
 							$email_icon_exist = true;
 						}
 						if( $options['email_pinterest'] != '' ){
-							$email_header_image = $options['email_pinterest'];
+							$email_pinterest = $options['email_pinterest'];
 							$email_icon_exist = true;
 						}
 						if( $options['email_youtube'] != '' ){
-							$email_header_image = $options['email_youtube'];
+							$email_youtube = $options['email_youtube'];
 							$email_icon_exist = true;
 						}
 						
@@ -259,17 +257,20 @@
 								
 								$messages = $email_template;
 								
-								echo $messages;
+								//= HEADERS FOR SENDING HTML EMAIL 
+								$headers = "MIME-Version: 1.0" . "\r\n";
+								$headers .= "Content-type: text/html;charset=UTF-8" . "\r\n";
+								
 								
 								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
-									$result  = mail($recipient, $from, $subject, $messages);
+									$result  = mail($recipient,$subject, $messages,$headers);
 								}
-								if( $result){
-									echo '<span id="contactSuccessImg"></span>';
+								/*if( $result){
+									//echo '<span id="contactSuccessImg"></span>';
 								}else{
-									echo '<span id="contactFailedImg"></span><br>';
-								}
-							
+									//echo '<span id="contactFailedImg"></span><br>';
+								}*/
+								
 							} // if( $owner_email != ''){
 								
 						}	// if( $send_email_to_owner ) {		
@@ -292,24 +293,20 @@
 								$from = $email_from;
 								$subject = $customer_email_subject;
 								
-								$messages  = "From ( " . $from ." )\n";
-								$messages .= "Subject ( " . $subject ." )\n";
-								$messages .= "Type of Table ( " . $type_of_table ." )\n";
-								$messages .= "Table ( " . $table ." )\n";
-								$messages .= "Persons ( " . $persons ." )\n";
-								$messages .= "Date ( " . $date ." )\n";
-								$messages .= "Time ( " . $time ." )\n";
-								$messages .= $message;
+								
+								require_once('email-template.php');
+								
+								$messages = $email_template;
+								
+								//= HEADERS FOR SENDING HTML EMAIL 
+								$headers = "MIME-Version: 1.0" . "\r\n";
+								$headers .= "Content-type: text/html;charset=UTF-8" . "\r\n";
 								
 								
 								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
-									$result  = mail($recipient, $from, $subject, $messages);
+									$result  = mail($recipient,$subject, $messages,$headers);
 								}
-								if( $result){
-									echo '<span id="contactSuccessImg"></span>';
-								}else{
-									echo '<span id="contactFailedImg"></span><br>';
-								}
+								
 							
 							} // if( $owner_email != ''){	
 							
