@@ -4,18 +4,15 @@
 		TABLE OF CONTENTS
 		========================
 		1.	RESTO BOOKING AJAX SUBMIT
-		1.	POST DATA
-		2. 	GENERAL VARIABLE
-		2.	RETRIEVE DATABASE DATA
-		3.	POST DATA
-		4.	PREVENT CODE INJECTION 
-		5.	VALIDATION AND SANITAZATION
-		6.	SAVING PROCESS
-		
+			1.	POST DATA
+			2. 	GENERAL VARIABLE
+			3.	FORM VERIFICATION
+			4.	GOOGLE RECAPTCHA VERIFICATION
+			5.	PREVENT CODE INJECTION 
+			6.	VALIDATION AND SANITAZATION
+			7.	SAVING PROCESS
 	*/
-	
-	
-	
+
 	/*#################################################################
 		1.	RESTO BOOKING AJAX SUBMIT
 			IS TRIGGERED ON , restaurant-script.js
@@ -29,32 +26,10 @@
 		
 		/*########################################
 			1.	POST DATA
-		########################################*/	
-		$plugin_url = $_POST['plugin_url'];
-		$Options 	= $_POST['options'];
-	
-	
-		/*########################################
-			2. 	GENERAL VARIABLE
-		########################################*/	
-		$pluginUrl 			= $plugin_url . '/online-reservation';
-		$olr['trueImg'] 	= $pluginUrl . '/images/true.gif';
-		$olr['post_type'] 	= 'olr_restaurant';
-		$olr['meta_key'] 	= 'olr_custom_column';
-		
-		
-		
-		/*########################################
-			2.	RETRIEVE DATABASE DATA
-		########################################*/	
-		$options = $Options;	
-		
-	
-		/*########################################
-			3.	POST DATA
-				1.	NONCE ( FORM KEY ) 
-				1.	PERSONAL INFORMATION
-				2.	BOOKING TABLE INFORMATION
+				1.	PLUGIN URL
+				2.	PLUGIN OPTIONS
+				3.	PERSONAL INFORMATION
+				4.	BOOKING TABLE INFORMATION
 		########################################*/	
 		global	$name;
 		global	$email; 			
@@ -79,15 +54,12 @@
 		global  $email_youtube;
 		global  $email_template;
 		
-	
+		$plugin_url = $_POST['plugin_url'];	// 1.	PLUGIN URL
+		$options 	= $_POST['options']; // 2.	PLUGIN OPTIONS
 		
-			/*========================================
-				 1.	NONCE ( FORM KEY ) , PREVENT XSS
-			========================================*/
-			$nonce 			= $_POST['restaurant_nonce'];	
-			
+		
 			/*=====================================
-				 1.	PERSONAL INFORMATION
+				 3.	PERSONAL INFORMATION
 			=====================================*/
 			$name 			= $_POST['olr_name'];	
 			$email 			= $_POST['olr_email'];	
@@ -95,7 +67,7 @@
 			$message		= $_POST["olr_message"];
 			
 			/*=====================================
-				 2.	BOOKING TABLE INFORMATION
+				 4.	BOOKING TABLE INFORMATION
 			=====================================*/
 			$type_of_table = '';
 			if( 	isset($_POST["olr_type_of_table"]) 
@@ -109,9 +81,66 @@
 			$time 			= $_POST["olr_time"];
 		
 		
+
+		/*########################################
+			2. 	GENERAL VARIABLE
+		########################################*/	
+		$pluginUrl 			= $plugin_url . '/online-reservation';
+		$olr['trueImg'] 	= $pluginUrl . '/images/true.gif';
+		$olr['post_type'] 	= 'olr_restaurant';
+		$olr['meta_key'] 	= 'olr_custom_column';
+		
+			
+		
+		/*#################################################
+			3.	FORM VERIFICATION
+				1.	NONCE ( FORM KEY ) , PREVENT XSS
+		#################################################*/
+		$nonce 	= $_POST['restaurant_nonce'];	
+		if ( 	empty($_POST) 
+			|| 	!wp_verify_nonce($nonce,'restaurant_form_verify') 
+		){
+			echo 'Sorry, your form is not valid.';
+			exit;
+					
+		}
+		
+		/*#################################################
+			4.	GOOGLE RECAPTCHA VERIFICATION
+		#################################################*/
+		if ( 	isset( $options['resto_captcha']['enable_captcha'] ) 
+			&&	$options['resto_captcha']['enable_captcha']
+		){
+			require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper\recaptchalib.php');
+			
+			$resp = recaptcha_check_answer(
+				$options['resto_captcha']['private_key'],
+				$_SERVER["REMOTE_ADDR"],
+				$_POST["recaptcha_challenge_field"],
+				$_POST["recaptcha_response_field"]
+			);
+			
+			
+			if (!$resp->is_valid) {
+				// What happens when the CAPTCHA was entered incorrectly
+				$captcha_error_message = "The reCAPTCHA wasn't entered correctly. try it again.";
+			
+				if( $options['resto_captcha']['captcha_error_message'] != '' ){
+					$captcha_error_message = $options['resto_captcha']['captcha_error_message'];
+				}
+				$captcha_response = $captcha_error_message .
+									"<br/>(reCAPTCHA said: " . $resp->error . ")"; // ONLY FOR DEVELOPMENT 
+				echo $captcha_response;
+				
+				exit;						
+										
+			}
+		} // if ( 	isset($Options['enable_captcha']) 
+			
+
 		
 		/*########################################
-			4.	PREVENT CODE INJECTION 
+			5.	PREVENT CODE INJECTION 
 		########################################*/
 		$name 			= strip_tags($name);
 		$email 			= strip_tags($email);
@@ -123,13 +152,14 @@
 		$date			= strip_tags($date);
 		$time			= strip_tags($time);
 		
+		
 		/*########################################
-			5.	VALIDATION AND SANITAZATION
+			6.	VALIDATION AND SANITAZATION
 		########################################*/
 			
 			
 		/*########################################
-			6.	SAVING PROCESS
+			7.	SAVING PROCESS
 				1. 	VARIABLE
 				2.	FORM VERIFICATION
 				3.	SAVING DATA TO DATABASE
@@ -143,12 +173,12 @@
 					
 					$saving_database 			= true;
 					$send_email_to_owner		= false;
-					if( $options['email_to_owner'] ){
+					if( $options['resto_email']['email_to_owner'] ){
 						$send_email_to_owner = true;
 					}
 					
 					$send_email_to_customer		= false;
-					if( $options['email_to_customer'] ){
+					if( $options['resto_email']['email_to_customer'] ){
 						$send_email_to_customer	 = true;
 					}
 					
@@ -193,8 +223,9 @@
 							if( $success ){
 								
 								$success_message = 'Booking Success';
-								if( isset($options['success_message']) && $options['success_message'] != '' ){
-									$success_message = $options['success_message']; 
+								if( 	isset($options['resto_general']['success_message']) 
+									&& 	$options['resto_general']['success_message'] != '' ){
+									$success_message = $options['resto_general']['success_message']; 
 								}
 	
 								echo $success_message;	
@@ -204,38 +235,37 @@
 						} // if( $saving_database ) {
 	
 		
-						$email_from = strip_tags( $options['email_from'] );
+						$email_from = strip_tags( $options['resto_email']['email_from'] );
 						$email_icon_exist = false;
 						
-						if( $options['email_header_image'] != '' ){
-							$email_header_image = $options['email_header_image'];
+						if( $options['resto_email']['email_header_image'] != '' ){
+							$email_header_image = $options['resto_email']['email_header_image'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_facebook'] != '' ){
-							$email_facebook = $options['email_facebook'];
+						if( $options['resto_email']['email_facebook'] != '' ){
+							$email_facebook = $options['resto_email']['email_facebook'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_twitter'] != '' ){
-							$email_twitter = $options['email_twitter'];
+						if( $options['resto_email']['email_twitter'] != '' ){
+							$email_twitter = $options['resto_email']['email_twitter'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_google'] != '' ){
-							$email_google = $options['email_google'];
+						if( $options['resto_email']['email_google'] != '' ){
+							$email_google = $options['resto_email']['email_google'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_linkedin'] != '' ){
-							$email_linkedin = $options['email_linkedin'];
+						if( $options['resto_email']['email_linkedin'] != '' ){
+							$email_linkedin = $options['resto_email']['email_linkedin'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_pinterest'] != '' ){
-							$email_pinterest = $options['email_pinterest'];
+						if( $options['resto_email']['email_pinterest'] != '' ){
+							$email_pinterest = $options['resto_email']['email_pinterest'];
 							$email_icon_exist = true;
 						}
-						if( $options['email_youtube'] != '' ){
-							$email_youtube = $options['email_youtube'];
+						if( $options['resto_email']['email_youtube'] != '' ){
+							$email_youtube = $options['resto_email']['email_youtube'];
 							$email_icon_exist = true;
 						}
-						
 				
 						
 						/*=====================================
@@ -243,8 +273,8 @@
 						=====================================*/
 						if( $send_email_to_owner ) {
 							
-							$owner_email 			= strip_tags( $options['owner_email'] );
-							$owner_email_subject 	= strip_tags( $options['owner_email_subject'] );
+							$owner_email 			= strip_tags( $options['resto_email']['owner_email'] );
+							$owner_email_subject 	= strip_tags( $options['resto_email']['owner_email_subject'] );
 							
 							
 							if( $owner_email != ''){
@@ -285,7 +315,7 @@
 							
 							
 							$customer_email 			= $email;
-							$customer_email_subject 	= strip_tags( $options['customer_email_subject'] );
+							$customer_email_subject 	= strip_tags( $options['resto_email']['customer_email_subject'] );
 			
 							if( $owner_email != ''){
 							

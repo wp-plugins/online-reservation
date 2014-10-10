@@ -95,7 +95,7 @@
 				||  $date_choosen < ( $date_choosen + 24 * 60 * 60 ) 
 				){
 			
-				$late_bookings = $options['late_bookings'];
+				$late_bookings = $options['resto_schedule']['late_bookings'];
 				if( stripos($late_bookings,'minutes') > 0 ){
 					$late_bookings = trim(str_replace( 'minutes','',$late_bookings));
 					$late_bookings_time = $late_bookings * 60;
@@ -131,7 +131,7 @@
 					$time_is_true = 'false';
 					
 					$output = 'Now : ' . date("d-M-Y H:i:s" , $now) . '<br/>';
-					$output .= 'Late Booking ( must be '.$options['late_bookings'].' in advance )' . '<br/>';
+					$output .= 'Late Booking ( must be '.$options['resto_schedule']['late_bookings'].' in advance )' . '<br/>';
 					$output .= 'Date : must be at least ' . date("d-M-Y" , $now + $late_bookings_time ) . '<br/>';
 					$output .= 'Time : must bigger than ' . date("H:i" , $now + $late_bookings_time ) . '<br/>';
 					$output .= '}';
@@ -156,7 +156,7 @@
 		============================================================*/
 			if( $date_choosen > ( $now + 24 * 60 * 60 ) ){
 				
-				$early_bookings = $options['early_bookings'];
+				$early_bookings = $options['resto_schedule']['early_bookings'];
 				if( stripos($early_bookings,'day') > 0 ){
 					$early_bookings = trim(str_replace( 'day','',$early_bookings));
 					$early_bookings_time = $early_bookings * 24 * 60 * 60;
@@ -194,7 +194,7 @@
 					$time_is_true = 'false';
 					
 					$output = 'Now : ' . date("d-M-Y H:i:s" , $now) . '<br/>';
-					$output .= 'Early Booking ( must be '.$options['early_bookings'].' in advance )' . '<br/>';
+					$output .= 'Early Booking ( must be '.$options['resto_schedule']['early_bookings'].' in advance )' . '<br/>';
 					$output .= 'Date : must be at least ' . date("d-M-Y" , $now + $early_bookings_time ) . '<br/>';
 					$output .= 'Time : must bigger than ' . date("H:i" , $now + $early_bookings_time ) . '<br/>';
 					$output .= '}';

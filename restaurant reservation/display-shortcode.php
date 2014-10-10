@@ -62,10 +62,11 @@ function olr_shortcode_display($args){
 			
 			$any_data_array 	= array( 
 										'plugin_folder' 	=> $plugin_folder,
-										'early_bookings' 	=> $options['early_bookings'],
-										'late_bookings' 	=> $options['late_bookings'],
+										'early_bookings' 	=> $options['resto_schedule']['early_bookings'],
+										'late_bookings' 	=> $options['resto_schedule']['late_bookings'],
 										'plugin_options' 	=> get_option('olr_all_restaurant_setting'),
 										'ajaxurl'         	=> admin_url( 'admin-ajax.php' )
+										
 										);
 			wp_localize_script( 'olr-script', 'data', $any_data_array );
 			

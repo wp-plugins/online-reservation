@@ -280,7 +280,7 @@ if( $email_facebook != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding-right:10px;">
-        <a href="'.$email_facebook.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/facebook_48.png" alt="Button Text" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_facebook.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/facebook_48.png" alt="Facebook" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         
@@ -295,7 +295,7 @@ if( $email_google != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding-right:10px;">
-        <a href="'.$email_google.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/google_plus_48.png" alt="Custom" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_google.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/google_plus_48.png" alt="Google" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         </tbody>
@@ -309,7 +309,7 @@ if( $email_linkedin != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding-right:10px;">
-        <a href="'.$email_linkedin.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/linkedin_48.png" alt="Custom" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_linkedin.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/linkedin_48.png" alt="LinkedIn" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         </tbody>
@@ -324,7 +324,7 @@ if( $email_pinterest != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding-right:10px;">
-        <a href="'.$email_pinterest.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/pinterest_48.png" alt="Custom" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_pinterest.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/pinterest_48.png" alt="Pinterest" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         </tbody>
@@ -339,7 +339,7 @@ if( $email_twitter != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding-right:10px;">
-        <a href="'.$email_twitter.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/twitter_48.png" alt="Custom" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_twitter.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/twitter_48.png" alt="Twitter" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         </tbody>
@@ -353,7 +353,7 @@ if( $email_youtube != ''){
         <tbody>
         <tr>
         <td align="center" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; ">
-        <a href="'.$email_youtube.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/youtube_48.png" alt="Custom" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
+        <a href="'.$email_youtube.'" target="_blank" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline"><img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/default/youtube_48.png" alt="Youtube" class="kmButtonBlockIcon" width="48" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; width:48px; max-width:48px; display:block;" /></a>
         </td>
         </tr>
         </tbody>

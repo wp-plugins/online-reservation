@@ -222,11 +222,12 @@ jQuery(document).ready(function($){
 			/*==================================
 				5. 	BOOKING BUTTON ( ONCLICK )
 					1.	VARIABLE
-					1.	NONCE 
-					2.	VALIDATION 
-					3. 	CHECK REQUIRED FIELDS
-					4. 	COLLECT ALL POST DATA
-					5. 	SUBMIT FORM
+					2.	GOOGLE RECAPTCHA VARIABLE
+					3.	NONCE 
+					4.	VALIDATION 
+					5. 	CHECK REQUIRED FIELDS
+					6. 	COLLECT ALL POST DATA
+					7. 	SUBMIT FORM
 			==================================*/
 			$("#olr_restaurant_booking_button").click(function(event){
 						
@@ -242,24 +243,31 @@ jQuery(document).ready(function($){
 					postData['action'] 		= 'resto-booking-ajax-submit';
 					
 					
-				//= 1.	NONCE 
+				//=	2.	GOOGLE RECAPTCHA VARIABLE
+				if( $("#recaptcha_challenge_image").length > 0 ){
+						postData['recaptcha_challenge_field'] 		= $("#recaptcha_challenge_field").val();
+						postData['recaptcha_response_field'] 		= $("#recaptcha_response_field").val();
+				}
+				
+					
+				//= 3.	NONCE 
 				postData['restaurant_nonce'] = $('#olr_restaurant_form').find('#restaurant_nonce_id').val()
 				
-				//= 2.	VALIDATION 
+				//= 4.	VALIDATION 
 				if( /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}/.test( $('#olr_email').val() ) == false ){
 					error = true;
 					error_content += 'Email is not Valid \n';
 				}
 					
 				
-				//= 3. 	CHECK REQUIRED FIELDS
+				//= 5. 	CHECK REQUIRED FIELDS
 				$('.olr_restaurant_wrapper').find('.olr_required').each(function(index){
 					if( $(this).prev().val() == '' ){
 						error = true;
 					}
 				});
 				
-				//= 4. 	COLLECT ALL POST DATA
+				//= 6. 	COLLECT ALL POST DATA
 				$('#olr_restaurant_form p').find(':text,select,textarea').each(function(index){
 					postData[$(this).attr('id')] = $(this).val();																																		
 				});
@@ -268,7 +276,7 @@ jQuery(document).ready(function($){
 				});
 				
 
-				//=	5. 	SUBMIT FORM
+				//=	7. 	SUBMIT FORM
 				if( error ){
 					
 					error_content += 'All Required Fields must be filled or selected ';
@@ -281,14 +289,32 @@ jQuery(document).ready(function($){
 					
 					$.post(ajaxurl,postData, function(data) {
 						//alert( data );
-						$('#olr_restaurant_response').html(data);
+						var captcha_error = false;
+						
+						if( $("#recaptcha_challenge_image").length > 0 ){
+							Recaptcha.reload();
+							var captcha_error_msg = data;
+							if( captcha_error_msg.search(/reCAPTCHA said/i) > 0 ){
+								var data = captcha_error_msg.split("<br/>");
+								$('.olr_captcha_response_error').text(data[0]);
+								$('#recaptcha_response_field').val('').focus();
+								$('#olr_restaurant_response').html('');
+								captcha_error = true;
+							}else{
+								$('.olr_captcha_response_error').text('');
+							}
+						}
+						
+						if( !captcha_error ){
+							$('#olr_restaurant_response').html(data);
+						}
 					});				
 				}
 				
 			}); // $("#olr_restaurant_booking_button").click(function(event){
 			
-		
-
+			
+	
 		} // restaurant_booking_form:function() {
 					
 	}

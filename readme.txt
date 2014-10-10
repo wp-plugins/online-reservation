@@ -6,7 +6,7 @@ Author URI: http://solweder.com/about-me
 Tags: wp, online reservations, online bookings, restaurant reservation, restaurant bookings, reservation, restaurant, bookings   
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.2
+Stable tag: 1.3
 Donate link: http://solweder.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,7 +22,7 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 * Set maximum available table and seats 
 * Assign how early and late, a reservation can be made by your customer 
 * Email ( HTML ) notification for admin and customer when reservation is made 
-
+* Protect Your reservation from spam and abuse with Captcha
 
 
 == Installation ==
@@ -59,6 +59,9 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 = 1.2 (2014-10-07) =
 * Add HTML Email 
 
+= 1.3 (2014-10-10) =
+* Add Google Recaptcha 
+
 == Upgrade Notice ==
 = 1.1 (2014-10-05) =
 This update adds support for Email Features.
@@ -66,6 +69,8 @@ This update adds support for Email Features.
 = 1.2 (2014-10-07) =
 This update adds support for HTML Email.
 
+= 1.3 (2014-10-10) =
+* Add Google Recaptcha 
 
 
 == Usage ==

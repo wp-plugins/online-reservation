@@ -96,14 +96,6 @@
 				}
 				
 				
-				
-				
-				
-				
-				
-				
-				
-
 				/*=======================================
 					3.	OWNER FIELD
 						1.	SEND EMAIL TO OWNER
@@ -228,12 +220,13 @@
 		
 		$options = get_option( 'resto_email_setting' );
 		
+		olr_delete_specific_setting_value('resto_email');
+			
 		if( $options != '' ){
 			foreach( $options as $key => $val ){
-				olr_grouping_all_setting_value($key,$val);
+				olr_grouping_all_setting_value('resto_email',$key,$val);
 			}
-		}
-		
+		}		
 		
 		/*=========================================
 			1.	FROM ( YOUR STORE NAME )
@@ -293,15 +286,7 @@
 		}
 		
 		
-		
-		
-		
-		
-		
-		
 	
-		
-		
 		/*=========================================
 			1.	SEND EMAIL TO OWNER
 		=========================================*/
@@ -349,8 +334,10 @@
 /*##############################################
 	3.	VALIDATION AND SANITIZATION	
 ##############################################*/		
-	
 	function olr_email_validation( $input ){
+		
+		
+		update_option( 'validate_setting',$input);
 		
 		// Create our array for storing the validated options
 		$output = array();
@@ -371,8 +358,7 @@
 		} // end foreach
 		
 		// Return the array processing any additional functions filtered by this action
-		return apply_filters( 'olr_email_validation', $output, $input );
-		
+		return apply_filters( 'olr_email_validation', $output, $input );	
 	}
 		
 ?>

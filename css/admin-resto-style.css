@@ -10,6 +10,7 @@
 		1.	RESTAURANT ALL BOOKINGS		
 		2.	RESTAURANT SETTINGS
 			1.	EMAIL TAB
+			2.	CAPTCHA TAB
 ##############################################*/
 
 
@@ -35,5 +36,12 @@
 	min-width: 80%;
 }
 .email-social-icons{
+	min-width: 50%;
+}
+
+
+/*= 2.	CAPTCHA TAB */
+.captcha_public_key,
+.captcha_private_key{
 	min-width: 50%;
 }

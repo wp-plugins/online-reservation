@@ -146,9 +146,11 @@
 		
 		$options = get_option('resto_schedule_setting');
 		
+		olr_delete_specific_setting_value('resto_schedule');
+			
 		if( $options != '' ){
 			foreach( $options as $key => $val ){
-				olr_grouping_all_setting_value($key,$val);
+				olr_grouping_all_setting_value('resto_schedule',$key,$val);
 			}
 		}
 		

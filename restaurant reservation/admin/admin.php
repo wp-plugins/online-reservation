@@ -479,7 +479,9 @@ if( 	$all_bookings_page
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_table_setting' ? 'nav-tab-active' : ''; ?>">
                             Table</a> 
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_email_setting' ? 'nav-tab-active' : ''; ?>">
-                            Email</a>                       
+                            Email</a>  
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_captcha_setting' ? 'nav-tab-active' : ''; ?>">
+                            Captcha</a>                                  
           		</h2>
                 
                 
@@ -506,10 +508,15 @@ if( 	$all_bookings_page
 						settings_fields( 'resto_table_setting' );
 						do_settings_sections( 'resto_table_setting' );
 					
-					} else { 
+					} else if ( $active_tab == 'resto_email_setting' )  {
 					
 						settings_fields( 'resto_email_setting' );
 						do_settings_sections( 'resto_email_setting' );
+					
+					} else { 
+					
+						settings_fields( 'resto_captcha_setting' );
+						do_settings_sections( 'resto_captcha_setting' );
 					
 					} // end if/else
 					
@@ -562,13 +569,24 @@ if( 	$all_bookings_page
 		/*=========================================
 			4.	EMAIL
 		=========================================*/	
+		if( 	$resto_email_setting_page 
+		   	||	$options_page
+		){
+			require_once('email.php');
+		}
+		
+		
+		/*=========================================
+			5.	CAPTCHA
+		=========================================*/	
 		if( 	$resto_setting_page
 		   	||	$options_page
 		 	&&	!$resto_general_setting_page 
 			&&	!$resto_schedule_setting_page
 			&&	!$resto_table_setting_page
+			&&	!$resto_email_setting_page
 		){
-			require_once('email.php');
+			require_once('captcha.php');
 		}
 		
 		

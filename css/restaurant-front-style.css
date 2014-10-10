@@ -43,5 +43,8 @@
 }
 
 
-
+.olr_captcha_response_error{
+	background-color: red;
+	color: white;
+}
 

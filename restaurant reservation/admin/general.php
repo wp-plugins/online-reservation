@@ -70,10 +70,9 @@
 			
 			$options = get_option( 'resto_general_setting' );
 			
-			/*echo "<pre>";
-				print_r( $options );
-			echo "</pre>";*/
-			olr_grouping_all_setting_value('success_message',$options['success_message']);
+			olr_delete_specific_setting_value('resto_general');
+			
+			olr_grouping_all_setting_value('resto_general','success_message',$options['success_message']);
 			
 			// Render the output
 			echo '<textarea id="textarea_example" name="resto_general_setting[success_message]" rows="5" cols="50">' . 

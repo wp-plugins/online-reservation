@@ -83,6 +83,15 @@
 			$resto_email_setting_page = true;
 		}
 		
+		if( 	is_admin() 
+			&&	$pagenow == 'edit.php' 
+			&& 	$post_type == 'olr_restaurant'
+			&& 	$setting_page == 'olr_restaurant_setting'
+			&& 	$setting_tab == 'resto_captcha_setting'
+			){
+			$resto_captcha_setting_page = true;
+		}
+		
 		
 		if( 	is_admin() 
 			&&	$pagenow == 'options.php' 

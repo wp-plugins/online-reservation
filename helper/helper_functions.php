@@ -10,37 +10,35 @@
 	/*=====================================================
 		1. 	GROUPING ALL SETTING VALUE
 	=====================================================*/
-	function olr_grouping_all_setting_value($new_key,$new_value){
+	function olr_grouping_all_setting_value($section,$new_key,$new_value){
 		
 		$option_name = 'olr_all_restaurant_setting';
 		
 		$all_restaurant_setting =  get_option($option_name);
 		
+		$all_restaurant_setting[$section][$new_key] = $new_value;
 		
-		if( $all_restaurant_setting != '' ){
-			
-			foreach( $all_restaurant_setting as $old_key => $old_val ){
-				if( $old_key == $new_key ){
-					$all_restaurant_setting[$old_key] = $new_value;
-					break;
-					$is_exist = 'yes';
-				}else{
-					$is_exist = 'no';	
-				}
-			
-			}
-			
-			if( $is_exist == 'no' ){
-				$all_restaurant_setting[$new_key] = $new_value;
-			}
-		
-		}else{
-			$all_restaurant_setting[$new_key] = $new_value;
-		}
-
 		update_option($option_name,$all_restaurant_setting);
 
 	}
+	
+	
+	/*=====================================================
+		2. 	DELETE SPECIFIC SETTING VALUE
+	=====================================================*/
+	function olr_delete_specific_setting_value($section){
+		
+		$option_name = 'olr_all_restaurant_setting';
+		
+		$all_restaurant_setting =  get_option($option_name);
+		
+		if( $all_restaurant_setting != '' ){
+			unset( $all_restaurant_setting[$section] );
+		}
+		update_option($option_name,$all_restaurant_setting);
+
+	}
+	
 	
 	
 	/*=====================================================
@@ -51,37 +49,37 @@
 		$current_day		= strtolower( date("D") );
 		
 		if( $current_day == 'mon' ){
-			$open_time 		= $options['open_time_monday'];
-			$close_time 	= $options['close_time_monday'];
+			$open_time 		= $options['resto_schedule']['open_time_monday'];
+			$close_time 	= $options['resto_schedule']['close_time_monday'];
 		}
 		if( $current_day == 'tue' ){
-			$open_time 		= $options['open_time_tuesday'];
-			$close_time 	= $options['close_time_tuesday'];
+			$open_time 		= $options['resto_schedule']['open_time_tuesday'];
+			$close_time 	= $options['resto_schedule']['close_time_tuesday'];
 		}
 		if( $current_day == 'wed' ){
-			$open_time 		= $options['open_time_wednesday'];
-			$close_time 	= $options['close_time_wednesday'];
+			$open_time 		= $options['resto_schedule']['open_time_wednesday'];
+			$close_time 	= $options['resto_schedule']['close_time_wednesday'];
 		}
 		if( $current_day == 'thu' ){
-			$open_time 		= $options['open_time_thursday'];
-			$close_time 	= $options['close_time_thursday'];
+			$open_time 		= $options['resto_schedule']['open_time_thursday'];
+			$close_time 	= $options['resto_schedule']['close_time_thursday'];
 		}
 		if( $current_day == 'fri' ){
-			$open_time 		= $options['open_time_friday'];
-			$close_time 	= $options['close_time_friday'];
+			$open_time 		= $options['resto_schedule']['open_time_friday'];
+			$close_time 	= $options['resto_schedule']['close_time_friday'];
 		}
 		if( $current_day == 'sat' ){
-			$open_time 		= $options['open_time_saturday'];
-			$close_time 	= $options['close_time_saturday'];
+			$open_time 		= $options['resto_schedule']['open_time_saturday'];
+			$close_time 	= $options['resto_schedule']['close_time_saturday'];
 		}
 		if( $current_day == 'sun' ){
-			$open_time 		= $options['open_time_sunday'];
-			$close_time 	= $options['close_time_sunday'];
+			$open_time 		= $options['resto_schedule']['open_time_sunday'];
+			$close_time 	= $options['resto_schedule']['close_time_sunday'];
 		}
 		
 		$time_interval = 30;
-		if(  $options['time_interval'] != '' ){ 
-			$time_interval = $options['time_interval'];
+		if(  $options['resto_schedule']['time_interval'] != '' ){ 
+			$time_interval = $options['resto_schedule']['time_interval'];
 		}
 		
 		$open_times = preg_match('/([0-9]+):([0-9]+)|([0-9]+)/',$open_time, $open_match);
@@ -155,12 +153,13 @@
 		<h2>Booking Table</h2>
 		<hr/>';
 		
-		if( $options['table_size'] == 'many' ):
+		
+		if( $options['resto_table']['table_size'] == 'many' ):
 		
 		$out .='<p>
 				<span class="olr_label"><label for="">Type of Table</label></span>
 				<select name="olr_type_of_table" id="olr_type_of_table">';	
-				$many_table_type = explode(',',str_replace(' ','',$options['many_type_of_table']) );
+				$many_table_type = explode(',',str_replace(' ','',$options['resto_table']['many_type_of_table']) );
 				if( $many_table_type != '' ){
 					
 					$first_table = '';
@@ -170,10 +169,7 @@
 							$first_table = 	$match_table['1'];	
 						}
 						$out .='<option value="'.$match_table['1'].'" >'.$match_table['1'].' ( '.$match_table['3'] .' person ) </option>';
-								
-									
-									
-								
+											
 					} // foreach( $many_table_type as $val){
 					
 				} // if( $many_table_type != '' ){
@@ -183,10 +179,10 @@
 		endif;
 		
 		
-		if( $options['table_size'] == 'one' ){
-			$total_table = $options['one_total_table'];
+		if( $options['resto_table']['table_size'] == 'one' ){
+			$total_table = $options['resto_table']['one_total_table'];
 		}else{
-			$total_table = $options[$first_table . '_table'];
+			$total_table = $options['resto_table'][$first_table . '_table'];
 		}
 		
 		
@@ -226,15 +222,30 @@
 					$out .= olr_output_time_list ( $options );         
 				$out .='</select> <span class="olr_required">*</span>
 			</div>	
-        </div>
-		<br/>
-			<span class="olr_requireds">*</span><span> Required fields </span> 
+        </div><br/>';
 		
+		if( $options['resto_captcha']['enable_captcha'] ){
+			if( $options['resto_captcha']['public_key'] != '' ){
+				$out .='<script type="text/javascript">
+							var RecaptchaOptions = {
+								theme : "'.$options['resto_captcha']['captcha_theme'].'"
+							};
+			 			</script>
+						<script type="text/javascript"
+							src="http://www.google.com/recaptcha/api/challenge?k='.$options['resto_captcha']['public_key'].'">
+						</script>
+						<p class="olr_captcha_response_error"></p>
+						';
+			}
+		}
+		
+$out .='<br/>
+			<span class="olr_requireds">*</span><span> Required fields </span> 
         <br/>
+		
 		<p>
  			<input type="submit" value="Booking" id="olr_restaurant_booking_button" name="olr_restaurant_booking_button">
         </p>
-        
         </form>';
 		$out .='<div id="olr_restaurant_response"></div>';
 		$out .='<div style="clear:both"></div>';

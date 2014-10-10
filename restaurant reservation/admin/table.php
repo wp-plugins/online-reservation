@@ -137,9 +137,11 @@
 		
 		$options = get_option( 'resto_table_setting' );
 		
+		olr_delete_specific_setting_value('resto_table');
+			
 		if( $options != '' ){
 			foreach( $options as $key => $val ){
-				olr_grouping_all_setting_value($key,$val);
+				olr_grouping_all_setting_value('resto_table',$key,$val);
 			}
 		}
 		
