@@ -9,9 +9,11 @@
 	4.	SETTING SUB MENU
 */
 
+
 /*#########################################################
 	1. 	ADMIN PAGES
 #########################################################*/
+global $plugin_folder;
 global $all_bookings_page;
 global $resto_setting_page;
 global $resto_general_setting_page;
@@ -30,6 +32,7 @@ global $options_page;
 		5.	CUSTOM BULK ACTION
 		6.	REMOVE HYPERLINK TO EDIT POST IN EDIT.PHP
 #########################################################*/
+
 		function olr_restaurant_post_type_registration(){
 			
 			global $themes_brand;
@@ -89,11 +92,21 @@ global $options_page;
 				'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>' ),
 			) );
 			
+			register_post_status( 'waiting-confirmation', array(
+				//'label'                     => _x( 'Confirmed', 'post' ),
+				'label'                     => 'Waiting Confirmation',
+				'public'                    => true,
+				'exclude_from_search'       => false,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Waiting Confirmation <span class="count">(%s)</span>', 'Waiting Confirmation <span class="count">(%s)</span>' ),
+			) );
+			
+			
 		}
 		add_action( 'init', 'olr_new_post_status' );
 	}
 	
-
 	/*=========================================
 		1.	ADDING VALUE TO CUSTOM COLUMN
 			1.	PHONE
@@ -107,8 +120,10 @@ global $options_page;
 			9.	STATUS
 	=========================================*/
 	if( $all_bookings_page ){
+	
 		add_action('manage_olr_restaurant_posts_custom_column', 'olr_custom_column_date', 10, 2);
 		function olr_custom_column_date($column_name, $id){
+			
 			$meta_key = 'olr_custom_column';
 			/*echo "<pre>";
 			print_r( get_post_meta($id, 'olr_custom_column', true) );
@@ -142,6 +157,10 @@ global $options_page;
 			if($column_name == 'Booking Time'){
 				echo $column['Booking Time'];
 			}
+			
+			if($column_name == 'Confirmation Key'){
+				echo $column['Confirmation Key'];
+			}
 			if($column_name == 'status'){
 				$status = get_post_status ( $id );
 				if( $status == 'draft' ){
@@ -162,7 +181,11 @@ global $options_page;
 		add_filter( 'manage_edit-olr_restaurant_columns', 'olr_customize_default_columns' ) ;
 		
 		function olr_customize_default_columns( $columns ) {
-		
+			
+			$all_settings = get_option('olr_all_restaurant_setting');
+			$resto_confirmation_key = $all_settings['resto_email']['confirmation_key'];
+			
+			
 			$columns = array(
 				'cb' 			=> '<input type="checkbox" />', // DEFAULT COLUMNS
 				'date' 			=> __( 'Date'), // DEFAULT COLUMNS
@@ -175,9 +198,16 @@ global $options_page;
 				'Persons' 		=> __( 'Persons'), // NEW COLUMNS
 				'Lunch / Dinner' => __( 'Lunch / Dinner'), // NEW COLUMNS
 				'Booking Date' 	=> __( 'Booking Date'), // NEW COLUMNS
-				'Booking Time' 	=> __( 'Booking Time'), // NEW COLUMNS
-				'status' 		=> __( 'Status') // DEFAULT COLUMNS
+				'Booking Time' 	=> __( 'Booking Time') // NEW COLUMNS
 			);
+		
+			if( 	isset( $resto_confirmation_key )
+			   	&&  $resto_confirmation_key 
+			){
+				$columns['Confirmation Key'] = __( 'Confirmation Key'); // NEW COLUMNS
+			}
+			$columns['status'] = __( 'Status'); // DEFAULT COLUMNS
+		
 		
 			return $columns;
 		}

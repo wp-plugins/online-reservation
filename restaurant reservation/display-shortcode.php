@@ -6,9 +6,6 @@
 	1.	CEATING SHORTCODE
 */
 
-
-		
-
 /*==============================================
 	1.	CEATING SHORTCODE
 		1.	GENERAL VARIABLE
@@ -18,7 +15,7 @@
 add_shortcode('online_restaurant_reservation','olr_shortcode_display');
 
 function olr_shortcode_display($args){
-		
+	
 		/*==============================================
 			1.	GENERAL VARIABLE
 		==============================================*/

@@ -16,6 +16,7 @@
 		/*===========================
 			1. 	VARIABLE 
 		===========================*/
+		$olr_admin_page = false;
 		$all_bookings_page	= false;
 		$resto_setting_page	= false;
 		$resto_general_setting_page	= false;
@@ -31,6 +32,10 @@
 		$setting_page = $_GET['page'];
 		$setting_tab = $_GET['tab'];
 		
+		if( is_admin() ){
+			$olr_admin_page = true;	
+		}
+
 		if( 	is_admin() 
 			&&	$pagenow == 'edit.php' 
 			&& 	$post_type == 'olr_restaurant'

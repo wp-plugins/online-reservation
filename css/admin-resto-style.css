@@ -32,12 +32,16 @@
 	color: #00F;
 	font-size: 25px;
 }
-.email-header-image{
+.email-longer-field{
 	min-width: 80%;
 }
-.email-social-icons{
+.email-medium-field{
 	min-width: 50%;
 }
+.image-preview{
+	display: block;
+}
+
 
 
 /*= 2.	CAPTCHA TAB */
@@ -45,3 +49,6 @@
 .captcha_private_key{
 	min-width: 50%;
 }
+
+
+

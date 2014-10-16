@@ -3,7 +3,7 @@
  * Plugin Name: Online Reservation
  * Plugin URI: http://solweder.com/
  * Description: Allow you to manage and receive your business reservation online
- * Version: 1.3
+ * Version: 1.4
  * Author: Wahsidin Tjandra
  * Author URI: http://solweder.com/about-me/
  * License:     GNU General Public License v2.0 or later
@@ -32,14 +32,16 @@
 	========================
 	1. 	GLOBAL VARIABLES
 	2.	HELPER FUNCTIONS
-	3.	ADMIN PAGES
+	3.	PAGES
 	4.	RESTAURANT RESERVATION
 
 */
 
+
 /*############################################
 	1. 	GLOBAL VARIABLES
 ############################################*/
+global $plugin_folder;
 $olr_prefix 	= 'olr_'; // olr ( online reservation )
 $plugin_folder 	= plugins_url() . '/online-reservation';
 
@@ -51,12 +53,13 @@ require_once('helper/helper_functions.php');
 
 
 /*############################################
-	3.	ADMIN PAGES
+	3.	PAGES
 		1.	RESTAURANT ADMIN PAGES
 ############################################*/
 	/*=================================
 		1.	RESTAURANT ADMIN PAGES
 	=================================*/
+	global $olr_admin_page;
 	global $all_bookings_page;
 	global $resto_setting_page;
 	global $resto_general_setting_page;
@@ -78,7 +81,7 @@ require_once('check-admin-page.php');
 /*==========================================
 	1.	ADMIN
 ==========================================*/
-if( is_admin() ){
+if( $olr_admin_page ){
 	require_once('restaurant reservation/admin/admin.php');
 }
 
@@ -86,9 +89,17 @@ if( is_admin() ){
 	2.	SHORTCODE
 ==========================================*/
 require_once('restaurant reservation/ajax.php');	
-if( !is_admin() ){
+if( 	!$olr_admin_page 
+   	&& 	!$_GET['confirmation_key']
+){
 	require_once('restaurant reservation/display-shortcode.php');
 }
+if( 	!$olr_admin_page 
+  	&& 	$_GET['confirmation_key']
+){	
+	require_once('restaurant reservation/display-shortcode-reservation-confirmed.php');	
+}
+
 
 /*==========================================
 	3.	WIDGET
