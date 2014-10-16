@@ -130,7 +130,13 @@
 		if ( 	isset( $options['resto_captcha']['enable_captcha'] ) 
 			&&	$options['resto_captcha']['enable_captcha']
 		){
-			require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper\recaptchalib.php');
+			if( $_SERVER['HTTP_HOST'] == 'localhost' ){
+				require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper\recaptchalib.php');
+			}else{
+				require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper/recaptchalib.php');
+			}
+			
+			
 			
 			$resp = recaptcha_check_answer(
 				$options['resto_captcha']['private_key'],
