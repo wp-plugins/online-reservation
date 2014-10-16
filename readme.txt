@@ -44,9 +44,11 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 
 == Screenshots ==
-1. Reservation Form with calendar.
-2. set all configuration on setting page.
-3. View reservation with all the complete information. 
+1. View reservation with all the complete information. 
+2. Reservation Form with captcha and calendar.
+3. set all configuration on setting page.
+4. confirmation email sent to your email
+
 
 
 == Changelog ==
