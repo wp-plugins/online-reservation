@@ -47,7 +47,7 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 1. View reservation with all the complete information. 
 2. Reservation Form with captcha and calendar.
 3. set all configuration on setting page.
-4. confirmation email sent to your email
+4. confirmation email sent to your email.
 
 
 
