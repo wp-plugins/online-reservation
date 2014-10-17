@@ -641,7 +641,6 @@ $text_email .= 'Persons : '.$persons.' \n';
 $text_email .= 'lunch : '.$lunch.' \n';
 $text_email .= 'date : '.$date.' \n';
 $text_email .= 'time : '.$time.' \n\n';
-
-
+$text_email .= 'Please go to this link to confirm your reservation process : '.$confirmation_link.' \n\n';
 
 ?>
