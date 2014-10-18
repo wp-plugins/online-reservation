@@ -37,7 +37,7 @@
 				// 2.  SUCCESS MESSAGE FIELD
 				add_settings_field(	
 					'success_message',						// $unique ID
-					'Success Message',							// $field title
+					__('Success Message',PLUGIN_NAME),							// $field title
 					'success_message_callback',	// $function_callback	
 					$parent_page,			// $Parent page
 					$parent_section			// $Parent section

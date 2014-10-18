@@ -19,7 +19,6 @@ function olr_shortcode_display($args){
 		/*==============================================
 			1.	GENERAL VARIABLE
 		==============================================*/
-		global $plugin_folder; 
 		
 		/*==============================================
 			2. 	RETRIEVE OPTION DATA
@@ -37,28 +36,28 @@ function olr_shortcode_display($args){
 			}
 			wp_enqueue_style(
 				'olr-date-picker-style',	// $handle (id)	
-				$plugin_folder .'/css/jquery.ui.datepicker.css', // $sr
+				OLR_FOLDER .'css/jquery.ui.datepicker.css', // $sr
 				false, 	// $dependencies
 				false,	// $version
 				false 	// in footer
 			); 
 			wp_enqueue_style(
 				'olr-front-style',	// $handle (id)	
-				$plugin_folder .'/css/restaurant-front-style.css', // $sr
+				OLR_FOLDER .'css/restaurant-front-style.css', // $sr
 				false, 	// $dependencies
 				false,	// $version
 				false 	// in footer
 			);  
 			wp_enqueue_script( 
 				'olr-script',
-				$plugin_folder . '/js/restaurant-script.js', // $src 
+				OLR_FOLDER . 'js/restaurant-script.js', // $src 
 				array(), 
 				false, 
 				true 
 			);
 			
 			$any_data_array 	= array( 
-										'plugin_folder' 	=> $plugin_folder,
+										'plugin_folder' 	=> OLR_FOLDER,
 										'early_bookings' 	=> $options['resto_schedule']['early_bookings'],
 										'late_bookings' 	=> $options['resto_schedule']['late_bookings'],
 										'plugin_options' 	=> get_option('olr_all_restaurant_setting'),

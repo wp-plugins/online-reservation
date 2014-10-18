@@ -48,10 +48,10 @@
 				=======================================*/
 				$fields = array(
 								// array ( $id , $title , $args )
-								array('table_size','Table Size', array('table_size') ), // 1.	TABLE SIZE
-								array('one_total_table','One', array('one_total_table') ), // 2.	ONE ( SIZE ) TOTAL TABLE
+								array('table_size',__('Table Size',PLUGIN_NAME), array('table_size') ), // 1.	TABLE SIZE
+								array('one_total_table',__('One',PLUGIN_NAME), array('one_total_table') ), // 2.	ONE ( SIZE ) TOTAL TABLE
 								array('one_max_person_per_table','', array('one_max_person_per_table') ), // 3.	ONE ( SIZE ) MAXIMUM PERSON PER TABLE
-								array('many_type_of_table','Many', array('many_type_of_table') ), // 4.	MANY ( SIZE ) TYPE OF TABLE 
+								array('many_type_of_table',__('Many',PLUGIN_NAME), array('many_type_of_table') ), // 4.	MANY ( SIZE ) TYPE OF TABLE 
                          	);
 				
 						
@@ -156,10 +156,10 @@
 			
 			
 			echo '<input type="radio" id="'.$args[0].'" name="resto_table_setting['.$args[0].']" value="one" '.checked('one', $options[$args[0]], false) .' />';
-			echo '<label for="resto_table_setting['.$args[0].']">One </label>';	
+			echo '<label for="resto_table_setting['.$args[0].']">'.__('One',PLUGIN_NAME).'</label>';	
 			echo '<br/>';	
 			echo '<input type="radio" id="'.$args[0].'" name="resto_table_setting['.$args[0].']" value="many" '.checked('many', $options[$args[0]], false) .' />';
-			echo '<label for="resto_table_setting['.$args[0].']">Many</label>';	
+			echo '<label for="resto_table_setting['.$args[0].']">'.__('Many',PLUGIN_NAME).'</label>';	
 		}
 		
 		
@@ -188,11 +188,11 @@
 			echo '<textarea id="'.$args[0].'" name="resto_table_setting['.$args[0].']" rows="5" cols="50">' . 
 				$options[$args[0]] . '</textarea>';
 			echo '
-					<p><strong>Format : </strong>tablename( maximum person per table )</p>
-					<p><strong>Examples</strong></p>
-					<span>smaller(4) , </span>	
-					<span>medium(8) , </span>
-					<span>larger(12)</span>
+					<p><strong>'.__('Format : ',PLUGIN_NAME).'</strong>'.__('tablename( maximum person per table )',PLUGIN_NAME).'</p>
+					<p><strong>'.__('Examples',PLUGIN_NAME).'</strong></p>
+					<span>'.__('smaller(4)',PLUGIN_NAME).' , </span>	
+					<span>'.__('medium(8)',PLUGIN_NAME).' , </span>
+					<span>'.__('larger(12)',PLUGIN_NAME).'</span>
 					
 				';
 		}

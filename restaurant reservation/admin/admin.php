@@ -9,11 +9,9 @@
 	4.	SETTING SUB MENU
 */
 
-
 /*#########################################################
 	1. 	ADMIN PAGES
 #########################################################*/
-global $plugin_folder;
 global $all_bookings_page;
 global $resto_setting_page;
 global $resto_general_setting_page;
@@ -35,26 +33,25 @@ global $options_page;
 
 		function olr_restaurant_post_type_registration(){
 			
-			global $themes_brand;
 			
 			$args = array(
 				'labels'  => array(
-						'name'                => _x('Restaurant Reservation', 'post type general name' ),
-						'menu_name'           => _x('Restaurant Reservation', 'olr_restaurant_reservation'),
-						'singular_name'       => _x('Restaurant Reservation', 'olr_restaurant_reservation'),
-						//'add_new' 			  => _x('Add New Bookings', 'olr_restaurant_reservation'),
-						'add_new_item' 		  => _x('Add New item', 'olr_restaurant_reservation'),
-						'all_items' 		  => _x('All Bookings', 'olr_restaurant_reservation'),
-						'edit_item'           => _x('Edit Online Reservation', 'olr_restaurant_reservation'),
-						'new_item'            => _x('New Online Reservation', 'olr_restaurant_reservation'),
-						'view_item'           => _x('View Online Reservation','olr_restaurant_reservation'),
-						'items_archive'       => _x('Online Reservation Archive', 'olr_restaurant_reservation'),
-						'search_items'        => _x('Search Online Reservation', 'olr_restaurant_reservation'),
-						'not_found'           => _x('No Online Reservation found.', 'olr_restaurant_reservation'),
-						'not_found_in_trash'  => _x('No Online Reservation found in trash.', 'olr_restaurant_reservation')
-					  ),
-				//'supports'      => array( 'title', 'editor', 'revisions' ,'thumbnail'),
-				'supports'      	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+						'name'                => _x('Restaurant Reservation', 'olr_restaurant' ,PLUGIN_NAME),
+						'menu_name'           => _x('Restaurant Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'singular_name'       => _x('Restaurant Reservation', 'olr_restaurant',PLUGIN_NAME),
+						//'add_new' 			  => _x('Add New Bookings', 'olr_restaurant',PLUGIN_NAME),
+						'add_new_item' 		  => _x('Add New item', 'olr_restaurant',PLUGIN_NAME),
+						'all_items' 		  => _x('All Bookings', 'olr_restaurant',PLUGIN_NAME),
+						'edit_item'           => _x('Edit Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'new_item'            => _x('New Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'view_item'           => _x('View Online Reservation','olr_restaurant',PLUGIN_NAME),
+						'items_archive'       => _x('Online Reservation Archive', 'olr_restaurant',PLUGIN_NAME),
+						'search_items'        => _x('Search Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'not_found'           => _x('No Online Reservation found.', 'olr_restaurant',PLUGIN_NAME),
+						'not_found_in_trash'  => _x('No Online Reservation found in trash.', 'olr_restaurant',PLUGIN_NAME)
+						),
+				//'supports'      => array( 'title', 'editor', 'revisions' ,'thumbnail',PLUGIN_NAME),
+				'supports'      	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
 				//'show_in_menu'  => 'admin.php?page=simple_Gmap_content',
 				'public'        	=> true,
 				'show_in_nav_menus'	=> true
@@ -188,17 +185,17 @@ global $options_page;
 			
 			$columns = array(
 				'cb' 			=> '<input type="checkbox" />', // DEFAULT COLUMNS
-				'date' 			=> __( 'Date'), // DEFAULT COLUMNS
-				'title' 		=> __( 'Name'), // DEFAULT COLUMNS
-				'Phone' 		=> __( 'Phone'), // NEW COLUMNS
-				'Email' 		=> __( 'Email'), // NEW COLUMNS
-				'editor' 		=> __( 'Message'), // DEFAULT COLUMNS
-				'Type of Tables' => __( 'Type of Tables'), // NEW COLUMNS
-				'Tables' 		=> __( 'Tables'), // NEW COLUMNS
-				'Persons' 		=> __( 'Persons'), // NEW COLUMNS
-				'Lunch / Dinner' => __( 'Lunch / Dinner'), // NEW COLUMNS
-				'Booking Date' 	=> __( 'Booking Date'), // NEW COLUMNS
-				'Booking Time' 	=> __( 'Booking Time') // NEW COLUMNS
+				'date' 			=> __( 'Date',PLUGIN_NAME), // DEFAULT COLUMNS
+				'title' 		=> __( 'Name',PLUGIN_NAME), // DEFAULT COLUMNS
+				'Phone' 		=> __( 'Phone',PLUGIN_NAME), // NEW COLUMNS
+				'Email' 		=> __( 'Email',PLUGIN_NAME), // NEW COLUMNS
+				'editor' 		=> __( 'Message',PLUGIN_NAME), // DEFAULT COLUMNS
+				'Type of Tables' => __( 'Type of Tables',PLUGIN_NAME), // NEW COLUMNS
+				'Tables' 		=> __( 'Tables',PLUGIN_NAME), // NEW COLUMNS
+				'Persons' 		=> __( 'Persons',PLUGIN_NAME), // NEW COLUMNS
+				'Lunch / Dinner' => __( 'Lunch / Dinner',PLUGIN_NAME), // NEW COLUMNS
+				'Booking Date' 	=> __( 'Booking Date',PLUGIN_NAME), // NEW COLUMNS
+				'Booking Time' 	=> __( 'Booking Time',PLUGIN_NAME) // NEW COLUMNS
 			);
 		
 			if( 	isset( $resto_confirmation_key )
@@ -221,9 +218,9 @@ global $options_page;
 		
 		function olr_sort_columns( $columns ) {
 			return array(
-				'date' 			=> __( 'Date'), // DEFAULT COLUMNS
-				'title' 		=> __( 'Name'), // DEFAULT COLUMNS
-				'Booking Date' 	=> __( 'Booking Date') // NEW COLUMNS
+				'date' 			=> __( 'Date',PLUGIN_NAME), // DEFAULT COLUMNS
+				'title' 		=> __( 'Name',PLUGIN_NAME), // DEFAULT COLUMNS
+				'Booking Date' 	=> __( 'Booking Date',PLUGIN_NAME) // NEW COLUMNS
 		  	);
 		}
 	} // if( $all_bookings_page ){
@@ -428,7 +425,7 @@ if( 	$all_bookings_page
 			//=	1.	ENQUEQE STYLE
 			wp_enqueue_style(
 				'olr-admin-resto-style',	// $handle (id)	
-				$plugin_folder .'/css/admin-resto-style.css', // $sr
+				OLR_FOLDER .'css/admin-resto-style.css', // $sr
 				false, 	// $dependencies
 				false
 			); 
@@ -436,7 +433,7 @@ if( 	$all_bookings_page
 			//=	2.	ENQUEQE SCRIPT
 			wp_enqueue_script(
                 'olr-admin-resto-script',	// $handle (id)	
-                $plugin_folder . '/js/admin-resto-script.js', // $src
+                OLR_FOLDER . 'js/admin-resto-script.js', // $src
                 array( 'jquery' ), 	// $dependencies
 				false,	// $version
 				false 	// in footer
@@ -468,8 +465,8 @@ if( 	$all_bookings_page
 				//$iconUrl = get_template_directory_uri() . '\theme-options\images\menu-icon.png';
 				add_submenu_page(
 					'edit.php?post_type=olr_restaurant',				// $parent_slug ( custom post type )
-					__('Settings'),				// $page_title
-					__('Settings'),			// $menu_title
+					__('Settings',PLUGIN_NAME),				// $page_title
+					__('Settings',PLUGIN_NAME),			// $menu_title
 					'administrator',		// $capability (which user can see)
 					'olr_restaurant_setting',		// $menu_slug (The unique ID )
 					'olr_restaurant_setting_display'	// $function
@@ -490,7 +487,7 @@ if( 	$all_bookings_page
 		
 				<!-- Add the icon to the page -->
 				<!--<div id="icon-themes" class="icon32"></div>-->
-				<h2>Restaurant Reservation Setting</h2>
+				<h2><?php _e('Restaurant Reservation Setting',PLUGIN_NAME)?></h2>
 		
 				<!-- Make a call to the WordPress function for rendering errors when settings are saved. -->
 				<?php settings_errors(); ?>
@@ -500,18 +497,19 @@ if( 	$all_bookings_page
 							$active_tab = $_GET[ 'tab' ];
 						} // end if
 					?>
-				
+			
+                
                 <h2 class="nav-tab-wrapper">
               		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_general_setting" class="nav-tab <?php echo $active_tab == 'resto_general_setting' ? 'nav-tab-active' : ''; ?>">
-                            General</a>
+                            <?php _e('General',PLUGIN_NAME); ?></a>
               		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_schedule_setting" class="nav-tab <?php echo $active_tab == 'resto_schedule_setting' ? 'nav-tab-active' : ''; ?>">
-                            Schedule</a>
+                            <?php _e('Schedule',PLUGIN_NAME); ?></a>
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_table_setting' ? 'nav-tab-active' : ''; ?>">
-                            Table</a> 
+                            <?php _e('Table',PLUGIN_NAME); ?></a> 
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_email_setting' ? 'nav-tab-active' : ''; ?>">
-                            Email</a>  
+                            <?php _e('Email',PLUGIN_NAME); ?></a>  
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_captcha_setting' ? 'nav-tab-active' : ''; ?>">
-                            Captcha</a>                                  
+                            <?php _e('Captcha',PLUGIN_NAME); ?></a>                                  
           		</h2>
                 
                 

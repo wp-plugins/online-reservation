@@ -26,8 +26,8 @@
 			
 			parent::__construct(
 				'olr_restaurant_widget', // Base ID
-				__( 'OLRS Restaurant Reservation'), // Name
-				array( 'description' => __( 'Display Online Restaurant Reservation') )// Args
+				__( 'OLRS Restaurant Reservation',PLUGIN_NAME), // Name
+				array( 'description' => __( 'Display Online Restaurant Reservation',PLUGIN_NAME) )// Args
 			);
 		}
 	   
@@ -41,9 +41,6 @@
 		 */
 		public function widget( $args, $instance ) {
 			
-			global $plugin_folder; 
-			
-			
 			/*====================================
 				ENQUEUES SCRIPTS
 			====================================*/
@@ -53,14 +50,14 @@
 				
 			wp_enqueue_script( 
 			'olr-script',
-			$plugin_folder . '/js/restaurant-script.js', // $src 
+			OLR_FOLDER . 'js/restaurant-script.js', // $src 
 				array(), 
 				false, 
 				true 
 			);
 				
 			$any_data_array 	= array( 
-										'plugin_folder' 	=> $plugin_folder,
+										'plugin_folder' 	=> OLR_FOLDER,
 										'early_bookings' 	=> $options['resto_schedule']['early_bookings'],
 										'late_bookings' 	=> $options['resto_schedule']['late_bookings'],
 										'plugin_options' 	=> get_option('olr_all_restaurant_setting'),
@@ -94,13 +91,13 @@
 		 */
 		public function form( $instance ) {
 			if ( $instance[ 'title' ] =='' ) {
-				$title = __( 'Restaurant Reservation');
+				$title = __( 'Restaurant Reservation',PLUGIN_NAME);
 			}else {
 				$title = $instance[ 'title' ];
 			}
 			?>
             <p>
-                <label for="<?php echo $this->get_field_name( 'title' ); ?>"><?php _e( 'Title:'); ?></label>
+                <label for="<?php echo $this->get_field_name( 'title' ); ?>"><?php _e( 'Title:',PLUGIN_NAME); ?></label>
                 <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" 
                     type="text" value="<?php echo esc_attr( $title ); ?>" />
 			</p>
@@ -158,14 +155,14 @@ if( !is_admin() ){
 	if( $olr_restaurant_widget_active ){
 		wp_enqueue_style(
 			'olr-date-picker-style',	// $handle (id)	
-			$plugin_folder .'/css/jquery.ui.datepicker.css', // $sr
+			OLR_FOLDER .'css/jquery.ui.datepicker.css', // $sr
 			false, 	// $dependencies
 			false,	// $version
 			false 	// in footer
 		); 
 		wp_enqueue_style(
 			'olr-front-style',	// $handle (id)	
-			$plugin_folder .'/css/restaurant-front-style.css', // $sr
+			OLR_FOLDER .'css/restaurant-front-style.css', // $sr
 			false, 	// $dependencies
 			false,	// $version
 			false 	// in footer

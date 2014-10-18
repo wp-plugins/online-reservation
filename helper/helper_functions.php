@@ -130,34 +130,34 @@
 		$out .='
         <form id="olr_restaurant_form" action="'.$_SERVER['PHP_SELF'].'" method="post">'.
         wp_nonce_field("restaurant_form_verify","restaurant_nonce_id")
-		.'<h2>Personal Information</h2>
+		.'<h2>'.__( 'Personal Information', PLUGIN_NAME ).'</h2>
 		<hr/>
 		<p>
-            <span class="olr_label"><label for="">Name</label></span> 
+            <span class="olr_label"><label for="">'.__( 'Name', PLUGIN_NAME ).'</label></span> 
             <input type="text" name="olr_name" id="olr_name" value="" /> <span class="olr_required">*</span>
         </p>
         <p>
-            <span class="olr_label"><label for="">Email Address</label></span> 
+            <span class="olr_label"><label for="">'.__( 'Email Address', PLUGIN_NAME ).'</label></span> 
             <input type="text" name="olr_email" id="olr_email" value="" /> <span class="olr_required">*</span>
         </p>
         <p>
-            <span class="olr_label"><label for="">Phone</label></span> 
+            <span class="olr_label"><label for="">'.__( 'Phone', PLUGIN_NAME ).'</label></span> 
             <input type="text" name="olr_phone" id="olr_phone" value="" /> <span class="olr_required">*</span>
         </p>
 		<p>
-        	<span class="olr_label"><label for="">Message</label></span>
+        	<span class="olr_label"><label for="">'.__( 'Message', PLUGIN_NAME ).'</label></span>
  			<textarea rows="10" cols="30" name="olr_message" id="olr_message"></textarea>
         </p>
 		<br/>
 		
-		<h2>Booking Table</h2>
+		<h2>'.__( 'Booking Table', PLUGIN_NAME ).'</h2>
 		<hr/>';
 		
 		
 		if( $options['resto_table']['table_size'] == 'many' ):
 		
 		$out .='<p>
-				<span class="olr_label"><label for="">Type of Table</label></span>
+				<span class="olr_label"><label for="">'.__( 'Type of Table', PLUGIN_NAME ).'</label></span>
 				<select name="olr_type_of_table" id="olr_type_of_table">';	
 				$many_table_type = explode(',',str_replace(' ','',$options['resto_table']['many_type_of_table']) );
 				if( $many_table_type != '' ){
@@ -187,7 +187,7 @@
 		
 		
 		$out .='<p>
-			<span class="olr_label"><label for="">Table</label></span>
+			<span class="olr_label"><label for="">'.__( 'Table', PLUGIN_NAME ).'</label></span>
             <select name="olr_table" id="olr_table">
                 <option value="1" selected="selected">1</option>';
                 for( $x = 2; $x <= $total_table; $x++ ): 
@@ -197,11 +197,11 @@
         </p>
         
         <p>
-            <span class="olr_label"><label for="">Persons</label></span> 
+            <span class="olr_label"><label for="">'.__( 'Persons', PLUGIN_NAME ).'</label></span> 
             <input type="text" name="olr_persons" id="olr_persons" value="" /> <span class="olr_required">*</span>
         </p>
         <p>
-        	<span class="olr_label"><label for="">Lunch / Dinner</label></span>
+        	<span class="olr_label"><label for="">'.__( 'Lunch / Dinner', PLUGIN_NAME ).'</label></span>
             <select name="olr_lunch" id="olr_lunch">
             	<option value="" selected="selected"></option>
                 <option value="lunch">Lunch</option>
@@ -209,13 +209,13 @@
             </select>
         </p>
         <div class="olr_date_section">
-        	<span class="olr_label"><label for="">Date</label></span> 
+        	<span class="olr_label"><label for="">'.__( 'Date', PLUGIN_NAME ).'</label></span> 
             <div class="olr_date_wrap">
 				<input name="olr_date" id="olr_date" type="text" value="" /> <span class="olr_required">*</span>
  			</div>	       
 		</div>
         <div class="olr_time_section">
-        	<span class="olr_label"><label for="">Time</label></span>
+        	<span class="olr_label"><label for="">'.__( 'Time', PLUGIN_NAME ).'</label></span>
 			<div class="olr_time_wrap">
 				<select name="olr_time" id="olr_time">
 					<option value="" selected="selected"></option>';
@@ -240,7 +240,7 @@
 		}
 		
 $out .='<br/>
-			<span class="olr_requireds">*</span><span> Required fields </span> 
+			<span class="olr_requireds">*</span><span>  '.__( 'Required fields', PLUGIN_NAME ).'</span> 
         <br/>
 		
 		<p>

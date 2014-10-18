@@ -9,14 +9,10 @@
 	5. 	CREATE THANK YOU PAGE
 */ 
 
-global $plugin_folder;
-
 /*##################################################
 	1.	ENQUEQE MEDIA UPLOADER SCRIPT AND STYLE 
 ##################################################*/
 		function olr_resto_admin_media_scripts() {
-			
-			global $plugin_folder;
 			
 			wp_enqueue_script('jquery');
 		
@@ -25,7 +21,7 @@ global $plugin_folder;
 			wp_enqueue_script('media-upload');
 			wp_enqueue_script(
 				'logo-image-upload',	// $handle (id)	
-				$plugin_folder . '/js/admin-resto-email.js', // $src
+				OLR_FOLDER . 'js/admin-resto-email.js', // $src
 				array('jquery','media-upload','thickbox'),  	// $dependencies
 				false,	// $version
 				false 	// in footer
@@ -124,28 +120,28 @@ global $plugin_folder;
 				=============================================*/
 				$fields_owner = array(
 									// array ( $id , $title , $args )
-									array('restaurant_name','Restaurant Name', array('restaurant_name') ), // 1.	RESTURANT NAME
-									array('restaurant_address','Restaurant Address', array('restaurant_address') ), // 2.	RESTAURANT ADDRESS
-									array('restaurant_city','Restaurant City', array('restaurant_city') ), // 3.	RESTAURANT CITY
-									array('restaurant_state','Restaurant State', array('restaurant_state') ), // 4.	RESTAURANT STATE
-									array('restaurant_zipcode','Restaurant Zip Code', array('restaurant_zipcode') ), // 5.	RESTAURANT ZIP CODE
-									array('restaurant_phone','Restaurant Phone', array('restaurant_phone') ), // 6.	RESTAURANT PHONE
-									array('restaurant_fax','Restaurant Fax', array('restaurant_fax') ), // 7.	RESTAURANT FAX
-									array('restaurant_email','Restaurant Email', array('restaurant_email') ), // 8.	RESTAURANT EMAIL
-									array('restaurant_website','Restaurant Website', array('restaurant_website') ), // 9.	RESTAURANT WEBSITE
-									array('restaurant_logo','Restaurant Logo', array('restaurant_logo') ), // 10.	RESTAURANT LOGO
-									array('restaurant_image','Restaurant Image', array('restaurant_image') ), // 11.	RESTAURANT IMAGE
-									array('restaurant_offer_link','Restaurant Special Offer Link', array('restaurant_offer_link') ), // 12.	SPECIAL OFFER LINK
-									array('restaurant_reservation_link','Restaurant Reservation Link', array('restaurant_reservation_link') ), // 13.	RESERVATION LINK
-									array('restaurant_information','Restaurant Information', array('restaurant_information') ), // 14.	RESTAURANT INFORMATION
-									array('restaurant_policies','Restaurant Policies', array('restaurant_policies') ), // 15.	RESTAURANT POLICIES
-									array('restaurant_facebook','Facebook', array('restaurant_facebook') ), // 16.	FACEBOOK 
-									array('restaurant_twitter','Twitter', array('restaurant_twitter') ), // 17.	TWITTER
-									array('restaurant_google','Google', array('restaurant_google') ), // 18. GOOGLE
-									array('restaurant_linkedin','LinkeIn', array('restaurant_linkedin') ), // 19. LINKEDIN
-									array('restaurant_pinterest','Pinterest', array('restaurant_pinterest') ), // 20.	PINTEREST
-									array('restaurant_youtube','Youtube', array('restaurant_youtube') ), // 21.	YOUTUBE
-									array('restaurant_footer','Footer Content', array('restaurant_footer') ) // 22.	FOOTER CONTENT
+									array('restaurant_name',__('Restaurant Name',PLUGIN_NAME), array('restaurant_name') ), // 1.	RESTURANT NAME
+									array('restaurant_address',__('Restaurant Address',PLUGIN_NAME), array('restaurant_address') ), // 2.	RESTAURANT ADDRESS
+									array('restaurant_city',__('Restaurant City',PLUGIN_NAME), array('restaurant_city') ), // 3.	RESTAURANT CITY
+									array('restaurant_state',__('Restaurant State',PLUGIN_NAME), array('restaurant_state') ), // 4.	RESTAURANT STATE
+									array('restaurant_zipcode',__('Restaurant Zip Code',PLUGIN_NAME), array('restaurant_zipcode') ), // 5.	RESTAURANT ZIP CODE
+									array('restaurant_phone',__('Restaurant Phone',PLUGIN_NAME), array('restaurant_phone') ), // 6.	RESTAURANT PHONE
+									array('restaurant_fax',__('Restaurant Fax',PLUGIN_NAME), array('restaurant_fax') ), // 7.	RESTAURANT FAX
+									array('restaurant_email',__('Restaurant Email',PLUGIN_NAME), array('restaurant_email') ), // 8.	RESTAURANT EMAIL
+									array('restaurant_website',__('Restaurant Website',PLUGIN_NAME), array('restaurant_website') ), // 9.	RESTAURANT WEBSITE
+									array('restaurant_logo',__('Restaurant Logo',PLUGIN_NAME), array('restaurant_logo') ), // 10.	RESTAURANT LOGO
+									array('restaurant_image',__('Restaurant Image',PLUGIN_NAME), array('restaurant_image') ), // 11.	RESTAURANT IMAGE
+									array('restaurant_offer_link',__('Restaurant Special Offer Link',PLUGIN_NAME), array('restaurant_offer_link') ), // 12.	SPECIAL OFFER LINK
+									array('restaurant_reservation_link',__('Restaurant Reservation Link',PLUGIN_NAME), array('restaurant_reservation_link') ), // 13.	RESERVATION LINK
+									array('restaurant_information',__('Restaurant Information',PLUGIN_NAME), array('restaurant_information') ), // 14.	RESTAURANT INFORMATION
+									array('restaurant_policies',__('Restaurant Policies',PLUGIN_NAME), array('restaurant_policies') ), // 15.	RESTAURANT POLICIES
+									array('restaurant_facebook',__('Facebook',PLUGIN_NAME), array('restaurant_facebook') ), // 16.	FACEBOOK 
+									array('restaurant_twitter',__('Twitter',PLUGIN_NAME), array('restaurant_twitter') ), // 17.	TWITTER
+									array('restaurant_google',__('Google',PLUGIN_NAME), array('restaurant_google') ), // 18. GOOGLE
+									array('restaurant_linkedin',__('LinkeIn',PLUGIN_NAME), array('restaurant_linkedin') ), // 19. LINKEDIN
+									array('restaurant_pinterest',__('Pinterest',PLUGIN_NAME), array('restaurant_pinterest') ), // 20.	PINTEREST
+									array('restaurant_youtube',__('Youtube',PLUGIN_NAME), array('restaurant_youtube') ), // 21.	YOUTUBE
+									array('restaurant_footer',__('Footer Content',PLUGIN_NAME), array('restaurant_footer') ) // 22.	FOOTER CONTENT
 								);
 				
 				foreach( $fields_owner as $field ){
@@ -170,10 +166,10 @@ global $plugin_folder;
 				=======================================*/
 				$fields_owner = array(
 									// array ( $id , $title , $args )
-									array('confirmation_email','Enable Confirmation Email', array('confirmation_email') ), // 1.	ENABLE CONFIRMATION EMAIL 
-									array('confirmation_key','Display Confirmation key ( on List of bookings )', array('confirmation_key') ), // 2.	DISPLAY CONFIRMATION KEY
-									array('confirmation_success_message','Confirmation Success Message', array('confirmation_success_message') ), // 3.	CONFIRMATION SUCCESS MESSAGE
-									array('confirmation_failed_message','Confirmation Success Message', array('confirmation_failed_message') ) // 4.	CONFIRMATION FAILED MESSAGE
+									array('confirmation_email',__('Enable Confirmation Email',PLUGIN_NAME), array('confirmation_email') ), // 1.	ENABLE CONFIRMATION EMAIL 
+									array('confirmation_key',__('Display Confirmation key ( on List of bookings )',PLUGIN_NAME), array('confirmation_key') ), // 2.	DISPLAY CONFIRMATION KEY
+									array('confirmation_success_message',__('Confirmation Success Message',PLUGIN_NAME), array('confirmation_success_message') ), // 3.	CONFIRMATION SUCCESS MESSAGE
+									array('confirmation_failed_message',__('Confirmation Success Message',PLUGIN_NAME), array('confirmation_failed_message') ) // 4.	CONFIRMATION FAILED MESSAGE
                          		);
 				
 				foreach( $fields_owner as $field ){
@@ -197,9 +193,9 @@ global $plugin_folder;
 				=======================================*/
 				$fields_owner = array(
 									// array ( $id , $title , $args )
-									array('email_to_owner','Send Email To Owner', array('email_to_owner') ), // 1.	SEND EMAIL TO OWNER
-									array('owner_email','Owner Email', array('owner_email') ), // 2.	OWNER EMAIL
-									array('owner_email_subject','Email Subject', array('owner_email_subject') ) // 3.	OWNER EMAIL SUBJECT
+									array('email_to_owner',__('Send Email To Owner',PLUGIN_NAME), array('email_to_owner') ), // 1.	SEND EMAIL TO OWNER
+									array('owner_email',__('Owner Email',PLUGIN_NAME), array('owner_email') ), // 2.	OWNER EMAIL
+									array('owner_email_subject',__('Email Subject',PLUGIN_NAME), array('owner_email_subject') ) // 3.	OWNER EMAIL SUBJECT
                          		);
 				
 				foreach( $fields_owner as $field ){
@@ -223,8 +219,8 @@ global $plugin_folder;
 				=======================================*/
 				$fields_customer = array(
 									// array ( $id , $title , $args )
-									array('email_to_customer','Send Email To Customer', array('email_to_customer') ), // 1.	SEND EMAIL TO CUSTOMER
-									array('customer_email_subject','Email Subject', array('customer_email_subject') ), // 2.	CUSTOMER EMAIL SUBJECT
+									array('email_to_customer',__('Send Email To Customer',PLUGIN_NAME), array('email_to_customer') ), // 1.	SEND EMAIL TO CUSTOMER
+									array('customer_email_subject',__('Email Subject',PLUGIN_NAME), array('customer_email_subject') ), // 2.	CUSTOMER EMAIL SUBJECT
 								
 								
                          		);
@@ -268,7 +264,7 @@ global $plugin_folder;
 	=========================================*/
 	function olr_general_email_section($args){
 		
-		echo '<h3 class="setting_section_title">GENERAL</h3><hr />';
+		echo '<h3 class="setting_section_title">'.__('GENERAL',PLUGIN_NAME).'</h3><hr />';
 		echo '
 			  	<p>
 					You can easier to add and style some content on your email template with below Editor 
@@ -300,7 +296,7 @@ global $plugin_folder;
 		2.	CONFIRMATION SECTION 
 	=========================================*/
 	function olr_confirmation_email_section($args){
-		echo '<h3 class="setting_section_title">Confirmation</h3><hr />';
+		echo '<h3 class="setting_section_title">'.__('Confirmation',PLUGIN_NAME).'</h3><hr />';
 	}
 	
 	
@@ -308,14 +304,14 @@ global $plugin_folder;
 		3.	OWNER SECTION
 	=========================================*/
 	function olr_owner_email_section($args){
-		echo '<h3 class="setting_section_title">Restaurant Owner</h3><hr />';
+		echo '<h3 class="setting_section_title">'.__('Restaurant Owner',PLUGIN_NAME).'</h3><hr />';
 	}
 	
 	/*=========================================
 		4.	CUSTOMER SECTION
 	=========================================*/
 	function olr_customer_email_section($args){
-		echo '<br /><h3 class="setting_section_title">Customer</h3><hr />';
+		echo '<br /><h3 class="setting_section_title">'.__('Customer',PLUGIN_NAME).'</h3><hr />';
 	}
 
 	/*=========================================

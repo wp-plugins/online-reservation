@@ -49,9 +49,9 @@ jQuery(document).ready(function($){
 			/*==================================
 				1. 	GENERAL VARIABLE
 			==================================*/
-			var loading_img 			= this.plugin_folder + "/image/loading.gif";
-			var check_date_url 			= this.plugin_folder + "/restaurant reservation/check-date.php";
-			var check_total_table_url 	= this.plugin_folder + "/restaurant reservation/total_table.php";
+			var loading_img 			= this.plugin_folder + "image/loading.gif";
+			var check_date_url 			= this.plugin_folder + "restaurant reservation/check-date.php";
+			var check_total_table_url 	= this.plugin_folder + "restaurant reservation/total_table.php";
 			plugin_folder 				= this.plugin_folder;
 			plugin_options				= this.plugin_options;
 			ajaxurl						= this.ajaxurl;
@@ -113,7 +113,6 @@ jQuery(document).ready(function($){
 						var postData= {};
 						postData['date'] 		= $("#olr_date").val();
 						postData['time'] 		= $("#olr_time").val();
-						postData['plugin_url'] 	= plugin_folder;
 						postData['options'] 	= plugin_options;
 						
 						

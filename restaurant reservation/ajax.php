@@ -104,8 +104,7 @@
 		/*########################################
 			2. 	GENERAL VARIABLE
 		########################################*/	
-		$pluginUrl 			= $plugin_url . '/online-reservation';
-		$olr['trueImg'] 	= $pluginUrl . '/images/true.gif';
+		$olr['trueImg'] 	= $plugin_url . 'image/true.gif';
 		$olr['post_type'] 	= 'olr_restaurant';
 		$olr['meta_key'] 	= 'olr_custom_column';
 		
@@ -131,9 +130,9 @@
 			&&	$options['resto_captcha']['enable_captcha']
 		){
 			if( $_SERVER['HTTP_HOST'] == 'localhost' ){
-				require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper\recaptchalib.php');
+				require_once( $plugin_url . 'helper\recaptchalib.php');
 			}else{
-				require_once( str_replace('restaurant reservation','',dirname(__FILE__)) . 'helper/recaptchalib.php');
+				require_once( $plugin_url . 'helper/recaptchalib.php');
 			}
 			
 			
@@ -486,6 +485,5 @@
 	
 	
 	} // function myajax_submit() {
-	
 	
 ?>

@@ -14,7 +14,6 @@
 	########################################*/	
 	$date 		= $_POST['date'];
 	$time 		= $_POST['time'];
-	$plugin_url = $_POST['plugin_url'];
 	$Options 	= $_POST['options'];
 	
 
@@ -22,10 +21,6 @@
 	/*########################################
 		2. 	GENERAL VARIABLE
 	########################################*/	
-	$pluginUrl 			= $plugin_url . '/online-reservation';
-	$olr['trueImg'] 	= $pluginUrl . '/images/true.gif';
-	$olr['post_type'] 	= 'olr_restaurant';
-	$olr['meta_key'] 	= 'olr_custom_column';
 	
 	
 	/*########################################

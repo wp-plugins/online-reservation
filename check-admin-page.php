@@ -6,7 +6,6 @@
 	1.	RESTAURANT ADMIN PAGES
 */
 	
-	
 	/*=================================
 		1.	RESTAURANT ADMIN PAGES
 			1. 	VARIABLE 

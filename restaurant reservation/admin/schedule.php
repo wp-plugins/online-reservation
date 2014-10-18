@@ -69,23 +69,23 @@
 				================================*/
 				$fields = array(
 							   	// array ( $id , $title , $args )
-                                array('open_time_monday','Monday', array('open_time_monday') ), // 1.	OPEN TIME MONDAY
+                                array('open_time_monday',__('Monday',PLUGIN_NAME), array('open_time_monday') ), // 1.	OPEN TIME MONDAY
 								array('close_time_monday','', array('close_time_monday') ),
-								array('open_time_tuesday','Tuesday', array('open_time_tuesday') ), // 3.	OPEN TIME TUESDAY
+								array('open_time_tuesday',__('Tuesday',PLUGIN_NAME), array('open_time_tuesday') ), // 3.	OPEN TIME TUESDAY
 								array('close_time_tuesday','', array('close_time_tuesday') ),
-								array('open_time_wednesday','Wednesday', array('open_time_wednesday') ),// 5.	OPEN TIME WEDNESDAY
+								array('open_time_wednesday',__('Wednesday',PLUGIN_NAME), array('open_time_wednesday') ),// 5.	OPEN TIME WEDNESDAY
 								array('close_time_wednesday','', array('close_time_wednesday') ),
-								array('open_time_thursday','Thursday', array('open_time_thursday') ),//	7.	OPEN TIME THURSDAY
+								array('open_time_thursday',__('Thursday',PLUGIN_NAME), array('open_time_thursday') ),//	7.	OPEN TIME THURSDAY
 								array('close_time_thursday','', array('close_time_thursday') ),
-								array('open_time_friday','Friday', array('open_time_friday') ),//	9.	OPEN TIME FRIDAY
+								array('open_time_friday',__('Friday',PLUGIN_NAME), array('open_time_friday') ),//	9.	OPEN TIME FRIDAY
 								array('close_time_friday','', array('close_time_friday') ),
-								array('open_time_saturday','Saturday', array('open_time_saturday') ),//	11.	OPEN TIME SATURDAY
+								array('open_time_saturday',__('Saturday',PLUGIN_NAME), array('open_time_saturday') ),//	11.	OPEN TIME SATURDAY
 								array('close_time_saturday','', array('close_time_saturday') ),
-								array('open_time_sunday','Sunday', array('open_time_sunday') ),// 13.	OPEN TIME SUNDAY	
+								array('open_time_sunday',__('Sunday',PLUGIN_NAME), array('open_time_sunday') ),// 13.	OPEN TIME SUNDAY	
 								array('close_time_sunday','', array('close_time_sunday') ),
-								array('time_interval','Time Interval', array('time_interval') ), //	15.	TIME STEP
-								array('early_bookings','Early Bookings', array('early_bookings') ), //	16.	EARLY BOOKINGS
-								array('late_bookings','Late Bookings', array('late_bookings') ) //	16.	EARLY BOOKINGS
+								array('time_interval',__('Time Interval',PLUGIN_NAME), array('time_interval') ), //	15.	TIME STEP
+								array('early_bookings',__('Early Bookings',PLUGIN_NAME), array('early_bookings') ), //	16.	EARLY BOOKINGS
+								array('late_bookings',__('Late Bookings',PLUGIN_NAME), array('late_bookings') ) //	16.	EARLY BOOKINGS
 								
                          	);
 				
@@ -129,7 +129,7 @@
 	}
 	function olr_working_time_title(){
 		?>
-        	<h2 class="section_title">Working Time</h2>
+        	<h2 class="section_title"><?php _e('Working Time',PLUGIN_NAME) ?></h2>
             <hr/>
         <?php 
 		
@@ -171,7 +171,7 @@
 				$options[ $args[0] ] = '08:00';
 			}
 			
-			echo '<p style="float:left; margin-right: 10px; "> Open Time </p>';
+			echo '<p style="float:left; margin-right: 10px; ">'.__('Open Time',PLUGIN_NAME).'</p>';
 			echo '<input type="text" id="'.$args[0].'" name="resto_schedule_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
 			echo '<p style="clear:both; "></p>';
 		}
@@ -187,7 +187,7 @@
 			if( $options[ $args[0] ] == '' ){
 				$options[ $args[0] ] = '23:00';
 			}
-			echo '<p style="float:left; margin-right: 10px; "> Close Time </p>';
+			echo '<p style="float:left; margin-right: 10px; ">'.__('Close Time',PLUGIN_NAME).'</p>';
 			echo '<input type="text" id="'.$args[0].'" name="resto_schedule_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
 			echo '<p style="clear:both; "></p>';
 		}
@@ -203,7 +203,8 @@
 			}
 			
 			echo '<input type="text" id="'.$args[0].'" name="resto_schedule_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
-			echo '<p><strong>Note : </strong> the range between hours , if you set 30 , then it would be (  01.30 , 02.00 , 02.30  )</p>';
+			echo '<p><strong> '.__('Note :',PLUGIN_NAME).'</strong> '
+					.__('the range between hours , if you set 30 , then it would be (  01.30 , 02.00 , 02.30  )',PLUGIN_NAME).'</p>';
 		}
 		
 		/*=========================================
@@ -222,7 +223,7 @@
                     <option value="3 month" <?php selected( $options[$args[0]], '3 month' ); ?>>3 months in advance</option>
                 </select>
             <?php 
-			echo '<p><strong>Note : </strong> set early booking your customer can make</p>';
+			echo '<p><strong>'.__('Note :',PLUGIN_NAME).'</strong> '.__('set early booking your customer can make',PLUGIN_NAME).'</p>';
 		}
 		
 		
@@ -246,7 +247,7 @@
                     <option value="23 hour" <?php selected( $options[$args[0]], '23 hour' ); ?>>23 hours in advance</option>
                 </select>
             <?php 
-			echo '<p><strong>Note : </strong> set late booking your customer can make</p>';
+			echo '<p><strong>'.__('Note :',PLUGIN_NAME).'</strong> '.__('set late booking your customer can make',PLUGIN_NAME).'</p>';
 		}
 		
 		

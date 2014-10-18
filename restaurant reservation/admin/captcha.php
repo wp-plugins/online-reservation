@@ -46,11 +46,11 @@
 				=============================================*/
 				$fields_owner = array(
 									// array ( $id , $title , $args )
-									array('enable_captcha','Enable Google Recaptcha', array('enable_captcha') ), // 1.	ENABLE GOOGLE RECAPTCHA
-									array('public_key','Public Key', array('public_key') ), // 2.	PUBLIC KEY
-									array('private_key','Private Key', array('private_key') ), // 3.	PRIVATE KEY
-									array('captcha_theme','Theme', array('captcha_theme') ), // 4.	THEME
-									array('captcha_error_message','Captcha Error Message', array('captcha_error_message') ), // 5.	CAPTCHA ERROR MESSAGE
+									array('enable_captcha',__('Enable Google Recaptcha',PLUGIN_NAME), array('enable_captcha') ), // 1.	ENABLE GOOGLE RECAPTCHA
+									array('public_key',__('Public Key',PLUGIN_NAME), array('public_key') ), // 2.	PUBLIC KEY
+									array('private_key',__('Private Key',PLUGIN_NAME), array('private_key') ), // 3.	PRIVATE KEY
+									array('captcha_theme',__('Theme',PLUGIN_NAME), array('captcha_theme') ), // 4.	THEME
+									array('captcha_error_message',__('Captcha Error Message',PLUGIN_NAME), array('captcha_error_message') ), // 5.	CAPTCHA ERROR MESSAGE
 									
 								);
 				

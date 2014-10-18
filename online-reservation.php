@@ -3,7 +3,7 @@
  * Plugin Name: Online Reservation
  * Plugin URI: http://solweder.com/
  * Description: Allow you to manage and receive your business reservation online
- * Version: 1.4
+ * Version: 1.5
  * Author: Wahsidin Tjandra
  * Author URI: http://solweder.com/about-me/
  * License:     GNU General Public License v2.0 or later
@@ -26,34 +26,59 @@
  */
 
   	
-	
 /*
 	TABLE OF CONTENTS
 	========================
-	1. 	GLOBAL VARIABLES
-	2.	HELPER FUNCTIONS
-	3.	PAGES
-	4.	RESTAURANT RESERVATION
+	1. 	CONSTANT
+	2. 	GLOBAL VARIABLES
+	3.	LOCALIZATION ( TRANSLATION )
+	4.	HELPER FUNCTIONS
+	5.	PAGES
+	6.	RESTAURANT RESERVATION
 
 */
 
 
+
 /*############################################
-	1. 	GLOBAL VARIABLES
+	1. 	CONSTANT
 ############################################*/
-global $plugin_folder;
-$olr_prefix 	= 'olr_'; // olr ( online reservation )
-$plugin_folder 	= plugins_url() . '/online-reservation';
+if ( !defined( 'OLR_FOLDER' ) ){
+	define( 'OLR_FOLDER', plugin_dir_url( __FILE__ ) );
+}
+if ( !defined( 'OLR_PATH' ) ){
+	define( 'OLR_PATH', plugin_dir_path( __FILE__ ) );
+}
+if ( !defined( 'OLR_BASENAME' ) ){
+	define( 'OLR_BASENAME', plugin_basename( __FILE__ ) );
+}
+if ( !defined( 'PLUGIN_NAME' ) ){
+	define( 'PLUGIN_NAME', 'online-reservation' );
+}
+
 
 
 /*############################################
-	2.	HELPER FUNCTIONS
+	2. 	GLOBAL VARIABLES
+############################################*/
+$olr_prefix 	= 'olr_'; // olr ( online reservation )
+
+
+/*############################################
+	3.	LOCALIZATION ( TRANSLATION )
+############################################*/
+load_plugin_textdomain( PLUGIN_NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+
+
+/*############################################
+	4.	HELPER FUNCTIONS
 ############################################*/
 require_once('helper/helper_functions.php');
 
 
 /*############################################
-	3.	PAGES
+	5.	PAGES
 		1.	RESTAURANT ADMIN PAGES
 ############################################*/
 	/*=================================
@@ -70,9 +95,8 @@ require_once('helper/helper_functions.php');
 	
 require_once('check-admin-page.php');
 
-
 /*############################################
-	4.	RESTAURANT RESERVATION
+	6.	RESTAURANT RESERVATION
 		1.	ADMIN
 		2.	SHORTCODE
 		3.	WIDGET
