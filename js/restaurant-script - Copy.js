@@ -16,7 +16,6 @@ jQuery(document).ready(function($){
 			
 			//= 1. 	GLOBAL VARIABLES
 			this.plugin_folder 	= data.plugin_folder,
-			this.plugin_path 	= data.plugin_path,
 			this.early_bookings = data.early_bookings, 
 			this.late_bookings 	= data.late_bookings; 
 			this.plugin_options = data.plugin_options; 
@@ -42,9 +41,9 @@ jQuery(document).ready(function($){
 				1. 	GENERAL VARIABLE
 				2.	VALIDATION 
 				3.	SHOW PROPERLY TIME
-				4.	CHECK LATE AND EARLY BOOKINGS
-				5.	CHECK TOTAL TABLE
-				6. 	BOOKING BUTTON ( ONCLICK )
+				3.	CHECK LATE AND EARLY BOOKINGS
+				4.	CHECK TOTAL TABLE
+				5. 	BOOKING BUTTON ( ONCLICK )
 			*/
 					
 
@@ -52,10 +51,9 @@ jQuery(document).ready(function($){
 				1. 	GENERAL VARIABLE
 			==================================*/
 			var loading_img 			= this.plugin_folder + "image/loading.gif";
-			var check_date_url 			= this.plugin_folder + "restaurant reservation/ajax-request/check-date.php";
-			var check_total_table_url 	= this.plugin_folder + "restaurant reservation//ajax-request/total_table.php";
+			var check_date_url 			= this.plugin_folder + "restaurant reservation/check-date.php";
+			var check_total_table_url 	= this.plugin_folder + "restaurant reservation/total_table.php";
 			plugin_folder 				= this.plugin_folder;
-			plugin_path 				= this.plugin_path;
 			plugin_options				= this.plugin_options;
 			ajaxurl						= this.ajaxurl;
 			
@@ -97,21 +95,15 @@ jQuery(document).ready(function($){
 					}
 				});
 				
-				
+			
+			
+			
 			/*===========================================
 				3.	SHOW PROPERLY TIME
 			===========================================*/
 			$("#olr_date").change(function(){
-				var postData= {};
-					postData['date'] 		= $("#olr_date").val();
-					postData['plugin_path'] = plugin_path;
-					postData['command'] 	= 'show time';
-					postData['options'] 	= plugin_options;	
 				
-				$.post(check_date_url, postData, function(data) {
-					$("#olr_time").html(data);	
-				});
-				
+			
 			
 			}); // $("#olr_date").change(function(){
 			
@@ -120,34 +112,22 @@ jQuery(document).ready(function($){
 			/*===========================================
 				3.	CHECK LATE AND EARLY BOOKINGS
 					1.	VARIABLE	
-					2.	PREPEND LOADING IMAGE
-					3.	CHECK DATE
+					2.	CHECK DATE
 			===========================================*/
-			$("#olr_time").change(function(){
+			$("#olr_date,#olr_time").change(function(){
 					
-				//= 1.	VARIABLE ===
-				var postData= {};
-					postData['date'] 		= $("#olr_date").val();
-					postData['time'] 		= $("#olr_time").val();
-					postData['options'] 	= plugin_options;
-					
-				
-				//= 2.	PREPEND LOADING IMAGE
-				$('.time_response').append(' <img class="theImg" src="'+loading_img+'" /><span> Check Time...</span>');	
-
-
-				if( $("#olr_date").val() == '' ){
-					$("#olr_time").html('');
-					alert( 'Please Choose Your booking date' );
-					$('.time_response').html('');
-					
-				}
-				
 					if( 	$("#olr_date").val() != '' 
 						&& 	$("#olr_time").val() != '' ){
 						
 						
-						//= 3.	CHECK DATE == 
+						//= 1.	VARIABLE ===
+						var postData= {};
+						postData['date'] 		= $("#olr_date").val();
+						postData['time'] 		= $("#olr_time").val();
+						postData['options'] 	= plugin_options;
+						
+						
+						//= 2.	CHECK DATE == 
 						$.post(check_date_url, postData, function(data) {
 							
 							if( data != '' ){
@@ -167,13 +147,11 @@ jQuery(document).ready(function($){
 															+ display[2] + '\n\n' 
 															+ display[3]
 															);
-													
 												}
 												
 												if( i == 1  && data[i] != ''){
 												//if( i == 2 && data[i] != ''){
-													$('#olr_date').val('');
-													$("#olr_time").html('');
+													$('#olr_date').val('');	
 													if( $('.date_error').length > 0 ){
 														$('.date_error').remove();
 													}
@@ -205,15 +183,10 @@ jQuery(document).ready(function($){
 									
 									}else if( data.search("!") > 0 ){
 										$('#olr_date').val('');
-										$("#olr_time").html('');
 										alert(data);
 										
 									}else{
-										alert(data);									
-									
-									}
-									
-									$('.time_response').html('');
+										alert(data);									}
 									
 								}else{
 									if( $('.date_error').length > 0 ){
@@ -222,15 +195,12 @@ jQuery(document).ready(function($){
 									if( $('.time_error').length > 0 ){
 										$('.time_error').remove();
 									}
-									
-									$('.time_response').html('');
-									
+								
 								}  // if( data != '' ){
 							
 							
 							
-						}); // $.post(check_date_url, postData, function(data) {
-						
+						});
 						
 		
 					} // if( 	$("#olr_time").val() != '' 

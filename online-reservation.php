@@ -112,7 +112,8 @@ if( $olr_admin_page ){
 /*==========================================
 	2.	SHORTCODE
 ==========================================*/
-require_once('restaurant reservation/ajax.php');	
+require_once('restaurant reservation/ajax-request/ajax.php');
+
 if( 	!$olr_admin_page 
    	&& 	!$_GET['confirmation_key']
 ){

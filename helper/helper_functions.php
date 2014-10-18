@@ -44,10 +44,13 @@
 	/*=====================================================
 		2.  OUTPUT TIME LIST
 	=====================================================*/
-	function olr_output_time_list( $options , $now = '' ){
+	function olr_output_time_list( $options , $now = '' ,$day_choosen = ''){
 		
 		$current_day		= strtolower( date("D") );
-		
+		if( $day_choosen != '' ){
+			$current_day = strtolower($day_choosen);
+		}
+
 		if( $current_day == 'mon' ){
 			$open_time 		= $options['resto_schedule']['open_time_monday'];
 			$close_time 	= $options['resto_schedule']['close_time_monday'];
@@ -94,7 +97,6 @@
 		
 		$start_minutes = ( $open_hours * 60 ) + $open_minutes;
 		$end_minutes = ( $close_hours * 60 ) + $close_minutes;
-		
 		
 		$output .= '<option selected="selected" val=""></option>';
 		//$output = '<option value>'.$open_time.'</option>';
@@ -219,8 +221,8 @@
 			<div class="olr_time_wrap">
 				<select name="olr_time" id="olr_time">
 					<option value="" selected="selected"></option>';
-					$out .= olr_output_time_list ( $options );         
-				$out .='</select> <span class="olr_required">*</span>
+					//$out .= olr_output_time_list ( $options );         
+				$out .='</select> <span class="olr_required">*</span><span class="time_response"></span>
 			</div>	
         </div><br/>';
 		

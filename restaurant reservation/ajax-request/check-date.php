@@ -5,8 +5,12 @@
 		========================
 		1.	POST DATA
 		2. 	GENERAL VARIABLE
+		3.	DATE AND TIME CHOOSEN ( ms )
 		3.	RETRIEVE DATABASE DATA
-		4.	CHECKING BOOKING DATE
+		
+		
+		4.	SHOW TIME
+		5.	CHECKING BOOKING DATE
 	*/
 
 	/*########################################
@@ -16,11 +20,31 @@
 	$time 		= $_POST['time'];
 	$Options 	= $_POST['options'];
 	
-
-
 	/*########################################
 		2. 	GENERAL VARIABLE
 	########################################*/	
+	
+	
+	/*########################################
+		3.	DATE AND TIME CHOOSEN ( ms )
+	########################################*/	
+		$day = substr($date ,3,2);
+		$month = substr($date ,0,2);
+		$year = substr($date ,6,4);
+		$hour = substr($time ,0,2);
+		$minute = substr($time ,3,2);
+		
+		$month = date("F",mktime(0,0,0,$month,$day,$year) );
+		$date_choosen = strtotime($day .' '. $month .' '. $year .' +'.$hour.' hours'.' +'.$minute.' minutes');
+		$day_letter = date('D', strtotime($day .' '. $month .' '. $year));
+		$now = strtotime("now");
+		$day_now 	= date('j', $now );
+		$month_now 	= date('n', $now );
+		$year_now 	= date('Y', $now );
+	
+	
+
+	
 	
 	
 	/*########################################
@@ -28,33 +52,32 @@
 	########################################*/	
 	$options = $Options;	
 	
-
+	
+	
+	
+	
+	
+	/*########################################
+		4.	SHOW TIME
+	########################################*/	
+	if( $_POST['command'] ){
+		require_once( $_POST['plugin_path'] . 'helper/helper_functions.php');
+		echo olr_output_time_list( $options,'',$day_letter);
+		exit;
+	}
+	
+	
 	/*########################################################################
-		4.	CHECKING BOOKING DATE
-			1.	DATE AND TIME CHOOSEN ( ms )
+		5.	CHECKING BOOKING DATE
 			2.	CHECK IS PAST DATE
 			3.	CHECK LATE BOOKINGS ( BOOKING BETWEEN ONE DAY )
 			4.	CHECK EARLY BOOKINGS ( BOOKING MORE THAN ONE DAY )
 	########################################################################*/	
 	
-		/*========================================
-			1.	DATE AND TIME CHOOSEN ( ms )
-		========================================*/
-		$day = substr($date ,3,2);
-		$month = substr($date ,0,2);
-		$year = substr($date ,6,4);
-		$hour = substr($time ,0,2);
-		$minute = substr($time ,3,2);
+	
 		
-		
-		$month = date("F",mktime(0,0,0,$month,$day,$year) );
-		$date_choosen = strtotime($day .' '. $month .' '. $year .' +'.$hour.' hours'.' +'.$minute.' minutes');
-		$now = strtotime("now");
-		$day_now 	= date('j', $now );
-		$month_now 	= date('n', $now );
-		$year_now 	= date('Y', $now );
-		
-		
+
+
 		/*==========================================
 			2.	CHECK IS PAST DATE
 				1.	CHECK YEAR , MONTH AND DAY 

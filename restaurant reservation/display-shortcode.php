@@ -58,6 +58,7 @@ function olr_shortcode_display($args){
 			
 			$any_data_array 	= array( 
 										'plugin_folder' 	=> OLR_FOLDER,
+										'plugin_path' 		=> OLR_PATH,
 										'early_bookings' 	=> $options['resto_schedule']['early_bookings'],
 										'late_bookings' 	=> $options['resto_schedule']['late_bookings'],
 										'plugin_options' 	=> get_option('olr_all_restaurant_setting'),

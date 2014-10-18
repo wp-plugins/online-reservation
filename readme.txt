@@ -70,7 +70,10 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 * Add confirmation email 
 
 = 1.5 (2014-10-17) =
-* Translation Ready
+* Add a .pot file for easier translations
+
+= 1.5.1 (2014-10-18) =
+* Fix: time and date field not working properly
 
 
 == Upgrade Notice ==
@@ -87,7 +90,10 @@ This update adds support for HTML Email.
 * Add confirmation email 
 
 = 1.5 (2014-10-17) =
-* Translation Ready
+* Add a .pot file for easier translations
+
+= 1.5.1 (2014-10-18) =
+* Fix: time and date field not working properly
 
 
 == Usage ==
