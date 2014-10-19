@@ -33,7 +33,6 @@ global $restaurant_logo;
 global $restaurant_image;
 global $restaurant_offer_link;
 global $restaurant_reservation_link;
-global $restaurant_message;
 global $restaurant_information;
 global $restaurant_policies;
 global $restaurant_icon_exist;
@@ -405,13 +404,7 @@ $email_template .='
 	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Message			</strong></span>
 	<span style="color:#000000;">'.$message.'</span>
 </p>
-<br />';
-
-if( $restaurant_message != '' ){
-$email_template .= 	$restaurant_message;
-} // if( $restaurant_message != '' ){
-	
-$email_template .='
+<br />
 <p style="margin: 0; padding-bottom: 1em">
 	<span style="color:#000000;display:inline-block;">Please <strong><a href="'.$confirmation_link.'" target="_blank">Click Here</a></strong> to confirm and complete your Reservation process</span>
 </p>
@@ -423,11 +416,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-
-
-if( $restaurant_information != '' ){
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
@@ -461,10 +450,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-} // $restaurant_information
-
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmButtonBarBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmButtonBarOuter">
 <tr>
@@ -542,10 +528,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-
-if( $restaurant_policies != '' ){
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
@@ -579,10 +562,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-}
-
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
