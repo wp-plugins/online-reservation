@@ -108,7 +108,6 @@
 						11.	RESTAURANT IMAGE
 						12.	SPECIAL OFFER LINK
 						13.	RESERVATION LINK
-						14.	RESTAURANT MESSAGE
 						14.	RESTAURANT INFORMATION
 						15.	RESTAURANT POLICIES
 						16.	FACEBOOK 
@@ -134,7 +133,6 @@
 									array('restaurant_image',__('Restaurant Image',PLUGIN_NAME), array('restaurant_image') ), // 11.	RESTAURANT IMAGE
 									array('restaurant_offer_link',__('Restaurant Special Offer Link',PLUGIN_NAME), array('restaurant_offer_link') ), // 12.	SPECIAL OFFER LINK
 									array('restaurant_reservation_link',__('Restaurant Reservation Link',PLUGIN_NAME), array('restaurant_reservation_link') ), // 13.	RESERVATION LINK
-									array('restaurant_message',__('Restaurant Message',PLUGIN_NAME), array('restaurant_message') ), // 14.	RESTAURANT MESSAGE
 									array('restaurant_information',__('Restaurant Information',PLUGIN_NAME), array('restaurant_information') ), // 14.	RESTAURANT INFORMATION
 									array('restaurant_policies',__('Restaurant Policies',PLUGIN_NAME), array('restaurant_policies') ), // 15.	RESTAURANT POLICIES
 									array('restaurant_facebook',__('Facebook',PLUGIN_NAME), array('restaurant_facebook') ), // 16.	FACEBOOK 
@@ -275,7 +273,6 @@
 					<span><strong>Field Content</strong><span>
 					<span>
 						<select name="email-editing-content" id="email-editing-content">
-							<option value="restaurant_message">Restaurant Message</option>
 							<option value="restaurant_information">Restaurant Information</option>
 							<option value="restaurant_policies">Restaurant Policies</option>
 							<option value="restaurant_footer">Footer Content</option>
@@ -333,7 +330,6 @@
 				11.	RESTAURANT IMAGE
 				12.	SPECIAL OFFER LINK
 				13.	RESERVATION LINK
-				14.	RESTAURANT MESSAGE
 				14.	RESTAURANT INFORMATION
 				15.	RESTAURANT POLICIES
 				16.	FACEBOOK 
@@ -478,15 +474,6 @@
 		if( $args[0] == 'restaurant_reservation_link' ){
 			echo '<input placeholder="www.yourwebsite.com" class="email-longer-field" type="text" id="'.$args[0].'" name="resto_email_setting['.$args[0].']" value="' . $options[$args[0]] . '" />';
 		}
-		
-		/*=========================================
-			14.	RESTAURANT MESSAGE
-		=========================================*/
-		if( $args[0] == 'restaurant_message' ){
-			echo '<textarea id="'.$args[0].'" name="resto_email_setting['.$args[0].']" rows="5" cols="50">' . 
-				$options[$args[0]] . '</textarea>';
-		}
-		
 		
 		/*=========================================
 			14.	RESTAURANT INFORMATIONS
