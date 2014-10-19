@@ -279,6 +279,7 @@ jQuery(document).ready(function($){
 				//= 1.	VARIABLE ===
 				var postData= {};
 					postData['plugin_url'] 	= plugin_folder;
+					postData['plugin_path'] = plugin_path;
 					postData['options'] 	= plugin_options;
 					postData['action'] 		= 'resto-booking-ajax-submit';
 					

@@ -71,14 +71,14 @@
 		global  $email_template;
 		global 	$text_email;
 		global 	$confirmation_link;
-		global $email_template;
-		global $text_email;
+		global 	$email_template;
+		global 	$text_email;
 
 		
-		$plugin_url = $_POST['plugin_url'];	// 1.	PLUGIN URL
-		$options 	= $_POST['options']; // 2.	PLUGIN OPTIONS
-		
-		
+		$plugin_url 	= $_POST['plugin_url'];	// 1.	PLUGIN URL
+		$plugin_path 	= $_POST['plugin_path']; // 2.	PLUGIN PATH
+		$options 		= $_POST['options']; // 2.	PLUGIN OPTIONS
+	
 			/*=====================================
 				 3.	PERSONAL INFORMATION
 			=====================================*/
@@ -132,12 +132,10 @@
 			&&	$options['resto_captcha']['enable_captcha']
 		){
 			if( $_SERVER['HTTP_HOST'] == 'localhost' ){
-				require_once( $plugin_url . 'helper\recaptchalib.php');
+				require_once( $plugin_path . 'helper\recaptchalib.php');
 			}else{
-				require_once( $plugin_url . 'helper/recaptchalib.php');
+				require_once( $plugin_path . 'helper/recaptchalib.php');
 			}
-			
-			
 			
 			$resp = recaptcha_check_answer(
 				$options['resto_captcha']['private_key'],
@@ -275,9 +273,7 @@
 								
 								
 								echo $success_message;	
-								echo "<br />";
-								echo "A Confirmation Email has Been Sent to Your Email, 
-										Please Click on the Confirmation Link to complete your reservation process";	
+								
 
 							}
 		
@@ -355,8 +351,6 @@
 						}
 						
 						
-						
-						
 						/*=====================================
 							5.	SEND EMAIL TO OWNER
 						=====================================*/
@@ -408,13 +402,13 @@
 								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
 									$result  = mail($recipient,$subject, $messages,$headers);
 								}
-								
+	
 							} // if( $owner_email != ''){
 								
 						}	// if( $send_email_to_owner ) {		
 								
 								
-		
+					
 								
 						/*=====================================
 							6.	SEND EMAIL TO CUSTOMER
@@ -425,25 +419,24 @@
 						=====================================*/
 						if( $send_email_to_customer ) {
 							
-							
+						
 							$customer_email 			= $email;
 							$customer_email_subject 	= strip_tags( $options['resto_email']['customer_email_subject'] );
-			
+						
 							if( $customer_email != '' ){
-								
 								//= 1.	RECIPIENT
 								$recipient = $customer_email;
 								
 								//= 2.	SUBJECT
 								$subject = $customer_email_subject;
+
 								
-							
 								/*================================================
 									3.	MESSAGE
 										1.	PLAIN TEXT
 										2.	HTML
 								================================================*/
-									require_once('email-content.php');
+									require_once( $plugin_path . 'restaurant reservation/email-content.php');
 									
 									//= 1.	PLAIN TEXT
 									$messages = "\r\n\r\n--" . $boundary . "\r\n";
@@ -466,8 +459,15 @@
 								//$headers .= "Content-type: text/html;charset=UTF-8" . "\r\n"; // FOR HTML
 								$headers .= "Content-Type: multipart/alternative;boundary=" . $boundary . "\r\n"; // FOR SENDING TEXT AND HTML
 								
+								
 								if( $_SERVER['HTTP_HOST'] != 'localhost' ){
 									$result  = mail($recipient,$subject, $messages,$headers);
+									if( $result ){
+										echo "<br />";
+										echo "A Confirmation Email has Been Sent to Your Email, 
+												Please Click on the Confirmation Link to complete your reservation process";	
+									}
+
 								}
 								
 							
