@@ -14,7 +14,12 @@ global	$table;
 global 	$type_of_table;
 global	$persons;		
 global	$lunch; 			
-global	$date;			
+global	$date;
+
+
+
+
+
 global 	$time;		
 global 	$recipient;
 global 	$from;
@@ -43,11 +48,47 @@ global $restaurant_linkedin;
 global $restaurant_pinterest;
 global $restaurant_youtube;
 global $restaurant_footer;
-global $restaurant_footer;
 global $confirmation_link;
 global $email_template;
 global $text_email;
 
+
+
+$name ='wah tjan';
+$email = 'wahtjan@yahoo.com';
+$phone = '1111';
+$message = 'table near window';
+$table = '2';
+$type_of_table = 'larger';
+$persons = '10';
+$lunch = 'dinner';
+$date = '03/08/2015';
+$time = '10:00';
+$recipient = 'wahtjan@yahoo.com';
+$subject = 'Restaurnat Reservation';
+$restaurant_name = 'the italiano';
+$restaurant_address = '115 singapore street'; 
+$restaurant_city = 'singapore'; 
+$restaurant_state = 'SG';
+$restaurant_zipcode = '10055'; 
+$restaurant_phone = '(015) 3666-8888'; 
+$restaurant_fax = '(015) 3666-8888'; 
+$restaurant_email = 'theitaliano@yahoo.com'; 
+$restaurant_website = 'www.theitaliano.com'; 
+$restaurant_logo = 'http://solweder.com/wp-content/uploads/2014/08/eat-more-fruits.jpg';  
+$restaurant_image = 'http://solweder.com/wp-content/uploads/2014/05/home1.jpg';
+$restaurant_offer_link = 'http://www.facebook.com';
+$restaurant_reservation_link = 'http://www.facebook.com';
+$restaurant_information = '';
+$restaurant_icon_exist = true;
+$restaurant_facebook = 'http://www.facebook.com';
+$restaurant_twitter = 'http://www.facebook.com';
+$restaurant_google = 'http://www.facebook.com';
+$restaurant_linkedin = 'http://www.facebook.com';
+$restaurant_pinterest = 'http://www.facebook.com';
+$restaurant_youtube = 'http://www.facebook.com';
+$restaurant_footer = 'http://www.facebook.com';
+$confirmation_link = 'http://www.facebook.com';
 
 
 
@@ -407,7 +448,13 @@ $email_template .='
 	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Message			</strong></span>
 	<span style="color:#000000;">'.$message.'</span>
 </p>
-<br />
+<br />';
+
+if( $restaurant_message != '' ){
+$email_template .= 	$restaurant_message;
+} // if( $restaurant_message != '' ){
+	
+$email_template .='
 <p style="margin: 0; padding-bottom: 1em">
 	<span style="color:#000000;display:inline-block;">Please <strong><a href="'.$confirmation_link.'" target="_blank">Click Here</a></strong> to confirm and complete your Reservation process</span>
 </p>
@@ -621,9 +668,14 @@ $email_template .='
 ';
 
 
+
 /*========================================================
 	2.	PLAIN TEXT
 ========================================================*/
+$message .= "Hello,\nThis is a text email, the text/plain version.
+		\n\nRegards,\nYour Name";
+
+
 
 $text_email .=' Restaurant Information \n';
 $text_email .= $restaurant_address .' \n';
@@ -640,7 +692,6 @@ $text_email .= 'LinkedIn : '.$restaurant_linkedin.' \n';
 $text_email .= 'Pinterest : '.$restaurant_pinterest.' \n';
 $text_email .= 'Youtube : '.$restaurant_youtube.' \n\n';
 
-
 $text_email .=' Your Reservation \n';
 $text_email .= 'Name : '.$name.' \n';
 $text_email .= 'Email : '.$email.' \n';
@@ -652,6 +703,12 @@ $text_email .= 'Persons : '.$persons.' \n';
 $text_email .= 'lunch : '.$lunch.' \n';
 $text_email .= 'date : '.$date.' \n';
 $text_email .= 'time : '.$time.' \n\n';
+
+
+if( $restaurant_message != '' ){
+$text_email .= 	$restaurant_message;
+} // if( $restaurant_message != '' ){
+
 $text_email .= 'Please go to this link to confirm your reservation process : '.$confirmation_link.' \n\n';
 
 ?>

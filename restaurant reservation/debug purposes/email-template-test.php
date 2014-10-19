@@ -1,60 +1,3 @@
-<?php
-/*
-	TABLE OF CONTENTS ( SCHEDULE TAB )
-	=======================================
-	1.	HTML 
-	2.	PLAIN TEXT
-*/
-
-global	$name;
-global	$email; 			
-global	$phone; 			
-global	$message; 		
-global	$table;
-global 	$type_of_table;
-global	$persons;		
-global	$lunch; 			
-global	$date;			
-global 	$time;		
-global 	$recipient;
-global 	$from;
-global  $subject;
-global  $messages;
-global $restaurant_name;
-global $restaurant_address;
-global  $restaurant_city;
-global  $restaurant_state;
-global  $restaurant_zipcode;
-global $restaurant_phone;
-global $restaurant_fax;
-global $restaurant_email;
-global $restaurant_website;
-global $restaurant_logo;
-global $restaurant_image;
-global $restaurant_offer_link;
-global $restaurant_reservation_link;
-global $restaurant_information;
-global $restaurant_policies;
-global $restaurant_icon_exist;
-global $restaurant_facebook;
-global $restaurant_twitter;
-global $restaurant_google;
-global $restaurant_linkedin;
-global $restaurant_pinterest;
-global $restaurant_youtube;
-global $restaurant_footer;
-global $restaurant_footer;
-global $confirmation_link;
-global $email_template;
-global $text_email;
-
-
-
-
-/*========================================================
-	1.	HTML 
-========================================================*/
-$email_template .='
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -215,13 +158,8 @@ $email_template .='
 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentLeftContentContainer" width="264" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmImageContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding: 0; padding-top:0px;padding-bottom:0;padding-left:9px;padding-right:9px;">';
-
-if( $restaurant_logo != '' ){
-$email_template .='<img align="left" alt="" class="kmImage" src="'.$restaurant_logo.'" width="228" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; padding-bottom: 0; display: inline; vertical-align: bottom; margin-right: 0; max-width:274px;" />';
-}
-
-$email_template .='
+<td class="kmImageContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding: 0; padding-top:0px;padding-bottom:0;padding-left:9px;padding-right:9px;">
+<img align="left" alt="" class="kmImage" src="http://localhost/wordpress/wp-content/uploads/2014/10/banana.png" width="228" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; padding-bottom: 0; display: inline; vertical-align: bottom; margin-right: 0; max-width:274px;" />
 </td>
 </tr>
 </tbody>
@@ -229,55 +167,12 @@ $email_template .='
 <table align="right" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentRightContentContainer" width="264" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left">';
-if( $restaurant_address != '' ){
-$email_template .='<p style="margin: 0; text-align: right;"><span style="color:#000000;">'.$restaurant_address.'</span></p>';
-}
-
-if( $restaurant_address != '' ){
-	$email_template .='<p style="margin: 0; text-align: right;">';
-	
-		if( $restaurant_city != '' ){
-			$email_template .='<span style="color:#000000;">'.$restaurant_city.', </span>';
-		}
-		
-		if( $restaurant_state != '' ){
-			$email_template .='<span style="color:#000000;">'.$restaurant_state.'</span>';
-		}
-		
-		if( $restaurant_zipcode != '' ){
-			$email_template .='<span style="color:#000000;"> '.zipcode.'</span>';
-		}
-	$email_template .='</p>';
-}
-
-if( $restaurant_phone != '' ){
-$email_template .='<p style="margin: 0; text-align: right;"><span style="color:#000000;">Tel: '.$restaurant_phone.'</span></p>';
-}
-if( $restaurant_fax != '' ){
-$email_template .='<p style="margin: 0; text-align: right;"><span style="color:#000000;">Fax: '.$restaurant_fax.'</span></p>';
-}
-if( $restaurant_email != '' ){
-$email_template .='<p style="margin: 0; text-align: right;"><a href="'.$restaurant_email.'">'.$restaurant_email.'</a></p>';
-}
-if( $restaurant_website != '' ){
-$email_template .='<p style="margin: 0; text-align: right;"><a target="_blank" href="http://'.$restaurant_website.'" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline">'.$restaurant_website.'</a></p>';
-}
-if( $restaurant_offer_link != '' || $restaurant_reservation_link != '' ){
-	$email_template .='<p style="margin: 0; padding-bottom: 0; text-align: right;"><span style="color:#000000;">'; 
-		if( $restaurant_offer_link != '' ){
-			$email_template .='<a target="_blank" href="http://'.$restaurant_offer_link.'">Special Offers</a></span>'; 
-		}
-	
-		if( $restaurant_offer_link != '' && $restaurant_reservation_link != '' ){
-			$email_template .='<span style="color:#000000;"> | </span>'; 
-		}
-		if( $restaurant_reservation_link != '' ){
-			$email_template .='<a target="_blank" href="http://'.$restaurant_reservation_link.'">Reservations</a>';
-		}					
-	$email_template .='</p>';
-} // if( $restaurant_offer_link != '' || $restaurant_reservation_link != '' ){
-$email_template .='
+<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left">
+<p style="margin: 0; padding-bottom: 1em; text-align: right;"><span style="color:#000000;">288 Singapore Street</span></p>
+<p style="margin: 0; padding-bottom: 1em; text-align: right;"><span style="color:#000000;">Singapore , SG 22550</span></p>
+<p style="margin: 0; padding-bottom: 1em; text-align: right;"><span style="color:#000000;">Tel: (015) 555-2210</span></p>
+<p style="margin: 0; padding-bottom: 1em; text-align: right;"><a href="http://www.the-italiano.com" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline">www.the-italiano.com</a></p>
+<p style="margin: 0; padding-bottom: 0; text-align: right;"><span style="color:#000000;">Home | Special Offers | Reservations</span></p>
 </td>
 </tr>
 </tbody>
@@ -314,13 +209,9 @@ $email_template .='
 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmImageContentContainer" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmImageContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding: 0; padding-top:0px;padding-bottom:0;text-align: center;">';
-
-if( $restaurant_image != '' ){
-$email_template .='<img align="center" alt="" class="kmImage" src="'.$restaurant_image.'" width="500" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; padding-bottom: 0; display: inline; vertical-align: bottom; width:100%;" />';
-}
-
-$email_template .='</td>
+<td class="kmImageContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding: 0; padding-top:0px;padding-bottom:0;text-align: center;">
+<img align="center" alt="" class="kmImage" src="http://localhost/wordpress/wp-content/uploads/2014/10/home1.jpg" width="500" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; padding-bottom: 0; display: inline; vertical-align: bottom; width:100%;" />
+</td>
 </tr>
 </tbody>
 </table>
@@ -336,7 +227,7 @@ $email_template .='</td>
 <tbody>
 <tr>
 <td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:20px;padding-bottom:20px;padding-left:18px;color:#FFFFFF;padding-right:18px;">
-<p style="margin: 0; padding-bottom: 0"><span style="font-size:26px;"><strong>'.$subject.'</strong></span></p>
+<p style="margin: 0; padding-bottom: 0"><span style="font-size:26px;"><strong>Your Res<span style="background-color: rgb(255, 215, 0);"></span>ervation</strong></span></p>
 </td>
 </tr>
 </tbody>
@@ -365,53 +256,11 @@ $email_template .='</td>
 <tbody>
 <tr>
 <td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:20px;padding-bottom:20px;padding-left:18px;padding-right:18px;">
-
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Name 			</strong></span>
-	<span style="color:#000000;">'.$name.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Email			</strong></span>
-	<span style="color:#000000;">'.$email.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Phone			</strong></span>
-	<span style="color:#000000;">'.$phone.'</span>
-</p>';
-if( $type_of_table != '' ){
-$email_template .='
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Type of table 			</strong></span>
-	<span style="color:#000000;">'.$type_of_table.'</span>
-</p>';
-}
-
-$email_template .='
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Table		</strong></span>
-	<span style="color:#000000;">'.$table.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Persons			</strong></span>
-	<span style="color:#000000;">'.$persons.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Booking Date 			</strong></span>
-	<span style="color:#000000;">'.$date.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Booking Time			</strong></span>
-	<span style="color:#000000;">'.$time.'</span>
-</p>
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Message			</strong></span>
-	<span style="color:#000000;">'.$message.'</span>
-</p>
-<br />
-<p style="margin: 0; padding-bottom: 1em">
-	<span style="color:#000000;display:inline-block;">Please <strong><a href="'.$confirmation_link.'" target="_blank">Click Here</a></strong> to confirm and complete your Reservation process</span>
-</p>
-
+<h1 style="color: #F20000; display: block; font-family: Helvetica, Arial; font-size: 26px; font-style: normal; font-weight: bold; line-height: 110%; letter-spacing: normal; margin: 0; margin-bottom: 9px; text-align: left"><span style="color:#FFFFFF;">Design Away</span></h1>
+<h3 style="color: #666; display: block; font-family: Helvetica, Arial; font-size: 16px; font-style: normal; font-weight: normal; line-height: 110%; letter-spacing: normal; margin: 0; margin-bottom: 9px; text-align: left"><span style="color:#FFFFFF;">Create the template you want and then use it in Klaviyo or export the HTML to use elsewhere.</span></h3>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">You can drag content blocks from the left to add sections to your template. Then, you can customize your template's colors and fonts to match your own by clicking "Styles" in the left navigation.</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#FFFFFF;">Don't forget to add images to the header to brand your email just the way you want.</span></p>
+<p style="margin: 0; padding-bottom: 0"><span style="color:#FFFFFF;">When you're done, you can preview your template and export the HTML so use elsewhere. We'll save your design in case you want to tweak it later. Happy emailing!</span></p>
 </td>
 </tr>
 </tbody>
@@ -419,11 +268,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-
-
-if( $restaurant_information != '' ){
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
@@ -448,19 +293,21 @@ $email_template .='
 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmTextContentContainer" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #000000; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;padding-right:18px;">'
-.$restaurant_information.
-'</td>
+<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;padding-right:18px;">
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#000000;">The Italiano Restaurant</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#000000;">288 Singapore Street</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#000000;">Singapore , SG 22550</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#000000;">Phone: (015) 555-2210</span></p>
+<p style="margin: 0; padding-bottom: 1em"><span style="color:#000000;">Email: italiano@yahoo.com</span></p>
+<p style="margin: 0; padding-bottom: 0"><span style="color:#000000;">Web:</span> <a href="http://www.the-italiano.com" style="word-wrap: break-word; color: #0000CD; font-weight: normal; text-decoration: underline">www.the-italiano.com</a></p>
+</td>
 </tr>
 </tbody>
 </table>
 </td>
 </tr>
 </tbody>
-</table>';
-} // $restaurant_information
-
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmButtonBarBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmButtonBarOuter">
 <tr>
@@ -538,10 +385,7 @@ $email_template .='
 </td>
 </tr>
 </tbody>
-</table>';
-
-if( $restaurant_policies != '' ){
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
@@ -566,32 +410,42 @@ $email_template .='
 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmTextContentContainer" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #000000; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;padding-right:18px;">'
-.$restaurant_policies.
-'</td>
+<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;padding-right:18px;">
+<span style="color:#000000;">cancelation must be made before ...</span>
+</td>
 </tr>
 </tbody>
 </table>
 </td>
 </tr>
 </tbody>
-</table>';
-}
-
-$email_template .='
+</table>
 <table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody class="kmTextBlockOuter">
 <tr>
-<td class="kmTextBlockInner" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; background-color:#F0670C;">
+<td class="kmTextBlockInner" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; background-color:#7ABECC;">
 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmTextContentContainer" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
 <tbody>
 <tr>
-<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;color:#FFFFFF;padding-right:18px;">
-'.$restaurant_footer.'       
+<td class="kmTextContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; color: #FFF; font-family: Helvetica, Arial; font-size: 14px; line-height: 150%; text-align: left; padding-top:9px;padding-bottom:9px;padding-left:18px;color:#000000;padding-right:18px;">
+            This is a text block. Click here to edit to it...
+          </td>
+</tr>
+</tbody>
+</table>
 </td>
 </tr>
 </tbody>
 </table>
+<table border="0" cellpadding="0" cellspacing="0" class="kmImageBlock" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+<tbody class="kmImageBlockOuter">
+<tr>
+<td class="kmImageBlockInner" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding:0px;background-color:#FFFFFF;" valign="top">
+<table align="left" border="0" cellpadding="0" cellspacing="0" class="kmImageContentContainer" width="100%" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0">
+<tbody>
+<tr>
+<td class="kmImageContent" valign="top" style="border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; padding: 0; padding:0;">
+<img align="center" alt="Shadow" class="kmImage" src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/bottom_shadow_444.png" width="600" style="border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; padding-bottom: 0; display: inline; vertical-align: bottom" />
 </td>
 </tr>
 </tbody>
@@ -618,40 +472,3 @@ $email_template .='
 </center>
 </body>
 </html>
-';
-
-
-/*========================================================
-	2.	PLAIN TEXT
-========================================================*/
-
-$text_email .=' Restaurant Information \n';
-$text_email .= $restaurant_address .' \n';
-$text_email .= $restaurant_city.', '.$restaurant_state.' '.zipcode.' \n';
-$text_email .= 'Tel : '.$restaurant_phone.' , Fax : '.$restaurant_fax.' \n';
-$text_email .= 'Email : '.$restaurant_email.' \n';
-$text_email .= 'Web : '.$restaurant_website.' \n';
-$text_email .= 'Special Offer : '.$restaurant_offer_link.' \n';
-$text_email .= 'Reservation : '.$restaurant_reservation_link.' \n';
-$text_email .= 'Facebook : '.$restaurant_facebook.' \n';
-$text_email .= 'Twiiter : '.$restaurant_twitter.' \n';
-$text_email .= 'Google : '.$restaurant_google.' \n';
-$text_email .= 'LinkedIn : '.$restaurant_linkedin.' \n';
-$text_email .= 'Pinterest : '.$restaurant_pinterest.' \n';
-$text_email .= 'Youtube : '.$restaurant_youtube.' \n\n';
-
-
-$text_email .=' Your Reservation \n';
-$text_email .= 'Name : '.$name.' \n';
-$text_email .= 'Email : '.$email.' \n';
-$text_email .= 'Phone : '.$phone.' \n';
-$text_email .= 'Message : '.$message.' \n';
-$text_email .= 'Table : '.$table.' \n';
-$text_email .= 'Type of table : '.$type_of_table.' \n';
-$text_email .= 'Persons : '.$persons.' \n';
-$text_email .= 'lunch : '.$lunch.' \n';
-$text_email .= 'date : '.$date.' \n';
-$text_email .= 'time : '.$time.' \n\n';
-$text_email .= 'Please go to this link to confirm your reservation process : '.$confirmation_link.' \n\n';
-
-?>
