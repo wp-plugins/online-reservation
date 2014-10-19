@@ -59,6 +59,7 @@
 		global  $restaurant_image;
 		global  $restaurant_offer_link;
 		global  $restaurant_reservation_link;
+		global  $restaurant_message;
 		global  $restaurant_information;
 		global  $restaurant_policies;
 		global  $restaurant_facebook;
@@ -317,6 +318,9 @@
 						}
 						if( $options['resto_email']['restaurant_reservation_link'] != '' ){
 							$restaurant_reservation_link = $options['resto_email']['restaurant_reservation_link'];
+						}
+						if( $options['resto_email']['restaurant_message'] != '' ){
+							$restaurant_message = $options['resto_email']['restaurant_message'];
 						}
 						if( $options['resto_email']['restaurant_information'] != '' ){
 							$restaurant_information = $options['resto_email']['restaurant_information'];
