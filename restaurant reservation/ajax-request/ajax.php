@@ -59,6 +59,7 @@
 		global  $restaurant_image;
 		global  $restaurant_offer_link;
 		global  $restaurant_reservation_link;
+		global  $restaurant_message;
 		global  $restaurant_information;
 		global  $restaurant_policies;
 		global  $restaurant_facebook;
