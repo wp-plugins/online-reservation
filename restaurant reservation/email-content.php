@@ -45,6 +45,9 @@ global $restaurant_youtube;
 global $restaurant_footer;
 global $restaurant_footer;
 global $confirmation_link;
+global $email_template;
+global $text_email;
+
 
 
 
