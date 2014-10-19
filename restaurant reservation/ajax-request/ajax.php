@@ -71,6 +71,8 @@
 		global  $email_template;
 		global 	$text_email;
 		global 	$confirmation_link;
+		global $email_template;
+		global $text_email;
 
 		
 		$plugin_url = $_POST['plugin_url'];	// 1.	PLUGIN URL
@@ -393,9 +395,8 @@
 									$messages .= "Content-type: text/html;charset=utf-8\r\n\r\n";
 									$messages .= $email_template;
 									$messages .= "\r\n\r\n--" . $boundary . "--";
-								
-								$messages = $email_template;
-								
+									
+									
 								//= 4.	HEADERS
 								$headers = "MIME-Version: 1.0" . "\r\n";
 								$headers .= "From: ".$restaurant_name." \r\n";
@@ -455,9 +456,7 @@
 									$messages .= "Content-type: text/html;charset=utf-8\r\n\r\n";
 									$messages .= $email_template;
 									$messages .= "\r\n\r\n--" . $boundary . "--";
-									
-									
-							
+
 								
 								//= 4.	HEADERS
 								$headers = "MIME-Version: 1.0" . "\r\n";
