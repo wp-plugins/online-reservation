@@ -275,6 +275,7 @@
 					<span><strong>Field Content</strong><span>
 					<span>
 						<select name="email-editing-content" id="email-editing-content">
+							<option value="restaurant_message">Restaurant Message</option>
 							<option value="restaurant_information">Restaurant Information</option>
 							<option value="restaurant_policies">Restaurant Policies</option>
 							<option value="restaurant_footer">Footer Content</option>
@@ -646,7 +647,8 @@
 			if( isset( $input[$key] ) ) {
 				
 				if( 	$input['restaurant_policies']
-					|| 	$input['restaurant_information']	
+					|| 	$input['restaurant_information']
+					|| 	$input['restaurant_message']
 					|| 	$input['restaurant_footer']
 				){
 					$output[$key] = stripslashes(wp_filter_post_kses(addslashes($input[$key])));

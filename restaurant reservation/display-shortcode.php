@@ -26,6 +26,7 @@ function olr_shortcode_display($args){
 		//$options = get_option( 'resto_schedule_setting' );
 		$options = get_option( 'olr_all_restaurant_setting' );
 		
+		
 		/*==============================================
 			3.	ENQUEQE SCRIPT AND STYLE
 		==============================================*/
