@@ -33,6 +33,7 @@ global $restaurant_logo;
 global $restaurant_image;
 global $restaurant_offer_link;
 global $restaurant_reservation_link;
+global $restaurant_message;
 global $restaurant_information;
 global $restaurant_policies;
 global $restaurant_icon_exist;
@@ -406,7 +407,13 @@ $email_template .='
 <p style="margin: 0; padding-bottom: 1em">
 	<span style="color:#000000; min-width:150px; display:inline-block;"><strong>Message			</strong></span>
 	<span style="color:#000000;">'.$message.'</span>
-</p>
+</p>';
+
+if( $restaurant_message != '' ){
+$email_template .= 	$restaurant_message;
+} // if( $restaurant_message != '' ){
+	
+$email_template .='
 <br />
 <p style="margin: 0; padding-bottom: 1em">
 	<span style="color:#000000;display:inline-block;">Please <strong><a href="'.$confirmation_link.'" target="_blank">Click Here</a></strong> to confirm and complete your Reservation process</span>
@@ -652,6 +659,13 @@ $text_email .= 'Persons : '.$persons.' \n';
 $text_email .= 'lunch : '.$lunch.' \n';
 $text_email .= 'date : '.$date.' \n';
 $text_email .= 'time : '.$time.' \n\n';
+
+if( $restaurant_message != '' ){
+	$text_email .= 	$restaurant_message;
+} 
+
 $text_email .= 'Please go to this link to confirm your reservation process : '.$confirmation_link.' \n\n';
+// if( $restaurant_message != '' ){
+
 
 ?>
