@@ -1,5 +1,4 @@
 <?php
-
 /*
 	TABLE OF CONTENTS
 	========================
@@ -19,7 +18,6 @@ global $resto_schedule_setting_page;
 global $resto_table_setting_page;
 global $options_page;
 
-
 /*#########################################################
 	2.	RESTAURANT RESERVATION POST TYPE
 		1.	REGISTER NEW POST STATUS
@@ -29,10 +27,11 @@ global $options_page;
 		4.	DISABLE ADD NEW 
 		5.	CUSTOM BULK ACTION
 		6.	REMOVE HYPERLINK TO EDIT POST IN EDIT.PHP
+		7.	ADD CUSTOM FIELD
+		8.	ADDING FIELD IN QUICK EDIT MENU
+		9.	ADDING FILTER 
 #########################################################*/
-
 		function olr_restaurant_post_type_registration(){
-			
 			
 			$args = array(
 				'labels'  => array(
@@ -51,7 +50,7 @@ global $options_page;
 						'not_found_in_trash'  => _x('No Online Reservation found in trash.', 'olr_restaurant',PLUGIN_NAME)
 						),
 				//'supports'      => array( 'title', 'editor', 'revisions' ,'thumbnail',PLUGIN_NAME),
-				'supports'      	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+				'supports'      	=> array( 'title'),
 				//'show_in_menu'  => 'admin.php?page=simple_Gmap_content',
 				'public'        	=> true,
 				'show_in_nav_menus'	=> true
@@ -89,14 +88,24 @@ global $options_page;
 				'label_count'               => _n_noop( 'Closed <span class="count">(%s)</span>', 'Closed <span class="count">(%s)</span>' ),
 			) );
 			
-			register_post_status( 'waiting-confirmation', array(
+			register_post_status( 'pending', array(
 				//'label'                     => _x( 'Confirmed', 'post' ),
-				'label'                     => 'Waiting Confirmation',
+				'label'                     => 'Pending',
 				'public'                    => true,
 				'exclude_from_search'       => false,
 				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => true,
-				'label_count'               => _n_noop( 'Waiting Confirmation <span class="count">(%s)</span>', 'Waiting Confirmation <span class="count">(%s)</span>' ),
+				'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
+			) );
+			
+			register_post_status( 'enquiry', array(
+				//'label'                     => _x( 'Confirmed', 'post' ),
+				'label'                     => 'Enquiry',
+				'public'                    => true,
+				'exclude_from_search'       => false,
+				'show_in_admin_all_list'    => true,
+				'show_in_admin_status_list' => true,
+				'label_count'               => _n_noop( 'Enquiry <span class="count">(%s)</span>', 'Enquiry <span class="count">(%s)</span>' ),
 			) );
 			
 			
@@ -122,9 +131,6 @@ global $options_page;
 		function olr_custom_column_date($column_name, $id){
 			
 			$meta_key = 'olr_custom_column';
-			/*echo "<pre>";
-			print_r( get_post_meta($id, 'olr_custom_column', true) );
-			echo "</pre>";*/
 			$column = get_post_meta($id, $meta_key, true);
 
 			if($column_name == 'Phone'){
@@ -136,35 +142,25 @@ global $options_page;
 			if($column_name == 'editor'){
 				echo nl2br( get_post_field( 'post_content', $id) );
 			}
-			if($column_name == 'Type of Tables'){
-				echo $column['Type of Tables'];
-			}
 			if($column_name == 'Tables'){
-				echo $column['Tables'];
+				$type_tables = '';
+				if( $column['Type_of_Tables'] != '' ){
+					$type_tables =  ' ( ' . $column['Type_of_Tables'] .' )';
+				}
+				echo $column['Tables'] . $type_tables;
 			}
 			if($column_name == 'Persons'){
 				echo $column['Persons'];	
 			}
-			if($column_name == 'Lunch / Dinner'){
-				echo $column['Lunch / Dinner'];
-			}
 			if($column_name == 'Booking Date'){
-				echo $column['Booking Date'];
+				echo $column['Booking_Date'] . ', ' .$column['Booking_Time'];
 			}
-			if($column_name == 'Booking Time'){
-				echo $column['Booking Time'];
-			}
-			
 			if($column_name == 'Confirmation Key'){
-				echo $column['Confirmation Key'];
+				echo $column['Confirmation_Key'];
 			}
 			if($column_name == 'status'){
 				$status = get_post_status ( $id );
-				if( $status == 'draft' ){
-					echo 'Waiting Confirmation';	
-				}else{
-					echo $status;
-				}	
+				echo '<span class="'.$status.'">'.ucfirst($status).'</span>';
 			}
 		}   // function olr_custom_column_date($column_name, $id){
 	
@@ -185,17 +181,18 @@ global $options_page;
 			
 			$columns = array(
 				'cb' 			=> '<input type="checkbox" />', // DEFAULT COLUMNS
-				'date' 			=> __( 'Date',PLUGIN_NAME), // DEFAULT COLUMNS
+				'Booking Date' 	=> __( 'Booking Date',PLUGIN_NAME), // NEW COLUMNS
+				//'Booking Time' 	=> __( 'Booking Time',PLUGIN_NAME) // NEW COLUMNS
+				//'date' 			=> __( 'Date',PLUGIN_NAME), // DEFAULT COLUMNS
 				'title' 		=> __( 'Name',PLUGIN_NAME), // DEFAULT COLUMNS
 				'Phone' 		=> __( 'Phone',PLUGIN_NAME), // NEW COLUMNS
 				'Email' 		=> __( 'Email',PLUGIN_NAME), // NEW COLUMNS
-				'editor' 		=> __( 'Message',PLUGIN_NAME), // DEFAULT COLUMNS
-				'Type of Tables' => __( 'Type of Tables',PLUGIN_NAME), // NEW COLUMNS
+				//'editor' 		=> __( 'Message',PLUGIN_NAME), // DEFAULT COLUMNS
+				//'Type of Tables' => __( '',PLUGIN_NAME), // NEW COLUMNS
 				'Tables' 		=> __( 'Tables',PLUGIN_NAME), // NEW COLUMNS
 				'Persons' 		=> __( 'Persons',PLUGIN_NAME), // NEW COLUMNS
-				'Lunch / Dinner' => __( 'Lunch / Dinner',PLUGIN_NAME), // NEW COLUMNS
 				'Booking Date' 	=> __( 'Booking Date',PLUGIN_NAME), // NEW COLUMNS
-				'Booking Time' 	=> __( 'Booking Time',PLUGIN_NAME) // NEW COLUMNS
+				
 			);
 		
 			if( 	isset( $resto_confirmation_key )
@@ -341,7 +338,6 @@ global $options_page;
 				//= 6.	REDIRECT URL 
 				$sendback = remove_query_arg( array('post_status'), wp_get_referer() );
 				
-				
 				if ( ! $sendback )
 				$sendback = admin_url( "edit.php?post_type=$post_type" );
 				$pagenum = $wp_list_table->get_pagenum();
@@ -360,9 +356,7 @@ global $options_page;
 				exit();
 				
 			} // if($post_type == 'olr_restaurant') {
-			
-			
-			
+
 		 
 		} // function mark_full_bulk_action_events()
 		
@@ -402,15 +396,44 @@ global $options_page;
 		function remove_row_actions( $actions )
 		{
 			if( get_post_type() == 'olr_restaurant' )
-				unset( $actions['edit'] );
+				//unset( $actions['edit'] );
 				unset( $actions['view'] );
-				unset( $actions['trash'] );
-				unset( $actions['inline hide-if-no-js'] );
+				//unset( $actions['trash'] );
+				//unset( $actions['inline hide-if-no-js'] );
 			return $actions;
 		}
 	} // if( $all_bookings_page ){	
-		
-		
+	
+	
+	/*==============================================================
+		7.	ADD CUSTOM FIELD
+	==============================================================*/
+	if( 	$post_page 
+		||	$post_new  	
+	){
+		require_once( OLR_PATH . 'restaurant reservation/admin/add-custom-field.php' );
+	}
+	
+	/*==============================================================
+		8.	ADDING FIELD IN QUICK EDIT MENU
+	==============================================================*/
+	if( $all_bookings_page ){
+		require_once( OLR_PATH . 'restaurant reservation/admin/add-custom-field-quick-edit-menu.php' );
+	}
+	
+
+	/*==============================================================
+		9.	ADDING FILTER
+			1.	REMOVE DEFAULT DATE FILTER
+			2.	ADD CUSTOM DATE FILTER
+	==============================================================*/
+	if( $all_bookings_page ){
+		//= 1.	REMOVE DEFAULT DATE FILTER
+		add_filter('months_dropdown_results', '__return_empty_array');
+		//= 2.	ADD CUSTOM DATE FILTER
+		require_once( OLR_PATH . 'restaurant reservation/admin/add-date-filter.php' );
+	}
+	
 
 /*##############################################################
 	3.	STYLE AND SCRIPT 
@@ -420,8 +443,24 @@ global $options_page;
 ##############################################################*/
 if( 	$all_bookings_page
 	||	$resto_setting_page
+	||	$post_page 
+	||	$post_new
 ){
-
+	
+	function my_admin_init(){
+			
+			if( !wp_script_is('jquery-ui-datepicker') ){
+				wp_enqueue_script( 'jquery-ui-datepicker' );
+			}
+			
+			wp_enqueue_style(
+				'olr-date-picker-style',	// $handle (id)	
+				OLR_FOLDER .'css/jquery.ui.datepicker.css', // $sr
+				false, 	// $dependencies
+				false,	// $version
+				false 	// in footer
+			); 
+			
 			//=	1.	ENQUEQE STYLE
 			wp_enqueue_style(
 				'olr-admin-resto-style',	// $handle (id)	
@@ -438,13 +477,19 @@ if( 	$all_bookings_page
 				false,	// $version
 				false 	// in footer
             );  
-			
-			//= 3.	REMOVE ADD NEW FEATURES ( CUSTOM POST TYPE )
-			$css_data =	"
-						.add-new-h2{display: none !important;}
-						.column-editor{width: 150px;}
-						";
-			wp_add_inline_style( 'olr-admin-resto-style', $css_data );
+
+			$olr_script_data = array( 
+								'admin_url' 		=> admin_url( 'admin-ajax.php' ),
+								'plugin_options' 	=> get_option('resto_all_setting'),
+								'plugin_folder' 	=> OLR_FOLDER,
+								'plugin_path' 		=> OLR_PATH
+								
+						  	);
+			wp_localize_script( 'olr-admin-resto-script', 'data', $olr_script_data );
+		
+		
+	}
+	add_action('admin_init', 'my_admin_init');
 		
 } // if( $all_bookings_page ){
 
@@ -453,169 +498,122 @@ if( 	$all_bookings_page
 	4.	SETTING SUB MENU
 		1.	MENU LINK 
 		2.	MENU DISPLAY
-		3.	SECTION ( TAB )
+		3.	REGISTER SETTING
 ##############################################*/
 				
 	/*=========================================
 		1.	MENU LINK 
 	=========================================*/
-			add_action('admin_menu', 'olr_restaurant_sub_menu');
-			function olr_restaurant_sub_menu() {
+	add_action('admin_menu', 'olr_restaurant_sub_menu');
+	function olr_restaurant_sub_menu() {
 				
-				//$iconUrl = get_template_directory_uri() . '\theme-options\images\menu-icon.png';
-				add_submenu_page(
-					'edit.php?post_type=olr_restaurant',				// $parent_slug ( custom post type )
-					__('Settings',PLUGIN_NAME),				// $page_title
-					__('Settings',PLUGIN_NAME),			// $menu_title
-					'administrator',		// $capability (which user can see)
-					'olr_restaurant_setting',		// $menu_slug (The unique ID )
-					'olr_restaurant_setting_display'	// $function
-					//$iconUrl, 			// icon 16 x 16 pixels for best results.
-				);
-				
-		
-			} // end sandbox_create_menu_page
+		//$iconUrl = get_template_directory_uri() . '\theme-options\images\menu-icon.png';
+		add_submenu_page(
+			'edit.php?post_type=olr_restaurant',				// $parent_slug ( custom post type )
+			__('Settings',PLUGIN_NAME),				// $page_title
+			__('Settings',PLUGIN_NAME),			// $menu_title
+			'administrator',		// $capability (which user can see)
+			'olr_restaurant_setting',		// $menu_slug (The unique ID )
+			'olr_restaurant_setting_display'	// $function
+			//$iconUrl, 			// icon 16 x 16 pixels for best results.
+		);
+
+	} // end sandbox_create_menu_page
 		
 		
 	/*=========================================
 		2.	MENU DISPLAY
+			1.	RESTO SETTING TITLE
+			2.	RESTO SETTING MENU TAB
+			4.	SETTING CONTENT
+				1.	PRIMARY CONTENT
+					1.	SETTING SAVE / ERROR NOTIFICATION
+				2.	SIDEBAR
 	=========================================*/
-			function olr_restaurant_setting_display(){
-			?>
-			<!-- Create a header in the default WordPress 'wrap' container -->
-			<div class="olr_menu_wrapper">
-		
-				<!-- Add the icon to the page -->
-				<!--<div id="icon-themes" class="icon32"></div>-->
-				<h2><?php _e('Restaurant Reservation Setting',PLUGIN_NAME)?></h2>
-		
-				<!-- Make a call to the WordPress function for rendering errors when settings are saved. -->
-				<?php settings_errors(); ?>
-				
-                	<?php
-						if( isset( $_GET[ 'tab' ] ) ) {
-							$active_tab = $_GET[ 'tab' ];
-						} // end if
-					?>
+	function olr_restaurant_setting_display(){
+		?>
 			
-                
-                <h2 class="nav-tab-wrapper">
-              		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_general_setting" class="nav-tab <?php echo $active_tab == 'resto_general_setting' ? 'nav-tab-active' : ''; ?>">
-                            <?php _e('General',PLUGIN_NAME); ?></a>
-              		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_schedule_setting" class="nav-tab <?php echo $active_tab == 'resto_schedule_setting' ? 'nav-tab-active' : ''; ?>">
-                            <?php _e('Schedule',PLUGIN_NAME); ?></a>
-                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_table_setting' ? 'nav-tab-active' : ''; ?>">
-                            <?php _e('Table',PLUGIN_NAME); ?></a> 
-                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_email_setting' ? 'nav-tab-active' : ''; ?>">
-                            <?php _e('Email',PLUGIN_NAME); ?></a>  
-                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_captcha_setting' ? 'nav-tab-active' : ''; ?>">
-                            <?php _e('Captcha',PLUGIN_NAME); ?></a>                                  
-          		</h2>
-                
-                
-                
-				<!-- Create the form that will be used to render our options -->
-				<form method="post" action="options.php">
-					
-					<?php
-					/*settings_fields( 'resto_general_setting' );
-						do_settings_sections( 'resto_general_setting' );*/
-					
-					if( $active_tab == 'resto_general_setting' ) {
-						
-						settings_fields( 'resto_general_setting' );
-						do_settings_sections( 'resto_general_setting' );
-					
-					} else if ( $active_tab == 'resto_schedule_setting' )  {
-						
-						settings_fields( 'resto_schedule_setting' );
-						do_settings_sections( 'resto_schedule_setting' );
-					
-					} else if ( $active_tab == 'resto_table_setting' )  {
-						
-						settings_fields( 'resto_table_setting' );
-						do_settings_sections( 'resto_table_setting' );
-					
-					} else if ( $active_tab == 'resto_email_setting' )  {
-					
-						settings_fields( 'resto_email_setting' );
-						do_settings_sections( 'resto_email_setting' );
-					
-					} else { 
-					
-						settings_fields( 'resto_captcha_setting' );
-						do_settings_sections( 'resto_captcha_setting' );
-					
-					} // end if/else
-					
-					submit_button();
-					?>
-				</form>
+			<div class="olr_admin_resto_wrapper">
+				
+                <?php //= 1.	RESTO SETTING TITLE ?>
+				<h2 class="resto-admin-title"><?php _e('Restaurant Reservation Setting',PLUGIN_NAME)?></h2>
 		
-			</div><!-- /.olr_menu_wrapper -->
-			<?php
-			}
+				<?php
+					if( isset( $_GET[ 'tab' ] ) ) {
+						$active_tab = $_GET[ 'tab' ];
+					} // end if 
+				?>
+			
+                <?php //= 2.	RESTO SETTING MENU TAB ?>
+                <h2 class="nav-tab-wrapper">
+              		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_general_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('General',PLUGIN_NAME); ?></a>
+              		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_schedule_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Schedule',PLUGIN_NAME); ?></a>
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Table',PLUGIN_NAME); ?></a> 
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Email',PLUGIN_NAME); ?></a>  
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Captcha',PLUGIN_NAME); ?></a>        
+          		</h2>
+
+                
+             	<?php //= 1.	PRIMARY CONTENT ?>
+                <div class="resto_admin_primary_content">
+                
+                	<?php //= 1.	SETTING SAVE / ERROR NOTIFICATION ?>
+                	<?php settings_errors(); ?>
+                    
+                    <br />
+                    <form id="restaurant-setting-form" method="post" action="options.php">
+                		<?php settings_fields( 'resto_all_setting' ); ?>
+                        <?php $options = get_option( 'resto_all_setting' ); 
+							
+							if( $options != '' ){
+								if( !array_key_exists('resto_thank_you_page_url', $options) ){
+									$thank_you_page = get_option('resto_thank_you_url');
+									
+									if( $thank_you_page ){
+										$options['resto_thank_you_page_url'] = $thank_you_page;
+										update_option('resto_all_setting',$options);
+									}
+								}
+							}
+	
+						?>
+                        <div id="resto_general_wrapper">
+                        	<?php require_once('general.php'); ?>
+                        </div>
+                     	<div id="resto_schedule_wrapper">
+                   		 	<?php require_once('schedule.php'); ?>
+                        </div>
+                        <div id="resto_table_wrapper">
+                   		 	<?php require_once('table.php'); ?>
+                        </div>
+                        <div id="resto_email_wrapper">
+                   		 	<?php require_once('email.php'); ?>
+                        </div>
+                        <div id="resto_captcha_wrapper">
+                   		 	<?php require_once('captcha.php'); ?>
+                        </div>
+                    	<?php submit_button(); ?>
+                    </form>
+                </div><?php // #resto_admin_primary_content?>
+                
+          		<?php //= 2.	SIDEBAR ?>
+                <div class="resto_admin_sidebar">
+                	
+                </div>
+                
+			</div><?php // #olr_admin_resto_wrapper  ?>
+            
+		<?php
+	} // function olr_restaurant_setting_display(){
 
 
 	/*=========================================
-		3.	SECTION ( TAB )
-			1.	GENERAL
-			2. 	SCHEDULE
-			3.	TABLE
-			4.	EMAIL
+		3.	REGISTER SETTING
 	=========================================*/
-		
-		/*=========================================
-			1.	 GENERAL
-		=========================================*/
-		if( 	$resto_setting_page
-			||	$options_page
-		){	
-			require_once('general.php');
-		}
-		
-		
-		/*=========================================
-			2. 	SCHEDULE
-		=========================================*/	
-		if( 	$resto_schedule_setting_page
-			||	$options_page
-		){
-			require_once('schedule.php');
-		}	
-		
+	if( 	$resto_setting_page
+		||	$options_page
+	){	
+		require_once('resto-setting.php');	
+	}
 
-		/*=========================================
-			3.	TABLE
-		=========================================*/	
-		if( 	$resto_table_setting_page
-		   	||	$options_page
-		){
-			require_once('table.php');
-		}
-		
-		/*=========================================
-			4.	EMAIL
-		=========================================*/	
-		if( 	$resto_email_setting_page 
-		   	||	$options_page
-		){
-			require_once('email.php');
-		}
-		
-		
-		/*=========================================
-			5.	CAPTCHA
-		=========================================*/	
-		if( 	$resto_setting_page
-		   	||	$options_page
-		 	&&	!$resto_general_setting_page 
-			&&	!$resto_schedule_setting_page
-			&&	!$resto_table_setting_page
-			&&	!$resto_email_setting_page
-		){
-			require_once('captcha.php');
-		}
-		
-		
 ?>

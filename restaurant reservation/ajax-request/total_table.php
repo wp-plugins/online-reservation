@@ -1,5 +1,4 @@
 <?php
-
 	/*
 		TABLE OF CONTENTS
 		========================
@@ -7,7 +6,6 @@
 		2.	RETRIEVE DATABASE DATA
 		3.	SHOW TABLE
 	*/
-	
 
 	/*########################################
 		1.	POST DATA
@@ -28,7 +26,7 @@
 			1.	TABLE NAME
 		========================================*/
 		$table_name = $table_name;
-		$total_table = $options['resto_table'][$table_name . '_table'];
+		$total_table = $options[$table_name . '_table'];
 		$out = '';
 		for( $x = 1; $x <= $total_table; $x++ ){
 			$out .='<option value="'.$x.'" >'.$x.'</option>';

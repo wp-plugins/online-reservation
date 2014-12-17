@@ -6,7 +6,7 @@ Author URI: http://solweder.com/about-me
 Tags: wp, online reservations, online bookings, restaurant reservation, restaurant bookings, reservation, restaurant, bookings   
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.5.2
+Stable tag: 1.6
 Donate link: http://solweder.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,12 +18,15 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 
 = Features =
 * Easy to confirm, reject and trash the reservations
-* Set your business opening and closing time for week day 
+* Set your business opening time , closing time and day off for week day 
 * Set maximum available table and seats 
 * Assign how early and late, a reservation can be made by your customer 
 * Email notification for admin and confirmation email for customer when reservation is made 
 * Protect Your reservation from spam and abuse with Captcha
 * Translation Ready
+* Checking any table available and provide other times if no table is found
+* Set maximum reservation Length
+
 
 
 == Installation ==
@@ -32,10 +35,12 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 2. Unzip the file.
 3. Upload the "online-reservation" folder to the "/wp-content/plugins/" directory. (DO NOT CHANGE ANY FILE OR FOLDER NAMES)
 4. Activate the plugin through the "Plugins" menu in WordPress.
-5. To display your plugin on post or pages, add [online_restaurant_reservation] shortcode
-5. To display on widget , Go to `Appearance` >> `Widgets` and drag `OLR Restaurant Reservation` in to your WordPress sidebar
-6. Save
-7. You are done. 
+5. Restaurant reservation and Thank you page will be created
+6. Restaurant reservation contain [online_restaurant_reservation] shortcode for displaying your plugin 
+7. To display your plugin on post or any pages, add [online_restaurant_reservation] shortcode
+8. To display on widget , Go to 'Appearance' >> 'Widgets' and drag 'OLR Restaurant Reservation' in to your WordPress sidebar
+9. Save
+10. You are done. 
 
 
 == Frequently Asked Questions ==
@@ -45,11 +50,11 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 
 == Screenshots ==
-1. View reservation with all the complete information. 
-2. Reservation Form with captcha and calendar.
-3. set all configuration on setting page.
-4. confirmation email sent to your email
-
+1. Reservation Form
+2. View reservation with all the complete information. 
+3. Quick edit and update reservation list 
+4. set all configuration on setting page.
+5. confirmation email sent to your email
 
 
 
@@ -78,6 +83,9 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 = 1.5.2 (2014-10-20) =
 * adding more field on email setting
 
+= 1.6 (2014-12-16) =
+* adding more new features
+
 
 == Upgrade Notice ==
 = 1.1 (2014-10-05) =
@@ -97,6 +105,10 @@ This update adds support for HTML Email.
 
 = 1.5.2 (2014-10-20) =
 * adding more field on email setting
+
+= 1.6 (2014-12-16) =
+* adding more new features
+
 
 
 == Usage ==

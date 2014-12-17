@@ -59,19 +59,22 @@
 			$any_data_array 	= array( 
 										'plugin_folder' 	=> OLR_FOLDER,
 										'plugin_path' 		=> OLR_PATH,
-										'early_bookings' 	=> $options['resto_schedule']['early_bookings'],
-										'late_bookings' 	=> $options['resto_schedule']['late_bookings'],
-										'plugin_options' 	=> get_option('olr_all_restaurant_setting'),
-										'ajaxurl'         	=> admin_url( 'admin-ajax.php' )
+										'early_bookings' 	=> $options['early_bookings'],
+										'late_bookings' 	=> $options['late_bookings'],
+										'plugin_options' 	=> get_option('resto_all_setting'),
+										'ajaxurl'         	=> admin_url( 'admin-ajax.php' ),
+										'ip_address'   		=> $_SERVER['REMOTE_ADDR'],
+										'fake_actions_title'   	=> $message_array['TOO MANY FAKE ACTIONS']['title'],
+										'fake_actions_message' 	=> $message_array['TOO MANY FAKE ACTIONS']['message'],
+										'geolocation_api' 	=> $geolocation_api
 										);
 			wp_localize_script( 'olr-script', 'data', $any_data_array );
 			
-				
-
+			
 			/*====================================
 				DISPLAY WIDGET
 			====================================*/
-			$options = get_option( 'olr_all_restaurant_setting' );
+			$options = get_option( 'resto_all_setting' );
 			$title 		= apply_filters( 'widget_title', $instance['title'] );
 			
 			echo $args['before_widget'];

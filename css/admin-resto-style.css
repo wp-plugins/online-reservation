@@ -9,10 +9,12 @@
 	1.	RESTAURANT RESERVATION
 		1.	RESTAURANT ALL BOOKINGS		
 		2.	RESTAURANT SETTINGS
-			1.	EMAIL TAB
+			1.	All TAB
 			2.	CAPTCHA TAB
+			3. 	TABLE TAB
+		3.	EDIT POST	
+		4.	POST LIST ( RESERVATION LIST )
 ##############################################*/
-
 
 /*= 1.	RESTAURANT ALL BOOKINGS */
 .section_title{
@@ -23,8 +25,78 @@
 .post-state{
 	display: none;
 }
+.resto-admin-title{
+	margin: 30px 0 50px !important;
+	font-size: 30px;
+	line-height: 30px;
+}
 
-/*= 1.	EMAIL TAB */
+/*= 2.	RESTAURANT SETTINGS */
+.resto_admin_primary_content{
+	margin: 30px 0 !important;
+	width: 100%;
+	max-width: 600px;
+}
+.resto_admin_primary_content h2{
+	font-size: 25px;
+	font-weight: 100;
+}
+.resto_admin_primary_content h3{
+	font-size: 18px;
+	font-weight: 100;
+}
+.resto_admin_primary_content label{
+	float: left;
+    min-width: 100px;
+    width: 30%;
+	margin-right: 15px;
+}
+.resto_admin_primary_content textarea{
+	margin-bottom: 20px;
+}
+.resto_admin_primary_content hr{
+	margin: 20px 0;
+}
+.float-none{
+	clear: both;
+}
+.common-container{
+	display: block;
+	float: left;
+	margin-bottom: 20px;
+}
+
+
+
+/*= 1.	RESTO SETTING CONTENT */
+/*.olr_javascript_enabled{
+	display: none;
+}*/
+
+.setting-title-checkbox{
+}
+.setting-input{
+}
+.medium-long{
+	min-width: 100px;
+	display: inline-block;
+}
+.olr-heading-title{
+	text-transform: capitalize;
+	margin: 50px 0 5px;
+}
+.margin-top{
+	margin-top: 50px;
+}
+.no-margin-top{
+	margin-top: 0 !important;
+}
+.no-margin{
+	margin: 0 !important;	
+}
+
+
+/*= 1.	All TAB */
 #owner_email{
 	min-width: 50%;
 }
@@ -37,12 +109,11 @@
 }
 .email-medium-field{
 	min-width: 50%;
+	margin-bottom: 10px;
 }
 .image-preview{
 	display: block;
 }
-
-
 
 /*= 2.	CAPTCHA TAB */
 .captcha_public_key,
@@ -50,5 +121,80 @@
 	min-width: 50%;
 }
 
+/*= 3. 	TABLE TAB */
+#display_table_field_button{
+	display: block;
+	margin: 10px 0;
+}
 
 
+
+/*= 3.	EDIT POST  */
+/*#preview-action,
+#post-preview, 
+#view-post-btn,
+#misc-publishing-actions{
+	display: none !important;
+}*/
+
+
+#reservation-information-wrap label{
+	min-width: 150px;
+	display: inline-block;
+}
+#reservation-information-wrap input,
+#reservation-information-wrap textarea{
+	width: 50%;
+	min-width: 300px;
+	
+}
+#reservation-information-wrap br,
+#reservation-information-wrap hr
+{
+	margin: 10px 0;
+}
+
+
+/*= 4.	POST LIST ( RESERVATION LIST )  */
+.inline-edit-col-right,
+.inline-edit-col-left{
+	display: none;
+}
+#olr-quick-menu-update-button{
+	padding: 5px;
+	background-color: #06F;
+	color: #FFF;
+	width: 100px !important;
+	min-width: 0 !important;
+}
+.quick-edit_response{
+	display: none;
+	background-color:#F60;
+	color: white !important;
+	padding:10px;
+	width: 200px;
+}
+.inline-edit-save .button-primary{
+	display: none !important;
+}
+
+.date-filter-link{
+	margin:0 10px;
+	text-decoration: none;
+}
+td .pending{
+	font-weight: bold;
+	color: #390;
+}
+td .confirmed{
+	font-weight: bold;
+	color: #F00;
+}
+td .closed{
+	font-weight: bold;
+	color: #CCC;
+}
+td .enquiry{
+	font-weight: bold;
+	color: #00C;
+}

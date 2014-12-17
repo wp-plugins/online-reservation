@@ -6,11 +6,9 @@
 		1.	POST DATA
 		2. 	GENERAL VARIABLE
 		3.	DATE AND TIME CHOOSEN ( ms )
-		3.	RETRIEVE DATABASE DATA
-		
-		
-		4.	SHOW TIME
-		5.	CHECKING BOOKING DATE
+		4.	RETRIEVE DATABASE DATA
+		5.	SHOW TIME
+		6.	CHECKING BOOKING DATE
 	*/
 
 	/*########################################
@@ -42,23 +40,16 @@
 		$month_now 	= date('n', $now );
 		$year_now 	= date('Y', $now );
 	
-	
 
 	
-	
-	
 	/*########################################
-		3.	RETRIEVE DATABASE DATA
+		4.	RETRIEVE DATABASE DATA
 	########################################*/	
 	$options = $Options;	
-	
-	
-	
-	
-	
+
 	
 	/*########################################
-		4.	SHOW TIME
+		5.	SHOW TIME
 	########################################*/	
 	if( $_POST['command'] ){
 		require_once( $_POST['plugin_path'] . 'helper/helper_functions.php');
@@ -68,18 +59,14 @@
 	
 	
 	/*########################################################################
-		5.	CHECKING BOOKING DATE
-			2.	CHECK IS PAST DATE
-			3.	CHECK LATE BOOKINGS ( BOOKING BETWEEN ONE DAY )
-			4.	CHECK EARLY BOOKINGS ( BOOKING MORE THAN ONE DAY )
+		6.	CHECKING BOOKING DATE
+			1.	CHECK IS PAST DATE
+			2.	CHECK LATE BOOKINGS ( BOOKING BETWEEN ONE DAY )
+			3.	CHECK EARLY BOOKINGS ( BOOKING MORE THAN ONE DAY )
 	########################################################################*/	
 	
-	
-		
-
-
 		/*==========================================
-			2.	CHECK IS PAST DATE
+			1.	CHECK IS PAST DATE
 				1.	CHECK YEAR , MONTH AND DAY 
 		==========================================*/
 		if( $date_choosen < $now ){
@@ -107,13 +94,13 @@
 		
 			
 		/*======================================================
-			3.	CHECK LATE BOOKINGS ( BOOKING BETWEEN ONE DAY )
+			2.	CHECK LATE BOOKINGS ( BOOKING BETWEEN ONE DAY )
 		======================================================*/
 			if( 	$date_choosen < $now 
 				||  $date_choosen < ( $date_choosen + 24 * 60 * 60 ) 
 				){
 			
-				$late_bookings = $options['resto_schedule']['late_bookings'];
+				$late_bookings = $options['late_bookings'];
 				if( stripos($late_bookings,'minutes') > 0 ){
 					$late_bookings = trim(str_replace( 'minutes','',$late_bookings));
 					$late_bookings_time = $late_bookings * 60;
@@ -149,7 +136,7 @@
 					$time_is_true = 'false';
 					
 					$output = 'Now : ' . date("d-M-Y H:i:s" , $now) . '<br/>';
-					$output .= 'Late Booking ( must be '.$options['resto_schedule']['late_bookings'].' in advance )' . '<br/>';
+					$output .= 'Late Booking ( must be '.$options['late_bookings'].' in advance )' . '<br/>';
 					$output .= 'Date : must be at least ' . date("d-M-Y" , $now + $late_bookings_time ) . '<br/>';
 					$output .= 'Time : must bigger than ' . date("H:i" , $now + $late_bookings_time ) . '<br/>';
 					$output .= '}';
@@ -166,15 +153,13 @@
 				}
 			}
 			
-	
-		
-		
+			
 		/*============================================================
-			4.	CHECK EARLY BOOKINGS ( BOOKING MORE THAN ONE DAY )
+			3.	CHECK EARLY BOOKINGS ( BOOKING MORE THAN ONE DAY )
 		============================================================*/
 			if( $date_choosen > ( $now + 24 * 60 * 60 ) ){
 				
-				$early_bookings = $options['resto_schedule']['early_bookings'];
+				$early_bookings = $options['early_bookings'];
 				if( stripos($early_bookings,'day') > 0 ){
 					$early_bookings = trim(str_replace( 'day','',$early_bookings));
 					$early_bookings_time = $early_bookings * 24 * 60 * 60;
@@ -212,7 +197,7 @@
 					$time_is_true = 'false';
 					
 					$output = 'Now : ' . date("d-M-Y H:i:s" , $now) . '<br/>';
-					$output .= 'Early Booking ( must be '.$options['resto_schedule']['early_bookings'].' in advance )' . '<br/>';
+					$output .= 'Early Booking ( must be '.$options['early_bookings'].' in advance )' . '<br/>';
 					$output .= 'Date : must be at least ' . date("d-M-Y" , $now + $early_bookings_time ) . '<br/>';
 					$output .= 'Time : must bigger than ' . date("H:i" , $now + $early_bookings_time ) . '<br/>';
 					$output .= '}';
