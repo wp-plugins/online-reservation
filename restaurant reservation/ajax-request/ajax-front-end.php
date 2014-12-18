@@ -871,6 +871,7 @@
 						$still_have_table = false;
 					}	
 				}else{
+					
 					$total_table = '';
 					foreach( $type_table_choosen as $table ){
 						$total_table += $table['total_table'];
@@ -878,6 +879,7 @@
 					
 					if( ($total_table - $total_tables_used) > 0 ){
 						$still_have_table = true;
+						
 						if( $total_table_used_array != '' ){
 							//= FIND TYPE OF TABLE IS STILL FREE TO BE BOOKED
 							foreach( $total_table_used_array as $table_used ){
@@ -890,13 +892,15 @@
 									}
 								}
 							}
-							foreach( $type_table_choosen as $table ){
-								if( $table['total_table'] > 0 ){
-									$table_type_choosen_for_customer = $table['type'];
-									break;
-								}
+						}	
+						
+						foreach( $type_table_choosen as $table ){
+							if( $table['total_table'] > 0 ){
+								$table_type_choosen_for_customer = $table['type'];
+								break;
 							}
 						}
+						
 					}else{
 						$still_have_table = false;
 					}
@@ -914,6 +918,11 @@
 					echo '<br/ >';
 					exit();
 				}
+				
+				
+				
+				
+				
 				
 				if( $still_have_table ){
 					$response['have_table'] 	= 'true';
@@ -1214,37 +1223,37 @@
 				lockout_table($today_date_time,$lockout_type,'save data');
 			}
 
-	
-	
+		
 		/*=======================================================
 			3.	FIND TYPE OF TABLE
 		=======================================================*/
 		if( $options['table_size'] == 'many' ){
 			if( $options['many_type_of_table'] != '' ){
 				$many_table_type = explode(',',str_replace(' ','',$options['many_type_of_table']) );
+				
 				global $many_table_id;
 				if( $many_table_type != '' ){
 					$b = 0;
 					foreach( $many_table_type as $key => $val){
 						$table_type = preg_match('/(.+)(\()([0-9]+)(\))/', $val, $match_table);
-						/*echo "<pre>";
-							print_r( $match_table );
-						echo "</pre>";*/
+						
 						if( count($match_table) > 0 ){
 							$person_per_table = $match_table['3'] - 0;
 							$type_table = $match_table['1'];
 							if( $b<3){
 								if( $person_per_table >= $persons_request ){
-									$type_table_choosen[$b] = array(
-																	'total_table' 	=>  $options[ $type_table . '_table'],
-																	'type' 			=>  $type_table
-																	);
-																			
-									if( $persons_request == $person_per_table ){
+									if( $options[ $type_table . '_table'] > 0 ){
 										$type_table_choosen[$b] = array(
-																	'total_table' 	=>  $options[ $type_table . '_table'],
-																	'type' 			=>  $type_table
-																	);
+																		'total_table' 	=>  $options[ $type_table . '_table'],
+																		'type' 			=>  $type_table
+																		);
+																				
+										if( $persons_request == $person_per_table ){
+											$type_table_choosen[$b] = array(
+																		'total_table' 	=>  $options[ $type_table . '_table'],
+																		'type' 			=>  $type_table
+																		);
+										}
 									}
 									$b++;
 								}
@@ -1258,7 +1267,6 @@
 				} // if( $many_table_type != '' ){				
 			} // if( $options['many_type_of_table'] != '' ){	
 		} // if( $options['table_size'] == 'many' ){
-		
 		
 		if( $type_table_choosen  == '' ){
 			echo output_result('5'); // SEND AN ENQUIRY
@@ -1511,7 +1519,6 @@
 			echo initialiaze_finding_table($all_customers_data,$reservation_length,$choosen_time,$options);	
 			
 		}else{
-			
 			echo output_result('0','',$type_table_choosen[0]['type']); // TABLE FOUND
 			
 		} // if( $all_customers_data != '' ){
