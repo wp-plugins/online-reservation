@@ -27,6 +27,11 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 * Checking any table available and provide other times if no table is found
 * Set maximum reservation Length
 
+= Video Walkthrough =
+[youtube https://www.youtube.com/watch?v=Z9K7hj4JhgI] 
+
+
+
 
 
 == Installation ==
