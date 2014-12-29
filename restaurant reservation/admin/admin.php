@@ -598,7 +598,10 @@ if( 	$all_bookings_page
                 
           		<?php //= 2.	SIDEBAR ?>
                 <div class="resto_admin_sidebar">
-                	
+                	<div>
+                    	<h2>Video Walkthrough</h2>
+                        <iframe width="420" height="315" src="//www.youtube.com/embed/Z9K7hj4JhgI" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
                 
 			</div><?php // #olr_admin_resto_wrapper  ?>
