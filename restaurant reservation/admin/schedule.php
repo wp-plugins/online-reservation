@@ -86,7 +86,7 @@
     <?php //= 16.	EARLY BOOKINGS ?>
     <label for="early_bookings" ><strong><?php _e('Early Bookings',PLUGIN_NAME); ?></strong></label>
    	<select name="resto_all_setting[early_bookings]" id="early_bookings">
-      	<option value="anytime" <?php selected( $options['early_bookings'], 'anytime' ); ?>><?php _e('Anytime',PLUGIN_NAME); ?></option>
+      	<option value="" <?php selected( $options['early_bookings'], '' ); ?>><?php _e('Anytime',PLUGIN_NAME); ?></option>
     	<option value="1 day" <?php selected( $options['early_bookings'], '1 day' ); ?>><?php _e('1 day in advance',PLUGIN_NAME); ?></option>
    		<option value="1 week" <?php selected( $options['early_bookings'], '1 week' ); ?>><?php _e('1 week in advance',PLUGIN_NAME); ?></option>
     	<option value="2 week" <?php selected( $options['early_bookings'], '2 week' ); ?>><?php _e('2 weeks in advance',PLUGIN_NAME); ?></option>
@@ -102,7 +102,7 @@
     <?php //= 17.	LATE BOOKINGS ?>
     <label for="late_bookings" ><strong><?php _e('Late Bookings',PLUGIN_NAME); ?></strong></label>
     <select name="resto_all_setting[late_bookings]" id="late_bookings">
-       	<option value="anytime" <?php selected( $options['late_bookings'], 'anytime' ); ?>><?php _e('last minute in advance',PLUGIN_NAME); ?></option>
+       	<option value="1 minutes" <?php selected( $options['late_bookings'], '1 minutes' ); ?>><?php _e('last minute in advance',PLUGIN_NAME); ?></option>
   		<option value="15 minutes" <?php selected( $options['late_bookings'], '15 minutes' ); ?>><?php _e('15 minutes in advance',PLUGIN_NAME); ?></option>
   		<option value="30 minutes" <?php selected( $options['late_bookings'], '30 minutes' ); ?>><?php _e('30 minutes in advance',PLUGIN_NAME); ?></option>
    		<option value="45 minutes" <?php selected( $options['late_bookings'], '45 minutes' ); ?>><?php _e('45 minutes in advance',PLUGIN_NAME); ?></option>
