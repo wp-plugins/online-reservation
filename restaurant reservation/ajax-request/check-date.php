@@ -51,7 +51,7 @@
 	/*########################################
 		5.	SHOW TIME
 	########################################*/	
-	if( $_POST['command'] ){
+	if( isset($_POST['command']) ){
 		require_once( $_POST['plugin_path'] . 'helper/helper_functions.php');
 		echo olr_output_time_list( $options,'',$day_letter);
 		exit;
@@ -101,6 +101,7 @@
 				){
 			
 				$late_bookings = $options['late_bookings'];
+				
 				if( stripos($late_bookings,'minutes') > 0 ){
 					$late_bookings = trim(str_replace( 'minutes','',$late_bookings));
 					$late_bookings_time = $late_bookings * 60;
@@ -160,6 +161,8 @@
 			if( $date_choosen > ( $now + 24 * 60 * 60 ) ){
 				
 				$early_bookings = $options['early_bookings'];
+				$early_bookings_time = $early_bookings;
+				
 				if( stripos($early_bookings,'day') > 0 ){
 					$early_bookings = trim(str_replace( 'day','',$early_bookings));
 					$early_bookings_time = $early_bookings * 24 * 60 * 60;
