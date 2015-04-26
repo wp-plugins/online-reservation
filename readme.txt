@@ -27,11 +27,6 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 * Checking any table available and provide other times if no table is found
 * Set maximum reservation Length
 
-= Video Walkthrough =
-[youtube https://www.youtube.com/watch?v=Z9K7hj4JhgI] 
-
-
-
 
 
 == Installation ==
@@ -91,6 +86,9 @@ Yes! Please visit http://www.solweder.com/plugins/online-reservation/
 = 1.6 (2014-12-16) =
 * adding more new features
 
+= 1.6.1 (2015-04-26) =
+* Fix: Geo Location
+
 
 == Upgrade Notice ==
 = 1.1 (2014-10-05) =
@@ -114,6 +112,8 @@ This update adds support for HTML Email.
 = 1.6 (2014-12-16) =
 * adding more new features
 
+= 1.6.1 (2015-04-26) =
+* Fix: Geo Location
 
 
 == Usage ==

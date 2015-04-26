@@ -113,17 +113,26 @@ if( 	$_SERVER['HTTP_HOST'] != 'localhost'
    	&&	$geolocation_api == 'hackertarget'
 ){
 
-	$URL="http://api.hackertarget.com/geoip/?q=" . $_SERVER['REMOTE_ADDR'];
-	$geo_string = file_get_contents($URL);
+	$URL = "http://api.hackertarget.com/geoip/?q=" . $_SERVER['REMOTE_ADDR'];
+	$geo_array = file($URL);
+		
+	if( count($geo_array) > 0 ){
+		$geo_country 	= str_replace('Country: ','', wp_strip_all_tags($geo_array['1']) );
+		$geo_city 		= str_replace('City: ','', wp_strip_all_tags($geo_array['3']) );
+		$latitude 		= str_replace('Latitude: ','', wp_strip_all_tags($geo_array['4']) );
+		$longitude 		= str_replace('Longitude: ','', wp_strip_all_tags($geo_array['5']) );
+	}else{
+		$geo_country 	= '';
+		$geo_city 		= '';
+		$latitude 		= '';
+		$longitude 		= '';	
+	}
+		
+	$geo_country 	= str_replace(' ','', $geo_country );
+	$geo_city 		= str_replace(' ','', $geo_city );
+	$latitude 		= str_replace(' ','', $latitude );
+	$longitude 		= str_replace(' ','', $longitude );
 	
-	$pattern = '/(IP Address: )([0-9.]+)( Country: )([a-zA-Z]+)( State: )([0-9]+)( City: )([a-zA-Z]+)( Latitude: )([0-9.]+)( Longitude: )([0-9.]+)/';
-	
-	$geo_datas = preg_match($pattern, $geo_string, $geo_data);
-	
-	$geo_country = wp_strip_all_tags($geo_data['4']);
-	$geo_city 	= wp_strip_all_tags($geo_data['8']);
-	$latitude 	= wp_strip_all_tags($geo_data['10']);
-	$longitude 	= wp_strip_all_tags($geo_data['12']);
 }
 
 

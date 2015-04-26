@@ -3,13 +3,13 @@
  * Plugin Name: Online Reservation
  * Plugin URI: http://solweder.com/
  * Description: Allow you to manage and receive your business reservation online
- * Version: 1.6
+ * Version: 1.6.1
  * Author: Wahsidin Tjandra
  * Author URI: http://solweder.com/about-me/
  * License:     GNU General Public License v2.0 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Requires at least: 3.6
- * Tested up to: 4.0
+ * Tested up to: 4.2
  *
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
@@ -174,24 +174,24 @@ function olr_plugin_activation() {
 				4.	LOCKOUT TABLE
 		=====================================================*/
 			$all_table = array(
-								"CREATE TABLE IF NOT EXISTS ".FIND_TABLE_ATTEMPT."(date DATETIME NOT NULL, 
+								"CREATE TABLE IF NOT EXISTS ".FIND_TABLE_ATTEMPT."(no int NOT NULL AUTO_INCREMENT,date DATETIME NOT NULL, 
 							     ip_address CHAR( 100 ) NOT NULL, latitude CHAR( 30 ) NOT NULL, longitude CHAR( 30 ) NOT NULL, 
-								 find_table_attempt CHAR( 5 ) NOT NULL)ENGINE = MYISAM;",
+								 find_table_attempt CHAR( 5 ) NOT NULL,PRIMARY KEY (no))ENGINE = MYISAM;",
 							 	
-								"CREATE TABLE IF NOT EXISTS ".ENQUIRY_ATTEMPT_TABLE."(date DATETIME 
+								"CREATE TABLE IF NOT EXISTS ".ENQUIRY_ATTEMPT_TABLE."(no int NOT NULL AUTO_INCREMENT,date DATETIME 
 							     NOT NULL, today_date DATE NOT NULL, today_time TIME NOT NULL, ip_address CHAR( 100 ) NOT NULL, 
 								 latitude CHAR( 30 ) NOT NULL, longitude CHAR( 30 ) NOT NULL, 
-								 send_enquiry_attempt CHAR( 5 ) NOT NULL)ENGINE = MYISAM; ",
+								 send_enquiry_attempt CHAR( 5 ) NOT NULL,PRIMARY KEY (no))ENGINE = MYISAM; ",
 								
-								"CREATE TABLE IF NOT EXISTS ".TEMPORARY_DATA_TABLE."(date DATETIME NOT NULL, session_id 
+								"CREATE TABLE IF NOT EXISTS ".TEMPORARY_DATA_TABLE."(no int NOT NULL AUTO_INCREMENT,date DATETIME NOT NULL, session_id 
 							 	 CHAR( 100 ) NOT NULL, booking_date DATETIME NOT NULL, book_date DATE NOT NULL, 
-							     type_table CHAR( 30 ) NOT NULL, email CHAR( 60 ) NOT NULL)ENGINE = MYISAM;",
+							     type_table CHAR( 30 ) NOT NULL, email CHAR( 60 ) NOT NULL,PRIMARY KEY (no))ENGINE = MYISAM;",
 								
-								"CREATE TABLE IF NOT EXISTS ".LOCKOUT_TABLE."(lockout_type CHAR( 50 ) NOT NULL, 
+								"CREATE TABLE IF NOT EXISTS ".LOCKOUT_TABLE."(no int NOT NULL AUTO_INCREMENT,lockout_type CHAR( 50 ) NOT NULL, 
 								 lockout_start DATETIME NOT NULL, ip_address CHAR( 100 ) NOT NULL, 
 								 latitude CHAR( 30 ) NOT NULL, longitude CHAR( 30 ) NOT NULL, 
 								 country CHAR( 30 ) NOT NULL, city CHAR( 30 ) NOT NULL, 
-								 email CHAR( 60 ) NOT NULL)ENGINE = MYISAM;"
+								 email CHAR( 60 ) NOT NULL,PRIMARY KEY (no))ENGINE = MYISAM;"
 							   );
 			foreach( $all_table as $table => $ql ){
 				$wpdb->query($ql); 
@@ -231,11 +231,24 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 		global $plugin_options;
 		global $post; 
 		if ( !empty($post) ){
-			if( $post->ID == $plugin_options['reservation_page'] ){
+			
+			if( $plugin_options['reservation_page'] != '' ){
+				$reservation_page = $plugin_options['reservation_page'];
+			}else{
+				$reservation_page = get_option('resto_reservation_page_id');
+			}
+			
+			if( $plugin_options['thank_you_page'] != '' ){
+				$thank_you_page = $plugin_options['thank_you_page'];
+			}else{
+				$thank_you_page = get_option('resto_thank_you_page_id');
+			}
+		
+			if( $post->ID == $reservation_page ){
 				require_once( OLR_PATH .'/config.php');
 				require_once('restaurant reservation/display-shortcode.php');
 			}
-			if( $post->ID == $plugin_options['thank_you_page'] ){
+			if( $post->ID == $thank_you_page ){
 				require_once( OLR_PATH .'/config.php');
 				require_once('restaurant reservation/display-shortcode-reservation-confirmed.php');	
 			}

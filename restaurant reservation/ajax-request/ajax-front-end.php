@@ -491,8 +491,12 @@
 							if( $send_email_to_owner ) {
 								
 								$owner_email 			= wp_strip_all_tags( $options['owner_email'] );
-								$owner_email_subject 	= wp_strip_all_tags( $options['owner_email_subject'] );
 								
+								if( $options['owner_email_subject'] != '' ){
+									$owner_email_subject 	= wp_strip_all_tags( $options['owner_email_subject'] );
+								}else{
+									$owner_email_subject 	= 'Restaurant Reservation';
+								}
 								
 								if( $owner_email != '' ){
 									
@@ -550,8 +554,13 @@
 								
 							
 								$customer_email 			= $email;
-								$customer_email_subject 	= wp_strip_all_tags( $options['customer_email_subject'] );
-							
+								if( $options['customer_email_subject'] != '' ){
+									$customer_email_subject	= wp_strip_all_tags( $options['customer_email_subject'] );
+								}else{
+									$customer_email_subject = 'Restaurant Reservation';
+								}
+								
+								
 								if( $customer_email != '' ){
 									//= 1.	RECIPIENT
 									$recipient = $customer_email;
