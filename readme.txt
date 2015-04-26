@@ -27,6 +27,8 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 * Checking any table available and provide other times if no table is found
 * Set maximum reservation Length
 
+= Video Overview =
+[youtube https://www.youtube.com/watch?v=Z9K7hj4JhgI] 
 
 
 == Installation ==
@@ -47,7 +49,7 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 
 = For help and support visit my site=
 
-Yes! Please visit http://www.solweder.com/plugins/online-reservation/
+Yes! Please visit http://solweder.com/plugin
 
 == Screenshots ==
 1. Reservation Form
@@ -118,7 +120,7 @@ This update adds support for HTML Email.
 
 == Usage ==
 After you download and activate the Online Reservation plugin, you need
-*Make sure to visit http://www.solweder.com/plugins/online-reservation/ for a live demo, detailed installation instructions, info about the plugin,
+*Make sure to visit http://solweder.com/plugin for a live demo, detailed installation instructions, info about the plugin,
 
 
 
