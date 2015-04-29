@@ -24,49 +24,58 @@
 ?>	
 	
 	<?php //= 1.	OPEN TIME MONDAY  ?>
-    <h2 class="olr-heading-title no-margin-top"><?php _e('Working Days',PLUGIN_NAME); ?></h2>
-	<?php 
-		foreach( $every_day as $day ){ 
-			$option_open = $options['open_time_' . $day];
-			if( $option_open == '' ){
-				$option_open = '08:00';
-			}
-			$option_close = $options['close_time_' . $day];
-			if( $option_close == '' ){
-				$option_close = '22:00';
-			}
-			
-	?>
-    <?php if ( $day == 'monday' ) { ?> 
-    <h3 class=""><?php _e('Monday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'tuesday' ) { ?> 
-    <h3 class=""><?php _e('Tuesday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'wednesday' ) { ?> 
-    <h3 class=""><?php _e('Wednesday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'thursday' ) { ?> 
-    <h3 class=""><?php _e('Thursday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'friday' ) { ?> 
-    <h3 class=""><?php _e('Friday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'saturday' ) { ?> 
-    <h3 class=""><?php _e('Saturday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <?php if ( $day == 'sunday' ) { ?> 
-    <h3 class=""><?php _e('Sunday',PLUGIN_NAME); ?></h3>
-    <?php } ?> 
-    <label for="day_off_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Day Off',PLUGIN_NAME); ?></span></label>    
-   	<input type="checkbox" id="day_off_<?php echo $day; ?>" name="resto_all_setting[day_off_<?php echo $day; ?>]" <?php checked('on', $options['day_off_' . $day]) ?> />
-    <br />
-	<label for="open_time_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Open Time',PLUGIN_NAME); ?></span></label>
-   	<input type="text" id="open_time_<?php echo $day; ?>" name="resto_all_setting[open_time_<?php echo $day; ?>]" value="<?php echo $option_open ?>" />
-	<br />
-    <label for="close_time_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Close Time',PLUGIN_NAME); ?></span></label>
-	<input type="text" id="close_time_<?php echo $day; ?>" name="resto_all_setting[close_time_<?php echo $day; ?>]" value="<?php echo $option_close ?>" />
-	<?php } //foreach( $every_day as $day ){ ?>
+    <h2 class="dashicons-before dashicons-clock olr-heading-title no-margin-top head-parent">
+		<?php _e('Working Days',PLUGIN_NAME); ?>
+    	<i class="fa fa-caret-down"></i>
+    	<i class="fa fa-caret-up"></i>    
+  	</h2>
+    <div class="open-time-wrap head-parent-content">
+		<?php 
+            foreach( $every_day as $day ){ 
+                $option_open = $options['open_time_' . $day];
+                if( $option_open == '' ){
+                    $option_open = '08:00';
+                }
+                $option_close = $options['close_time_' . $day];
+                if( $option_close == '' ){
+                    $option_close = '22:00';
+                }
+                
+        ?>
+        <?php if ( $day == 'monday' ) { ?> 
+        <h3 class="day-title"><?php _e('Monday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'tuesday' ) { ?> 
+        <h3 class="day-title"><?php _e('Tuesday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'wednesday' ) { ?> 
+        <h3 class="day-title"><?php _e('Wednesday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'thursday' ) { ?> 
+        <h3 class="day-title"><?php _e('Thursday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'friday' ) { ?> 
+        <h3 class="day-title"><?php _e('Friday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'saturday' ) { ?> 
+        <h3 class="day-title"><?php _e('Saturday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <?php if ( $day == 'sunday' ) { ?> 
+        <h3 class="day-title"><?php _e('Sunday',PLUGIN_NAME); ?></h3>
+        <?php } ?> 
+        <label for="day_off_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Day Off',PLUGIN_NAME); ?></span></label>    
+        <input type="checkbox" id="day_off_<?php echo $day; ?>" name="resto_all_setting[day_off_<?php echo $day; ?>]" <?php checked('on', $options['day_off_' . $day]) ?> />
+        <br class="height_10px" />
+        <label for="open_time_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Open Time',PLUGIN_NAME); ?></span></label>
+        <input type="text" id="open_time_<?php echo $day; ?>" name="resto_all_setting[open_time_<?php echo $day; ?>]" value="<?php echo $option_open ?>" />
+        <br class="height_10px" />
+        <label for="close_time_<?php echo $day; ?>" ><span class="medium-long"><?php _e('Close Time',PLUGIN_NAME); ?></span></label>
+        <input type="text" id="close_time_<?php echo $day; ?>" name="resto_all_setting[close_time_<?php echo $day; ?>]" value="<?php echo $option_close ?>" />
+        <?php } //foreach( $every_day as $day ){ ?>
+    
+    
+    </div>
+    
     
     <hr class="float-none" />
 	
@@ -115,5 +124,3 @@
  	 	<option value="23 hour" <?php selected( $options['late_bookings'], '23 hour' ); ?>><?php _e('23 hours in advance',PLUGIN_NAME); ?></option>
  	</select>
     <p class="no-margin"><strong><?php _e('Note :',PLUGIN_NAME); ?></strong> <?php _e('set late booking your customer can make',PLUGIN_NAME); ?></p>
-    
-  

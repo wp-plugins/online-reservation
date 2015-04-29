@@ -24,9 +24,15 @@
 	global $today_date;
 	global $today_time;
 	$today 		= getdate();
-	$today_date_time = $today['year'].'-'.$today['mon'].'-'.$today['mday'].' '.$today['hours'].':'.$today['minutes'].':'.$today['seconds'];
-	$today_date = $today['year'].'-'.$today['mon'].'-'.$today['mday'];
-	$today_time = $today['hours'].':'.$today['minutes'].':'.$today['seconds'];
+	$t_year 	= $today['year'];
+	$t_month	= strlen($today['mon']) == 1 ? '0'. $today['mon'] : $today['mon'];
+	$t_day		= strlen($today['mday']) == 1 ? '0'. $today['mday'] : $today['mday'];
+	$t_hour		= strlen($today['hours']) == 1 ? '0'. $today['hours'] : $today['hours'];
+	$t_min		= strlen($today['minutes']) == 1 ? '0'. $today['minutes'] : $today['minutes'];
+	$t_sec		= strlen($today['seconds']) == 1 ? '0'. $today['seconds'] : $today['seconds'];
+	$today_date_time 	= $t_year.'-'.$t_month.'-'.$t_day.' '.$t_hour.':'.$t_min.':'.$t_sec;
+	$today_date 		= $t_year.'-'.$t_month.'-'.$t_day;
+	$today_time 		= $t_hour.':'.$t_min.':'.$t_sec;
 	
 	//=  3.	IP ADDRESS AND SESSION ID
 	global $ip_address;
@@ -366,6 +372,7 @@
 		
 							$success = update_post_meta($post_id, $olr['meta_key'], $meta);
 							
+							
 							if( $success ){
 								
 								if( $booking_status == 'pending' ){
@@ -407,7 +414,8 @@
 								2.	SEND EMAIL TO OWNER
 								3.	SEND EMAIL TO CUSTOMER
 						================================================================*/
-						
+						if( $success ){ // INSERT POST 
+							
 							/*================================================================
 								1.	EMAIL INFORMATION
 							================================================================*/
@@ -612,6 +620,8 @@
 								
 								
 							}	// if( $send_email_to_customer ) {
+						
+						} // if( $success ){
 		exit;
 		
 	} // function olr_resto_booking_ajax()

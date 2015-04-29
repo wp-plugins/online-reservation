@@ -28,7 +28,7 @@ function olr_shortcode_display($args){
 			2. 	RETRIEVE OPTION DATA
 		==============================================*/
 		$options = get_option( 'resto_all_setting' );
-
+		
 		/*==============================================
 			3.	ENQUEQE SCRIPT AND STYLE
 		==============================================*/

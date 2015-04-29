@@ -10,14 +10,18 @@ jQuery(document).ready(function($){
 
 
 	/*=========================================================
-		1.	GENERAL RESTO SETTING
+		1.	GENERAL SETTING
 			1. 	GLOBAL VARIABLES
 			2.	MANIPULATE SETTING TAB AND SETTING CONTENT 
 			3.	CHOOSE DATE CHANGE
+			4.	TOGGLE CONTENT
 	=========================================================*/
 	var Olr_admin_resto = {
 		init : function() {
 			
+			/*==========================================================
+				1. 	GLOBAL VARIABLES
+			==========================================================*/
 			plugin_path			= data.plugin_path; 
 			plugin_folder		= data.plugin_folder; 
 			plugin_options 		= data.plugin_options; 
@@ -26,7 +30,7 @@ jQuery(document).ready(function($){
 			$('table.wp-list-table a.row-title').contents().unwrap();
 			$('.view-switch').css('display','none');
 			$('#preview-action').css('display','none');
-			$('#resto_schedule_wrapper,#resto_table_wrapper,#resto_email_wrapper,#resto_captcha_wrapper,#resto_form_wrapper')
+			$('#resto_schedule_wrapper,#resto_table_wrapper,#resto_email_wrapper,#resto_captcha_wrapper,#resto_form_wrapper,#resto_security_wrapper')
 				.css('display','none');
 			
 			
@@ -95,7 +99,23 @@ jQuery(document).ready(function($){
 					});
 				}); // $("#olr_date").change(function(){
 					
-		
+			
+			/*==========================================================
+				4.	TOGGLE CONTENT
+			==========================================================*/
+			$(".resto_admin_primary_content .head-parent,.resto_admin_sidebar .head-parent").click(function(){
+				if( $(this).next().css('display') == 'block' ){
+					$(this).find('.fa-caret-up').css('display','block');
+					$(this).find('.fa-caret-down').css('display','none');
+				}else{
+					$(this).find('.fa-caret-up').css('display','none');
+					$(this).find('.fa-caret-down').css('display','block');
+				}
+				$(this).next().slideToggle(500);
+			}); 
+			
+			
+			
 		
 		} // init : function() {		
 	}

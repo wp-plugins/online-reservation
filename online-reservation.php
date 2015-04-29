@@ -3,7 +3,7 @@
  * Plugin Name: Online Reservation
  * Plugin URI: http://solweder.com/
  * Description: Allow you to manage and receive your business reservation online
- * Version: 1.6.1
+ * Version: 1.7
  * Author: Wahsidin Tjandra
  * Author URI: http://solweder.com/about-me/
  * License:     GNU General Public License v2.0 or later
@@ -26,12 +26,13 @@
 /*
 	TABLE OF CONTENTS
 	========================
-	1. 	CONSTANT
-	2.	GLOBAL VARIABLE
+	1.	GLOBAL VARIABLE
+	2. 	CONSTANT
 	3. 	ADMIN PAGES
 	4.	CONFIGURATION
 	5.	PLUGIN ACTIVATION
-	6.	RESTAURANT RESERVATION
+	6.	ALL RESERVATION
+	7.	RESTAURANT RESERVATION
 
 */
 session_start();
@@ -76,7 +77,7 @@ if ( !defined( 'LOCKOUT_TABLE' ) ){
 
 
 /*==========================================
-	2.	ADMIN PAGES
+	3. 	ADMIN PAGES
 		1.	RESTAURANT ADMIN PAGES
 ==========================================*/
 
@@ -96,7 +97,7 @@ if ( !defined( 'LOCKOUT_TABLE' ) ){
 
 
 /*==========================================
-	3.	CONFIGURATION
+	4.	CONFIGURATION
 ==========================================*/
 if( 	$all_bookings_page 
 	||	$post_page 
@@ -106,11 +107,14 @@ if( 	$all_bookings_page
 	||	$options_page
 ){
 	require_once('config.php');
+	require_once('helper/helper_functions.php');
 }
 
 
+
+
 /*==========================================
-	4.	PLUGIN ACTIVATION
+	5.	PLUGIN ACTIVATION
 		1.	CREATE PAGES
 		2.	CREATE TABLE
 ==========================================*/
@@ -202,7 +206,26 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 
 
 /*========================================================
-	5.	RESTAURANT RESERVATION
+	6.	ALL RESERVATION
+		1.	STYLE AND SCRIPT 
+========================================================*/
+	
+	/*========================================================
+		1.	STYLE AND SCRIPT 
+	========================================================*/
+	if( $olr_admin_page ){
+		wp_enqueue_style(
+			'all-admin-style',	// $handle (id)	
+			OLR_FOLDER .'css/admin-all.css', // $sr
+			false, 	// $dependencies
+			false,	// $version
+			false 	// in footer
+		); 
+	}
+
+
+/*========================================================
+	7.	RESTAURANT RESERVATION
 		1.	ADMIN
 		2.	SHORTCODE ( FRONT END )
 		3.	WIDGET
@@ -216,7 +239,6 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 		require_once('restaurant reservation/admin/admin.php');
 	}
 	
-
 	/*=================================================
 		2.	SHORTCODE ( FRONT END )
 			1.	ADMIN AJAX
@@ -246,10 +268,12 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 		
 			if( $post->ID == $reservation_page ){
 				require_once( OLR_PATH .'/config.php');
+				require_once( OLR_PATH .'helper/helper_functions.php');
 				require_once('restaurant reservation/display-shortcode.php');
 			}
 			if( $post->ID == $thank_you_page ){
 				require_once( OLR_PATH .'/config.php');
+				require_once( OLR_PATH .'helper/helper_functions.php');
 				require_once('restaurant reservation/display-shortcode-reservation-confirmed.php');	
 			}
 		}	
@@ -275,6 +299,7 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 	}
 	if( $access_widget ){
 		require_once( OLR_PATH .'/config.php');
+		require_once( OLR_PATH .'helper/helper_functions.php');
 		require_once('restaurant reservation/display-widget.php');
 	}
 	

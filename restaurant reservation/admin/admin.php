@@ -35,25 +35,26 @@ global $options_page;
 			
 			$args = array(
 				'labels'  => array(
-						'name'                => _x('Restaurant Reservation', 'olr_restaurant' ,PLUGIN_NAME),
-						'menu_name'           => _x('Restaurant Reservation', 'olr_restaurant',PLUGIN_NAME),
-						'singular_name'       => _x('Restaurant Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'name'                	=> _x('Restaurant Reservation', 'olr_restaurant' ,PLUGIN_NAME),
+						'menu_name'          	=> _x('Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'singular_name'       	=> _x('Restaurant Reservation', 'olr_restaurant',PLUGIN_NAME),
 						//'add_new' 			  => _x('Add New Bookings', 'olr_restaurant',PLUGIN_NAME),
-						'add_new_item' 		  => _x('Add New item', 'olr_restaurant',PLUGIN_NAME),
-						'all_items' 		  => _x('All Bookings', 'olr_restaurant',PLUGIN_NAME),
-						'edit_item'           => _x('Edit Online Reservation', 'olr_restaurant',PLUGIN_NAME),
-						'new_item'            => _x('New Online Reservation', 'olr_restaurant',PLUGIN_NAME),
-						'view_item'           => _x('View Online Reservation','olr_restaurant',PLUGIN_NAME),
-						'items_archive'       => _x('Online Reservation Archive', 'olr_restaurant',PLUGIN_NAME),
-						'search_items'        => _x('Search Online Reservation', 'olr_restaurant',PLUGIN_NAME),
-						'not_found'           => _x('No Online Reservation found.', 'olr_restaurant',PLUGIN_NAME),
-						'not_found_in_trash'  => _x('No Online Reservation found in trash.', 'olr_restaurant',PLUGIN_NAME)
+						'add_new_item' 		  	=> _x('Add New item', 'olr_restaurant',PLUGIN_NAME),
+						'all_items' 		  	=> _x('All Bookings', 'olr_restaurant',PLUGIN_NAME),
+						'edit_item'           	=> _x('Edit Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'new_item'            	=> _x('New Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'view_item'           	=> _x('View Online Reservation','olr_restaurant',PLUGIN_NAME),
+						'items_archive'       	=> _x('Online Reservation Archive', 'olr_restaurant',PLUGIN_NAME),
+						'search_items'        	=> _x('Search Online Reservation', 'olr_restaurant',PLUGIN_NAME),
+						'not_found'           	=> _x('No Online Reservation found.', 'olr_restaurant',PLUGIN_NAME),
+						'not_found_in_trash'  	=> _x('No Online Reservation found in trash.', 'olr_restaurant',PLUGIN_NAME)
 						),
 				//'supports'      => array( 'title', 'editor', 'revisions' ,'thumbnail',PLUGIN_NAME),
 				'supports'      	=> array( 'title'),
 				//'show_in_menu'  => 'admin.php?page=simple_Gmap_content',
 				'public'        	=> true,
 				'show_in_nav_menus'	=> true
+				//'menu_icon' 		  	=> 'dashicons-calendar-alt',
 			);
 			register_post_type( 'olr_restaurant', $args );  
 		}
@@ -436,11 +437,16 @@ global $options_page;
 	
 
 /*##############################################################
-	3.	STYLE AND SCRIPT 
-		1.	ENQUEQE STYLE
-		2.	ENQUEQE SCRIPT 
-		3.	REMOVE ADD NEW FEATURES ( CUSTOM POST TYPE )
+	3.	STYLE AND SCRIPT
+		1.	DATE PICKER
+		2.	FONT AWESOME
+		3.	ENQUEQE STYLE
+		4.	ENQUEQE SCRIPT 
 ##############################################################*/
+
+
+
+
 if( 	$all_bookings_page
 	||	$resto_setting_page
 	||	$post_page 
@@ -449,10 +455,12 @@ if( 	$all_bookings_page
 	
 	function my_admin_init(){
 			
+			/*==============================================================
+				1.	DATE PICKER
+			==============================================================*/
 			if( !wp_script_is('jquery-ui-datepicker') ){
 				wp_enqueue_script( 'jquery-ui-datepicker' );
 			}
-			
 			wp_enqueue_style(
 				'olr-date-picker-style',	// $handle (id)	
 				OLR_FOLDER .'css/jquery.ui.datepicker.css', // $sr
@@ -461,7 +469,20 @@ if( 	$all_bookings_page
 				false 	// in footer
 			); 
 			
-			//=	1.	ENQUEQE STYLE
+			/*==============================================================
+				2.	FONT AWESOME
+			==============================================================*/
+			wp_enqueue_style(
+				'font-awesome-style',	// $handle (id)	
+				OLR_FOLDER .'css/font-awesome.min.css', // $sr
+				false, 	// $dependencies
+				false,	// $version
+				false 	// in footer
+			); 
+			
+			/*==============================================================
+				3.	ENQUEQE STYLE
+			==============================================================*/
 			wp_enqueue_style(
 				'olr-admin-resto-style',	// $handle (id)	
 				OLR_FOLDER .'css/admin-resto-style.css', // $sr
@@ -469,23 +490,24 @@ if( 	$all_bookings_page
 				false
 			); 
 			
-			//=	2.	ENQUEQE SCRIPT
+			/*==============================================================
+				4.	ENQUEQE SCRIPT 
+			==============================================================*/
 			wp_enqueue_script(
                 'olr-admin-resto-script',	// $handle (id)	
                 OLR_FOLDER . 'js/admin-resto-script.js', // $src
-                array( 'jquery' ), 	// $dependencies
+                array( 'jquery','jquery-ui-datepicker' ), 	// $dependencies
 				false,	// $version
 				false 	// in footer
             );  
-
-			$olr_script_data = array( 
-								'admin_url' 		=> admin_url( 'admin-ajax.php' ),
-								'plugin_options' 	=> get_option('resto_all_setting'),
-								'plugin_folder' 	=> OLR_FOLDER,
-								'plugin_path' 		=> OLR_PATH
-								
-						  	);
-			wp_localize_script( 'olr-admin-resto-script', 'data', $olr_script_data );
+				$olr_script_data = array( 
+									'admin_url' 		=> admin_url( 'admin-ajax.php' ),
+									'plugin_options' 	=> get_option('resto_all_setting'),
+									'plugin_folder' 	=> OLR_FOLDER,
+									'plugin_path' 		=> OLR_PATH
+									
+								);
+				wp_localize_script( 'olr-admin-resto-script', 'data', $olr_script_data );
 		
 		
 	}
@@ -526,9 +548,9 @@ if( 	$all_bookings_page
 			1.	RESTO SETTING TITLE
 			2.	RESTO SETTING MENU TAB
 			4.	SETTING CONTENT
-				1.	PRIMARY CONTENT
-					1.	SETTING SAVE / ERROR NOTIFICATION
-				2.	SIDEBAR
+				1.	SETTING SAVE / ERROR NOTIFICATION
+				2.	PRIMARY CONTENT
+				3.	SIDEBAR
 	=========================================*/
 	function olr_restaurant_setting_display(){
 		?>
@@ -550,17 +572,18 @@ if( 	$all_bookings_page
               		<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_schedule_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Schedule',PLUGIN_NAME); ?></a>
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_table_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Table',PLUGIN_NAME); ?></a> 
                    	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_email_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Email',PLUGIN_NAME); ?></a>  
-                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Captcha',PLUGIN_NAME); ?></a>        
+                   	<a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_captcha_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Captcha',PLUGIN_NAME); ?></a>
+                    <a href="?post_type=olr_restaurant&page=olr_restaurant_setting&tab=resto_security_setting" class="nav-tab <?php echo $active_tab == 'resto_all_setting' ? 'nav-tab-active' : ''; ?>"><?php _e('Security',PLUGIN_NAME); ?></a>
+                            
           		</h2>
 
                 
-             	<?php //= 1.	PRIMARY CONTENT ?>
-                <div class="resto_admin_primary_content">
+                <?php //= 1.	SETTING SAVE / ERROR NOTIFICATION ?>
+             	<?php settings_errors(); ?>
                 
-                	<?php //= 1.	SETTING SAVE / ERROR NOTIFICATION ?>
-                	<?php settings_errors(); ?>
-                    
-                    <br />
+             	<?php //= 2.	PRIMARY CONTENT ?>
+                <div class="resto_admin_primary_content">
+                	<br />
                     <form id="restaurant-setting-form" method="post" action="options.php">
                 		<?php settings_fields( 'resto_all_setting' ); ?>
                         <?php $options = get_option( 'resto_all_setting' ); 
@@ -592,15 +615,28 @@ if( 	$all_bookings_page
                         <div id="resto_captcha_wrapper">
                    		 	<?php require_once('captcha.php'); ?>
                         </div>
+                        <div id="resto_security_wrapper">
+                   		 	<?php require_once('security.php'); ?>
+                        </div>
                     	<?php submit_button(); ?>
                     </form>
                 </div><?php // #resto_admin_primary_content?>
                 
-          		<?php //= 2.	SIDEBAR ?>
+          		<?php //= 3.	SIDEBAR ?>
                 <div class="resto_admin_sidebar">
-                	<div>
-                    	<h2>Video Walkthrough</h2>
-                        <iframe width="420" height="315" src="//www.youtube.com/embed/Z9K7hj4JhgI" frameborder="0" allowfullscreen></iframe>
+                	<br />
+                	<div >
+                    	<h2 class="olr-heading-title no-margin-top head-parent dashicons-before dashicons-format-video">
+							<?php _e('Video Walkthrough',PLUGIN_NAME); ?>
+                            <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-caret-up"></i>    
+                        </h2>
+                        <div class="youtube-container">
+                        	<a href="http://www.youtube.com/embed/Z9K7hj4JhgI" target="_blank">
+                            	<span class="dashicons dashicons-video-alt3"></span>
+                        		<img src="<?php echo OLR_FOLDER;?>/image/video-overview.jpg" alt="video-overview-image" />
+                            </a>
+                    	</div>	
                     </div>
                 </div>
                 

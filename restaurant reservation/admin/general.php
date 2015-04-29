@@ -73,13 +73,13 @@
    	<p class="float-none"></p>
     
     <?php //= 3.	HELP TO PROMOTE PLUGIN  ?> 
-    <label for="help_promote_plugin"><?php _e('Help to promote this plugin',PLUGIN_NAME); ?><br /><?php _e('( By Display Link Below Reservation Form )',PLUGIN_NAME); ?></label>                        
+    <label for="help_promote_plugin"><?php _e('Help to promote this plugin',PLUGIN_NAME); ?><br /><span class="sub-text"><?php _e('( By Display Link Below Reservation Form )',PLUGIN_NAME); ?></span></label>                        
  	<input type="checkbox" id="help_promote_plugin" name="resto_all_setting[help_promote_plugin]" value="1" <?php checked('1', $options['help_promote_plugin']) ?> />
 	<p class="float-none"></p>
     <br/>
     
     <?php //= 4.	RESERVATION LENGTH  ?>   
-    <label for="reservation_length"><?php _e('Reservation Length ( in minutes )',PLUGIN_NAME); ?></label>                      
+    <label for="reservation_length"><?php _e('Reservation Lengths',PLUGIN_NAME); ?><br /><span class="sub-text"><?php _e(' ( in minutes )',PLUGIN_NAME); ?></label>                      
 	<select name="resto_all_setting[reservation_length]" id="reservation_length">
     	<?php for( $min=20; $min<900; $min=$min+20 ): ?>
         	<option value="<?php echo $min; ?>" <?php selected( $options['reservation_length'], $min ); ?>><?php echo $min; ?></option>
@@ -89,7 +89,9 @@
     <br/>
     
     <?php //= 5.	PROVIDE OTHER TIME  ?>   
-    <label for="provide_other_time"><?php _e('Provide Other time ( if table on choosen time is fully booked ) ',PLUGIN_NAME); ?></label>                      
+    <label for="provide_other_time"><?php _e('Provide Other time',PLUGIN_NAME); ?>
+    	<br /><span class="sub-text"><?php _e(' ( if table on choosen time is fully booked ) ',PLUGIN_NAME); ?>
+   	</label>                      
 	<input type="checkbox" id="provide_other_time" name="resto_all_setting[provide_other_time]" value="1" <?php checked('1', $options['provide_other_time']) ?> />
    	<p class="float-none"></p>
     <br/>
