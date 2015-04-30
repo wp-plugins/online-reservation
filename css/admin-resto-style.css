@@ -31,11 +31,16 @@
 #menu-posts-olr_restaurant .wp-submenu li:nth-child(2) a::before{
 	font-family:  FontAwesome !important;
   	content: "\f073";
+	font-weight: 100 !important;
 
 }
 #menu-posts-olr_restaurant .wp-submenu li:nth-child(3) a::before{
-	font-family:  FontAwesome !important;
-  	content: "\f013";
+	font-family: "dashicons";
+  	content: "\f108";
+	font-size: 20px;
+    vertical-align: middle;
+	margin-left: -3px;
+	font-weight: 100 !important;
 
 }
 

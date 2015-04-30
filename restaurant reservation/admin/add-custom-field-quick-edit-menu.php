@@ -13,7 +13,11 @@
 		add_action('quick_edit_custom_box',  'olr_adding_field_on_quick_edit', 10, 2);
 		 
 		function olr_adding_field_on_quick_edit($column_name, $post_type) {
-
+			
+			
+			
+			
+			
 			?>
             <?php if( $column_name == 'Booking Date'):?>
             	<?php 
@@ -37,10 +41,12 @@
 					$phone 		= isset( $values['Phone'] ) ? esc_attr( $values['Phone'] ) : '';
 					$email 		= isset( $values['Email'] ) ? esc_attr( $values['Email'] ) : '';
 					$message 	= isset( $values['Message'] ) ? esc_attr( $values['Message'] ) : '';
+				
 				?>
             
             	<div style="clear:both;"></div>
        			<div id="reservation-information-wrap">
+                	
                 	<?php wp_nonce_field("quick_edit_nonce","quick_edit_nonce_id"); ?>
                     <input name="post_id" id="post_id" type="hidden" value="<?php echo $post->ID; ?>" />
                     <br/>
@@ -78,7 +84,7 @@
                     ?>
                     </select>
                     <br/>
-                    <label for="table"><?php _e('Table',PLUGIN_NAME) ?></label>
+                    <label for="table"><?php _e('Total Table',PLUGIN_NAME) ?></label>
                     <input type="text" name="table" id="table" value="<?php echo $table; ?>" />
                     <br/>
                     <label for="Person"><?php _e('Person',PLUGIN_NAME) ?></label>
@@ -139,10 +145,8 @@
 					plugin_options 	= <?php echo json_encode(get_option('resto_all_setting')); ?>;
 					admin_url 		= '<?php echo admin_url( 'admin-ajax.php' ); ?>';
 					
-					
-					
-					
 					function olr_quick_edit_init(){
+						
 						
 						
 						var _edit = inlineEditPost.edit ;
@@ -150,6 +154,8 @@
 						//= "call" the original WP edit function
 						//= and then we overwrite the function with our own code
 						inlineEditPost.edit = function (id) {
+							
+							$('.quick-edit_response').css('display','none');
 							
 							var args = [].slice.call (arguments) ;
 							_edit.apply (this, args) ;
@@ -169,12 +175,13 @@
 										postData['action'] 			= 'refresh_quick_edit';
 										postData['post_id'] 		= id ;
 										
-									
+									//alert( id );
 									
 									$.post( admin_url, postData ).success( function(data) {
 										data = data.replace('[','');
 										data = data.replace(']','');
 										var obj = $.parseJSON( data );
+										$(':input[name="post_id"]', editRow).val( id );
 										$(':input[name="booking_dates"]', editRow).val( obj.Booking_Date );
 										$(':input[name="booking_time"]', editRow).val( obj.Booking_Time );
 										$(':input[name="type_tables"]', editRow).val( obj.Type_of_Tables );
@@ -253,15 +260,16 @@
 							postData['email'] 			= $('#email').val();
 							postData['message'] 		= $('#message').val();
 							
+							
 							$.post( admin_url, postData ).success( function(data) {
-								alert( data );
+								//alert( data );
 								if( data == 'success' ){
 									prev_parent.find('.Booking').text( postData['booking_date']+', '+postData['booking_time'] );
 									prev_parent.find('.Phone').text( postData['phone']);
 									prev_parent.find('.Email').text( postData['email'] 	);
-									prev_parent.find('.Tables').text( postData['table']	);
+									prev_parent.find('.Tables').text( postData['table'] + ' ( ' + postData['type_tables'] + ' )' );
 									prev_parent.find('.Persons').text( postData['person'] );
-									prev_parent.find('.status').text( postData['status'] );
+									prev_parent.find('.status').html( '<span class="'+postData['status']+'">'+postData['status']+'</span>' );
 									$('.quick-edit_response').css('display','block');
 									$('.quick-edit_response').text(data );
 									
