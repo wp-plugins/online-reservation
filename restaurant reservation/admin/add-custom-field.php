@@ -88,7 +88,7 @@
 				?>
 				</select>
                 <br/>
-            	<label for="table"><?php _e('Table',PLUGIN_NAME) ?></label>
+            	<label for="table"><?php _e('Total Table',PLUGIN_NAME) ?></label>
 				<input type="text" name="table" id="table" value="<?php echo $table; ?>" />
                 <br/>
                 <label for="Person"><?php _e('Person',PLUGIN_NAME) ?></label>
