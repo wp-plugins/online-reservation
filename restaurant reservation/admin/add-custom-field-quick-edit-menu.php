@@ -14,10 +14,6 @@
 		 
 		function olr_adding_field_on_quick_edit($column_name, $post_type) {
 			
-			
-			
-			
-			
 			?>
             <?php if( $column_name == 'Booking Date'):?>
             	<?php 
@@ -67,7 +63,7 @@
                         
                             $first_table = '';
                             foreach( $many_table_type as $val){
-                                echo $val; 
+                                //echo $val; 
                                 
                                 $table_type = preg_match('/(.+)(\()([0-9]+)(\))/', $val, $match_table);
                                 
@@ -240,8 +236,8 @@
 					$('#olr-quick-menu-update-button').click(function(event){
 				
 						me = $(this);
-						parent = $(this).parents('tr');
-						prev_parent = $(this).parents('tr').prev();
+						parent_id = $(this).parents('tr').attr('id').replace('edit-','');
+						prev_parent = $('#the-list').find('#post-'+parent_id);
 						
 						$('.quick-edit_response').css('display','none');
 						event.preventDefault();
@@ -264,6 +260,7 @@
 							$.post( admin_url, postData ).success( function(data) {
 								//alert( data );
 								if( data == 'success' ){
+									
 									prev_parent.find('.Booking').text( postData['booking_date']+', '+postData['booking_time'] );
 									prev_parent.find('.Phone').text( postData['phone']);
 									prev_parent.find('.Email').text( postData['email'] 	);
