@@ -41,8 +41,8 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 6. Restaurant reservation contain [online_restaurant_reservation] shortcode for displaying your plugin 
 7. To display your plugin on post or any pages, add [online_restaurant_reservation] shortcode
 8. To display on widget , Go to 'Appearance' >> 'Widgets' and drag 'OLR Restaurant Reservation' in to your WordPress sidebar
-9. Save
-10. You are done. 
+9. Then , controls some of the most basic configuration settings on setting page.
+10. For more information look on below Quick Start Guide Video . 
 
 = Video Quick Start Guide =
 [youtube https://www.youtube.com/watch?v=JeMFOI318no] 
