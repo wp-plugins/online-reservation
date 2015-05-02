@@ -44,6 +44,10 @@ Online Reservation is a plugin that allow you to manage and receive your busines
 9. Save
 10. You are done. 
 
+= Video Quick Start Guide =
+[youtube https://www.youtube.com/watch?v=JeMFOI318no] 
+
+
 
 == Frequently Asked Questions ==
 
