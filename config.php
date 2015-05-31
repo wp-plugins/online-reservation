@@ -18,28 +18,28 @@
 		8.	GET LATITUDE AND LONGITUDE
 ==================================================*/
 //= 1.	PLUGIN OPTIONS
-global $plugin_options;
+global $olr_plugin_options;
 
 //= 2.	RESERVATION TIME NEEDED 
 global $temporary_data_length;
-$temporary_data_length 	= (str_replace('_min','',$plugin_options['reservation_time_needed']) - 0) * 60; // seconds
+$temporary_data_length 	= (str_replace('_min','',$olr_plugin_options['reservation_time_needed']) - 0) * 60; // seconds
 
 //= 3.	LOCKOUT RESERVATION LENGTH
 global $lockout_reservation_length;
-$lockout_reservation_length = (str_replace('_hour','',$plugin_options['lock_our_reservation']) - 0) * 3600; // seconds
+$lockout_reservation_length = (str_replace('_hour','',$olr_plugin_options['lock_our_reservation']) - 0) * 3600; // seconds
 
 
 //= 4.	MAXIMUM FIND TABLE ATTEMPT
 global $max_find_table_attempt;
-$max_find_table_attempt = $plugin_options['max_find_table'] - 0;
+$max_find_table_attempt = $olr_plugin_options['max_find_table'] - 0;
 
 //= 5.	MAXIMUM SEND ENQUIRY ATTEMPT
 global $max_send_enquiry_attempt;
-$max_send_enquiry_attempt = $plugin_options['max_send_enquiry'] - 0;
+$max_send_enquiry_attempt = $olr_plugin_options['max_send_enquiry'] - 0;
 
 //= 6.	EMAIL CONFIRMATION LENGTH
 global $email_confirmation_length;
-$email_confirmation_length = (str_replace('_min','',$plugin_options['email_confirmation_length']) - 0) * 60; // seconds
+$email_confirmation_length = (str_replace('_min','',$olr_plugin_options['email_confirmation_length']) - 0) * 60; // seconds
 
 
 /*==========================================

@@ -3,7 +3,7 @@
  * Plugin Name: Online Reservation
  * Plugin URI: http://solweder.com/
  * Description: Allow you to manage and receive your business reservation online
- * Version: 1.7
+ * Version: 1.7.1
  * Author: Wahsidin Tjandra
  * Author URI: http://solweder.com/about-me/
  * License:     GNU General Public License v2.0 or later
@@ -40,9 +40,9 @@ session_start();
 	1.	GLOBAL VARIABLE
 ==========================================*/
 global $wpdb;
-global $plugin_options;
-$plugin_options = get_option('resto_all_setting');
-date_default_timezone_set( $plugin_options['timezone'] );
+global $olr_plugin_options;
+$olr_plugin_options = get_option('resto_all_setting');
+date_default_timezone_set( $olr_plugin_options['timezone'] );
 
 /*==========================================
 	2. 	CONSTANT
@@ -250,18 +250,18 @@ register_activation_hook( __FILE__, 'olr_plugin_activation' );
 	}
 	//= 2.	CALING SHORTCODES
 	function olr_plugin_shortcodes(){
-		global $plugin_options;
+		global $olr_plugin_options;
 		global $post; 
 		if ( !empty($post) ){
 			
-			if( $plugin_options['reservation_page'] != '' ){
-				$reservation_page = $plugin_options['reservation_page'];
+			if( $olr_plugin_options['reservation_page'] != '' ){
+				$reservation_page = $olr_plugin_options['reservation_page'];
 			}else{
 				$reservation_page = get_option('resto_reservation_page_id');
 			}
 			
-			if( $plugin_options['thank_you_page'] != '' ){
-				$thank_you_page = $plugin_options['thank_you_page'];
+			if( $olr_plugin_options['thank_you_page'] != '' ){
+				$thank_you_page = $olr_plugin_options['thank_you_page'];
 			}else{
 				$thank_you_page = get_option('resto_thank_you_page_id');
 			}

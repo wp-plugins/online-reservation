@@ -6,7 +6,7 @@ Author URI: http://solweder.com/about-me
 Tags: wp, online reservations, online bookings, restaurant reservation, restaurant bookings, reservation, restaurant, bookings   
 Requires at least: 3.6
 Tested up to: 4.2
-Stable tag: 1.7
+Stable tag: 1.7.1
 Donate link: http://solweder.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,9 @@ Yes! Please visit http://solweder.com/plugin
 = 1.7 (2015-04-29) =
 * Fix: Adding Security tab
 
+= 1.7.1 (2015-04-29) =
+* Fix: Admin
+
 
 == Upgrade Notice ==
 = 1.1 (2014-10-05) =
@@ -126,6 +129,9 @@ This update adds support for HTML Email.
 
 = 1.7 (2015-04-29) =
 * Fix: Adding Security tab
+
+= 1.7.1 (2015-04-29) =
+* Fix: Admin
 
 
 == Usage ==

@@ -16,8 +16,8 @@
 	#################################################################*/
 	//= 1.	PLUGIN OPTIONS
 	global $options;
-	global $plugin_options;
-	$options = $plugin_options; 
+	global $olr_plugin_options;
+	$options = $olr_plugin_options; 
 	
 	//= 2.	TODAY DATE
 	global $today_date_time;
